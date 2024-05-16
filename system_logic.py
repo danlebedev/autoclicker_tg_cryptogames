@@ -1,4 +1,6 @@
 from subprocess import Popen, run
+from time import sleep
+import uiautomator2 as u2
 
 
 class Shell():
@@ -60,3 +62,26 @@ class Dnconsole(Shell):
     def stop(self):
         self.args = f'{self.name} quit --index {self.index}'
         self.start_process()
+
+
+class Emulator(Dnconsole):
+    def __init__(self, index, device_id):
+        super().__init__()
+        self.set_index(index)
+        self.device_id = device_id
+
+    def start(self):
+        super().start()
+        sleep(30)
+
+    def stop(self):
+        super().stop()
+        sleep(5)
+    
+    def connect(self):
+        self.d = u2.connect(self.device_id)
+
+    def is_connected(self) -> bool:
+        if self.d:
+            return True
+        return False

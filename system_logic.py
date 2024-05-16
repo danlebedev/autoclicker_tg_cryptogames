@@ -43,3 +43,20 @@ class ADB(Shell):
     def reconnect(self):
         self.args = f'{self.name} reconnect'
         self.run_command()
+
+
+class Dnconsole(Shell):
+    def __init__(self):
+        self.cwd = r'C:\LDPlayer\LDPlayer9'
+        self.name = 'dnconsole'
+
+    def set_index(self, index):
+        self.index = index
+
+    def start(self):
+        self.args = f'{self.name} launch --index {self.index}'
+        self.start_process()
+
+    def stop(self):
+        self.args = f'{self.name} quit --index {self.index}'
+        self.start_process()

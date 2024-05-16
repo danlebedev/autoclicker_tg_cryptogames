@@ -25,3 +25,21 @@ class Shell():
             shell=self.shell,
             cwd=self.cwd
         )
+
+
+class ADB(Shell):
+    def __init__(self):
+        self.cwd = r'C:\Users\spirit\Desktop\platform-tools'
+        self.name = 'adb'
+
+    def start(self):
+        self.args = f'{self.name} start-server'
+        self.run_command()
+
+    def stop(self):
+        self.args = f'{self.name} kill-server'
+        self.run_command()
+
+    def reconnect(self):
+        self.args = f'{self.name} reconnect'
+        self.run_command()

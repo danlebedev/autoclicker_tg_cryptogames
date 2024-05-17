@@ -81,7 +81,7 @@ class Emulator(Dnconsole):
         sleep(5)
     
     def connect(self):
-        self.d = u2.connect(self.device_id)
+        self.device = u2.connect(self.device_id)
 
     def is_connected(self) -> bool:
         if self.d:

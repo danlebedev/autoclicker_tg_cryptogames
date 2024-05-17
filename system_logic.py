@@ -30,9 +30,10 @@ class Shell():
 
 
 class ADB(Shell):
-    def __init__(self):
+    def __init__(self, shell=True):
         self.cwd = r'C:\Users\spirit\Desktop\platform-tools'
         self.name = 'adb'
+        self.shell = shell
 
     def start(self):
         self.args = f'{self.name} start-server'
@@ -48,9 +49,10 @@ class ADB(Shell):
 
 
 class Dnconsole(Shell):
-    def __init__(self):
+    def __init__(self, shell=True):
         self.cwd = r'C:\LDPlayer\LDPlayer9'
         self.name = 'dnconsole'
+        self.shell = shell
 
     def set_index(self, index):
         self.index = index
@@ -65,8 +67,8 @@ class Dnconsole(Shell):
 
 
 class Emulator(Dnconsole):
-    def __init__(self, index, device_id):
-        super().__init__()
+    def __init__(self, index, device_id, shell=True):
+        super().__init__(shell)
         self.set_index(index)
         self.device_id = device_id
 

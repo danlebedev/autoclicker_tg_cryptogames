@@ -13,6 +13,10 @@ class Telegram():
         if self.session:
             return self.session.running()
 
+    def connect_folder(self, index):
+        self.folder = Folder(index, self.session)
+        self.folder.connect()
+
 
 class Folder():
     def __init__(self, index, session):

@@ -13,7 +13,7 @@ class Telegram():
         if self.session:
             return self.session.running()
 
-    def connect_folder(self, index):
+    def connect_folder(self, index) -> bool:
         self.folder = Folder(index, self.session)
         self.folder.connect()
 
@@ -25,7 +25,7 @@ class Folder():
         self.index = index
         self.session = session
 
-    def connect(self):
+    def connect(self) -> bool:
         try:
             self.session(className=self.parent_classname) \
                 .child(className=self.classname, index=self.index) \
@@ -33,10 +33,10 @@ class Folder():
         finally:
             return self.is_connected()
 
-    def is_connected(self):
+    def is_connected(self) -> bool:
         return self.session(className=self.classname, index=self.index, selected=True).exists
 
-    def connect_bot(self, index):
+    def connect_bot(self, index) -> bool:
         self.bot = Bot(index, self.session)
         self.bot.connect()
 

@@ -1,11 +1,12 @@
 class Telegram():
-    def __init__(self):
+    def __init__(self, device):
         self.name = 'org.telegram.messenger'
         self.session = None
+        self.device = device
 
-    def start(self, d):
+    def start(self):
         try:
-            self.session = d.session(self.name)
+            self.session = self.device.session(self.name)
         except:
             self.session = None
 

@@ -48,7 +48,7 @@ class Chat():
         self.index = index
         self.session = session
 
-    def connect(self):
+    def connect(self) -> bool:
             try:
                 self.session(className=self.parent_classname) \
                     .child(className=self.classname, index=self.index) \
@@ -57,7 +57,7 @@ class Chat():
             finally:
                 return self.is_connected()
 
-    def is_connected(self):
+    def is_connected(self) -> bool:
         return self.session(className='android.widget.EditText', longClickable=True).exists
 
     def _set_name(self):

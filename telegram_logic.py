@@ -9,7 +9,7 @@ class Telegram():
         except:
             self.session = None
 
-    def is_started(self) -> bool:
+    def is_started(self) -> bool|None:
         if self.session:
             return self.session.running()
 

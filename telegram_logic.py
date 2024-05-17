@@ -54,3 +54,23 @@ class Chat():
 
     def _set_name(self):
         self.name = self.session(className='android.widget.TextView')[0].get_text()
+
+
+class Bot(Chat):
+    def __init__(self, index, session):
+        self.menu = 'Меню бота'
+        super().__init__(index, session)
+
+    def is_connected(self):
+        return self.session(description=self.menu).exists
+
+    def run(self):
+        self.session(description=self.menu).click()
+        self._run_accept()
+
+    def stop(self):
+        self.run()
+
+    def _run_accept(self):
+        if self.session(className='android.widget.TextView', text='Начать', clickable=True).exists():
+            self.session(className='android.widget.TextView', text='Начать', clickable=True).click()

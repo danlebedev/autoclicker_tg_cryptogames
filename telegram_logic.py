@@ -69,7 +69,7 @@ class Bot(Chat):
         self.menu = 'Меню бота'
         super().__init__(index, session)
 
-    def is_connected(self):
+    def is_connected(self) -> bool:
         return self.session(description=self.menu).exists
 
     def run(self):

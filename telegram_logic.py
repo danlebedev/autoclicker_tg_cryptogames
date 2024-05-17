@@ -36,6 +36,10 @@ class Folder():
     def is_connected(self):
         return self.session(className=self.classname, index=self.index, selected=True).exists
 
+    def connect_bot(self, index):
+        self.bot = Bot(index, self.session)
+        self.bot.connect()
+
 
 class Chat():
     def __init__(self, index, session):

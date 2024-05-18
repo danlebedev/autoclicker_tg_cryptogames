@@ -4,7 +4,7 @@ from time import sleep
 
 
 def telegram_actions(emulator):
-    tg = Telegram(emulator.device)
+    tg = Telegram(device=emulator.device)
     tg.start()
     sleep(5)
 
@@ -16,7 +16,7 @@ def main():
     )
     emulator.start()
     emulator.connect()
-    telegram_actions(emulator)
+    telegram_actions(emulator=emulator)
 
 
 if '__main__' == __name__:

@@ -1,5 +1,6 @@
 from system_logic import Emulator
 from telegram_logic import Telegram
+from telegram_games import HarvestMoon
 from time import sleep
 
 
@@ -11,9 +12,17 @@ def telegram_actions(emulator):
     folder = tg.folder
     folder.connect()
     folder.init_bot(index=0)
-    
+
     bot = folder.bot
     bot.connect()
+    games = [
+        HarvestMoon,
+    ]
+    bot.set_game(games)
+
+    game = bot.game
+    game.play()
+    emulator.device.press('back')
     sleep(5)
 
 

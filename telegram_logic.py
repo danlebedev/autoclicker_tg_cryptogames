@@ -14,9 +14,8 @@ class Telegram():
         if self.session:
             return self.session.running()
 
-    def connect_folder(self, index) -> bool:
+    def init_folder(self, index):
         self.folder = Folder(index, self.session)
-        self.folder.connect()
 
 
 class Folder():
@@ -37,9 +36,8 @@ class Folder():
     def is_connected(self) -> bool:
         return self.session(className=self.classname, index=self.index, selected=True).exists
 
-    def connect_bot(self, index) -> bool:
+    def init_bot(self, index):
         self.bot = Bot(index, self.session)
-        self.bot.connect()
 
 
 class Chat():

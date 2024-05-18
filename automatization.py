@@ -6,8 +6,14 @@ from time import sleep
 def telegram_actions(emulator):
     tg = Telegram(device=emulator.device)
     tg.start()
-    tg.connect_folder(index=0)
-    tg.folder.connect_bot(index=0)
+    tg.init_folder(index=0)
+
+    folder = tg.folder
+    folder.connect()
+    folder.init_bot(index=0)
+    
+    bot = folder.bot
+    bot.connect()
     sleep(5)
 
 

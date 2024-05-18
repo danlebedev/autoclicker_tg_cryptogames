@@ -83,3 +83,11 @@ class Bot(Chat):
     def _run_accept(self):
         if self.session(className='android.widget.TextView', text='Начать', clickable=True).exists():
             self.session(className='android.widget.TextView', text='Начать', clickable=True).click()
+
+    def set_game(self, games):
+        for game in games:
+            if game.name == self.name:
+                self.game = game(self)
+                break
+        else:
+            self.game = None

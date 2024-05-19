@@ -56,7 +56,7 @@ class HamsterKombat():
     def __init__(self, bot):
         self.bot = bot
         self.thanks = (0.500, 0.830)
-        self.hamster = (0.200, 0.630)
+        self.hamster = [0.200, 0.630]
 
     def play(self):
         try:

@@ -85,6 +85,7 @@ class Emulator(Dnconsole):
         self.device.settings['operation_delay'] = (0.5, 0.5)
         self.device.settings['operation_delay_methods'] = [
             'click',
+            'press',
             'exists',
             'get_text',
         ]

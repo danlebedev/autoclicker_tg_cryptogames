@@ -1,12 +1,14 @@
 from time import sleep
-from threading import Thread
 from random import randint
 
 
-def clicker(d, x, y, count):
-    y += randint(-50, +50) / 1000
+def click_generator(x, y, count=10):
+    commands = []
     for _ in range(count):
-        d.click(x, y)
+        x += randint(-20, 20)
+        y += randint(-20, 20)
+        commands.append(f"input tap {x} {y}")
+    return ' && '.join(commands)
 
 
 class HarvestMoon():
@@ -56,7 +58,8 @@ class HamsterKombat():
     def __init__(self, bot):
         self.bot = bot
         self.thanks = (0.500, 0.830)
-        self.hamster = [0.200, 0.630]
+        self.hamster = (440, 990)
+        self.clicks = 70
 
     def play(self):
         try:
@@ -66,19 +69,9 @@ class HamsterKombat():
         else:
             sleep(10)
             self.bot.session.click(*self.thanks)
-            self.multi_threads(10)
+            self.clicker()
             self.bot.run()
 
-    def multi_threads(self, thread_count=0):
-        threads = []
-        for _ in range(thread_count):
-            threads.append(Thread(
-                target=clicker,
-                args=(self.bot.session, *self.hamster, 80)
-            ))
-            self.hamster[0] += 0.6 / thread_count
-        for thread in threads:
-            sleep(0.17)
-            thread.start()
-        for thread in threads:
-            thread.join()
+    def clicker(self):
+        for _ in range(self.clicks):
+            self.bot.session.shell(click_generator(*self.hamster))

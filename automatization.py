@@ -34,6 +34,7 @@ def main():
     emulator.start()
     emulator.connect()
     telegram_actions(emulator=emulator)
+    emulator.stop()
 
 
 if '__main__' == __name__:

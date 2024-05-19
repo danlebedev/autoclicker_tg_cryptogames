@@ -20,20 +20,26 @@ def telegram_actions(emulator):
     tg = Telegram(device=emulator.device)
     tg.start()
     tg.init_folder(index=0)
+    folder_actions(tg.folder)
 
-    folder = tg.folder
+
+def folder_actions(folder):
     folder.connect()
     for index in CHATS:
         folder.init_bot(index=index)
+        bot_actions(folder.bot)
 
-        bot = folder.bot
-        bot.connect()
-        bot.set_game(games=GAMES)
 
-        game = bot.game
-        game.play()
-        emulator.device.press('back')
-        sleep(5)
+def bot_actions(bot):
+    bot.connect()
+    bot.set_game(games=GAMES)
+    game_actions(bot.game)
+
+
+def game_actions(game):
+    game.play()
+    game.bot.session.press('back')
+    sleep(5)
 
 
 def main():

@@ -1,29 +1,34 @@
 from system_logic import Emulator
 from telegram_logic import Telegram
-from telegram_games import HarvestMoon
+from telegram_games import HarvestMoon, Blum, HamsterKombat
 from time import sleep
 
 
 def telegram_actions(emulator):
+    GAMES = [
+        HarvestMoon,
+        Blum,
+        HamsterKombat,
+    ]
+    CHATS = 3
+
     tg = Telegram(device=emulator.device)
     tg.start()
     tg.init_folder(index=0)
 
     folder = tg.folder
     folder.connect()
-    folder.init_bot(index=0)
+    for index in range(CHATS):
+        folder.init_bot(index=index)
 
-    bot = folder.bot
-    bot.connect()
-    games = [
-        HarvestMoon,
-    ]
-    bot.set_game(games)
+        bot = folder.bot
+        bot.connect()
+        bot.set_game(games=GAMES)
 
-    game = bot.game
-    game.play()
-    emulator.device.press('back')
-    sleep(5)
+        game = bot.game
+        game.play()
+        emulator.device.press('back')
+        sleep(5)
 
 
 def main():

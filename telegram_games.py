@@ -60,14 +60,14 @@ class HamsterKombat():
 
     def play(self):
         try:
-            self.bot.bot_run()
+            self.bot.run()
         except:
             pass
         else:
             sleep(10)
             self.bot.session.click(*self.thanks)
             self.multi_threads(10)
-            self.bot.bot_run()
+            self.bot.run()
 
     def multi_threads(self, thread_count=0):
         threads = []

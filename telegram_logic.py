@@ -34,7 +34,7 @@ class Folder():
             return self.is_connected()
 
     def is_connected(self) -> bool:
-        return self.session(className=self.classname, index=self.index, selected=True).exists
+        return self.session(className=self.classname, index=self.index, selected=True).exists()
 
     def init_bot(self, index):
         self.bot = Bot(index, self.session)
@@ -57,7 +57,7 @@ class Chat():
                 return self.is_connected()
 
     def is_connected(self) -> bool:
-        return self.session(className='android.widget.EditText', longClickable=True).exists
+        return self.session(className='android.widget.EditText', longClickable=True).exists()
 
     def _set_name(self):
         self.name = self.session(className='android.widget.TextView')[0].get_text()
@@ -69,7 +69,7 @@ class Bot(Chat):
         super().__init__(index, session)
 
     def is_connected(self) -> bool:
-        return self.session(description=self.menu).exists
+        return self.session(description=self.menu).exists()
 
     def run(self):
         self.session(description=self.menu).click()

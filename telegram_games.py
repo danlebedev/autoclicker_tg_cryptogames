@@ -27,7 +27,7 @@ class HarvestMoon():
             sleep(10)
             self.bot.session.click(*self.button)
             sleep(10)
-            self.bot.run()
+            self.bot.stop()
 
 
 class Blum():
@@ -70,7 +70,7 @@ class HamsterKombat():
             sleep(10)
             self.bot.session.click(*self.thanks)
             self.clicker()
-            self.bot.run()
+            self.bot.stop()
 
     def clicker(self):
         for _ in range(self.clicks):

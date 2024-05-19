@@ -9,6 +9,10 @@ class Telegram():
             self.session = self.device.session(self.name)
         except:
             self.session = None
+        else:
+            # If we start session, session.setting are reset.
+            # That why we need assign previous settings.
+            self.session.settings = self.device.settings
 
     def is_started(self) -> bool | None:
         if self.session:

@@ -9,6 +9,9 @@ GAMES = [
     Blum,
     HamsterKombat,
 ]
+FOLDERS = [
+    0,
+]
 CHATS = [
     0,
     1,
@@ -19,8 +22,9 @@ CHATS = [
 def telegram_actions(emulator):
     tg = Telegram(device=emulator.device)
     tg.start()
-    tg.init_folder(index=0)
-    folder_actions(tg.folder)
+    for index in FOLDERS:
+        tg.init_folder(index=index)
+        folder_actions(tg.folder)
 
 
 def folder_actions(folder):

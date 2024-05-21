@@ -38,9 +38,8 @@ class Blum():
         self.button = (0.500, 0.870)
 
     def play(self):
-        texts = ('Launch Blum', 'Claim')    # todo: add text choice.
         try:
-            self.bot.session(className='android.widget.Button', text=texts[0]).click()
+            self.bot.click_inline_button(index=0)
         except:
             pass
         else:

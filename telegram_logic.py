@@ -73,6 +73,13 @@ class Chat(MessageMixin):
 
     def get_last_message(self):
         return self.session(className=self.message_classname)[-1]
+    
+    def click_inline_button(self, index):
+        self.get_last_message(self) \
+            .child(
+                className=self.inline_button_classname,
+                index=index,
+            ).click()
 
 
 class Bot(Chat):

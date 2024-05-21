@@ -46,7 +46,7 @@ class Folder():
 
 class MessageMixin():
     message_classname = 'android.view.ViewGroup'
-    message_button_classname = 'android.widget.Button'
+    inline_button_classname = 'android.widget.Button'
 
 
 class Chat(MessageMixin):

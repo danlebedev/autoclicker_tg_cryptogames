@@ -82,7 +82,7 @@ class Emulator(Dnconsole):
     
     def connect(self):
         self.device = u2.connect(self.device_id)
-        self.device.settings['operation_delay'] = (1, 1)
+        self.device.settings['operation_delay'] = (2, 2)
         self.device.settings['operation_delay_methods'] = [
             'click',
             'press',

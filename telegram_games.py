@@ -59,7 +59,7 @@ class HamsterKombat():
         self.bot = bot
         self.thanks = (0.500, 0.830)
         self.hamster = (440, 990)
-        self.clicks = 70
+        self.clicks = 60
 
     def play(self):
         try:

@@ -2,8 +2,11 @@ from system_logic import Emulator
 from telegram_logic import Telegram
 from telegram_games import HarvestMoon, Blum, HamsterKombat
 from time import sleep
+import json
 
 
+with open('emulators.json', 'r') as f:
+    EMULATORS = json.load(f)
 GAMES = [
     HarvestMoon,
     Blum,
@@ -47,14 +50,15 @@ def game_actions(game):
 
 
 def main():
-    emulator = Emulator(
-        index=0,
-        device_id='emulator-5554',
-    )
-    emulator.start()
-    emulator.connect()
-    telegram_actions(emulator=emulator)
-    emulator.stop()
+    for emulator in EMULATORS:
+        emulator = Emulator(
+            index=EMULATORS.index(emulator),
+            device_id=emulator,
+        )
+        emulator.start()
+        emulator.connect()
+        telegram_actions(emulator=emulator)
+        emulator.stop()
 
 
 if '__main__' == __name__:

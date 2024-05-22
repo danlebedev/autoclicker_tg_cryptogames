@@ -1,7 +1,7 @@
 from system_logic import Emulator, ADB
 from telegram_logic import Telegram
 from telegram_games import HarvestMoon, Blum, HamsterKombat, \
-    PocketFi
+    PocketFi, Vertus
 from time import sleep
 import json
 
@@ -13,15 +13,17 @@ GAMES = [
     Blum,
     HamsterKombat,
     PocketFi,
+    Vertus,
 ]
 FOLDERS = [
-    0,
+    1,
 ]
 CHATS = [
     0,
     1,
     2,
     4,
+    5,
 ]
 SLEEP_OUT = 5
 RETRY = 3

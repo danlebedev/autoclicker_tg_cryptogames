@@ -74,3 +74,23 @@ class HamsterKombat():
     def clicker(self):
         for _ in range(self.clicks):
             self.bot.session.shell(click_generator(*self.hamster))
+
+
+class PocketFi():
+    name = 'PocketFi'
+
+    def __init__(self, bot):
+        self.bot = bot
+        self.button = (0.75, 0.645)
+
+    def play(self):
+        try:
+            self.bot.click_inline_button(index=0)
+            self.bot._run_accept()
+        except:
+            pass
+        else:
+            sleep(10)
+            self.bot.session.click(*self.button)
+            sleep(5)
+            self.bot.session.press('back')

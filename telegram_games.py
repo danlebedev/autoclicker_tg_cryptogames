@@ -93,3 +93,25 @@ class PocketFi():
             self.bot.session.click(*self.button)
             sleep(5)
             self.bot.session.press('back')
+
+
+class Vertus():
+    name = 'Vertus'
+
+    def __init__(self, bot):
+        self.bot = bot
+        self.storage = (0.700, 0.460)
+        self.collect = (0.840, 0.780)
+
+    def play(self):
+        try:
+            self.bot.click_inline_button(index=0)
+        except:
+            pass
+        else:
+            sleep(10)
+            self.bot.session.click(*self.storage)
+            sleep(5)
+            self.bot.session.click(*self.collect)
+            self.bot.session.press('back')
+            self.bot.session.press('back')

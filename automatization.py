@@ -1,6 +1,7 @@
 from system_logic import Emulator
 from telegram_logic import Telegram
-from telegram_games import HarvestMoon, Blum, HamsterKombat
+from telegram_games import HarvestMoon, Blum, HamsterKombat, \
+    PocketFi
 from time import sleep
 import json
 
@@ -11,6 +12,7 @@ GAMES = [
     HarvestMoon,
     Blum,
     HamsterKombat,
+    PocketFi,
 ]
 FOLDERS = [
     0,

@@ -78,9 +78,10 @@ def game_actions(game):
 
 
 def main():
-    ADB_PROCESS.start()
     emulator_actions()
 
 
 if '__main__' == __name__:
-    main()
+    ADB_PROCESS.start()
+    while True:
+        main()

@@ -25,6 +25,18 @@ CHATS = [
 SLEEP_OUT = 5
 
 
+def emulator_actions():
+    for emulator in EMULATORS:
+        emulator = Emulator(
+            index=EMULATORS.index(emulator),
+            device_id=emulator,
+        )
+        emulator.start()
+        emulator.connect()
+        telegram_actions(emulator=emulator)
+        emulator.stop()
+
+
 def telegram_actions(emulator):
     tg = Telegram(device=emulator.device)
     tg.start()
@@ -57,15 +69,7 @@ def game_actions(game):
 
 
 def main():
-    for emulator in EMULATORS:
-        emulator = Emulator(
-            index=EMULATORS.index(emulator),
-            device_id=emulator,
-        )
-        emulator.start()
-        emulator.connect()
-        telegram_actions(emulator=emulator)
-        emulator.stop()
+    emulator_actions()
 
 
 if '__main__' == __name__:

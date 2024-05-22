@@ -31,19 +31,25 @@ def emulator_connect(emulator):
         for _ in range(RETRY):
             emulator.connect()
             if emulator.is_connected():
-                telegram_actions(emulator=emulator)
+                tg = Telegram(device=emulator.device)
+                telegram_connect(tg=tg)
                 break
             else:
                 ADB_PROCESS.reconnect()
                 sleep(SLEEP_OUT)
+                # TODO: add logging.
 
 
-def telegram_actions(emulator):
-    tg = Telegram(device=emulator.device)
-    tg.start()
-    for index in FOLDERS:
-        tg.init_folder(index=index)
-        folder_actions(tg.folder)
+def telegram_connect(tg):
+    for _ in range(RETRY):
+        tg.start()
+        if tg.is_started():
+            for index in FOLDERS:
+                tg.init_folder(index=index)
+                folder_actions(tg.folder)
+            break
+        else:
+            pass    # TODO: add logging.
 
 
 def folder_actions(folder):

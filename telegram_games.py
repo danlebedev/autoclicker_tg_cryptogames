@@ -86,7 +86,6 @@ class PocketFi():
     def play(self):
         try:
             self.bot.click_inline_button(index=0)
-            self.bot._run_accept()
         except:
             pass
         else:

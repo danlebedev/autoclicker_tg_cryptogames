@@ -46,17 +46,22 @@ def telegram_start(tg):
         if tg.is_started():
             for index in FOLDERS:
                 tg.init_folder(index=index)
-                folder_actions(tg.folder)
+                folder_connect(tg.folder)
             break
         else:
             pass    # TODO: add logging.
 
 
-def folder_actions(folder):
-    folder.connect()
-    for index in CHATS:
-        folder.init_bot(index=index)
-        bot_actions(folder.bot)
+def folder_connect(folder):
+    for _ in range(RETRY):
+        folder.connect()
+        if folder.is_connected():
+            for index in CHATS:
+                folder.init_bot(index=index)
+                bot_actions(folder.bot)
+            break
+        else:
+            pass    # TODO: add logging.
 
 
 def bot_actions(bot):

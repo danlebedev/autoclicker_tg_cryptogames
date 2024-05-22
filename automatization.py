@@ -36,7 +36,6 @@ def emulator_connect(emulator):
             else:
                 ADB_PROCESS.reconnect()
                 sleep(SLEEP_OUT)
-                emulator.connect()
 
 
 def telegram_actions(emulator):

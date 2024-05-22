@@ -97,6 +97,10 @@ class Bot(Chat):
     def stop(self):
         self.run()
 
+    def click_inline_button(self, index):
+        super().click_inline_button(index)
+        self._run_accept()
+
     def _run_accept(self):
         if self.session(className='android.widget.TextView', text='Начать', clickable=True).exists():
             self.session(className='android.widget.TextView', text='Начать', clickable=True).click()

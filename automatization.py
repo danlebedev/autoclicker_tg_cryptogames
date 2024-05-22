@@ -1,4 +1,4 @@
-from system_logic import Emulator
+from system_logic import Emulator, ADB
 from telegram_logic import Telegram
 from telegram_games import HarvestMoon, Blum, HamsterKombat, \
     PocketFi
@@ -6,6 +6,7 @@ from time import sleep
 import json
 
 
+ADB_PROCESS = ADB()
 with open('emulators.json', 'r') as f:
     EMULATORS = json.load(f)
 GAMES = [
@@ -69,6 +70,7 @@ def game_actions(game):
 
 
 def main():
+    ADB_PROCESS.start()
     emulator_actions()
 
 

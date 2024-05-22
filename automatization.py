@@ -22,6 +22,7 @@ CHATS = [
     1,
     2,
 ]
+SLEEP_OUT = 5
 
 
 def telegram_actions(emulator):
@@ -46,13 +47,13 @@ def bot_actions(bot):
         game_actions(bot.game)
     else:
         bot.session.press('back')
-        sleep(5)
+        sleep(SLEEP_OUT)
 
 
 def game_actions(game):
     game.play()
     game.bot.session.press('back')
-    sleep(5)
+    sleep(SLEEP_OUT)
 
 
 def main():

@@ -24,6 +24,7 @@ CHATS = [
     4,
 ]
 SLEEP_OUT = 5
+RETRY = 3
 
 
 def emulator_actions():
@@ -33,8 +34,15 @@ def emulator_actions():
             device_id=emulator,
         )
         emulator.start()
-        emulator.connect()
-        telegram_actions(emulator=emulator)
+        for _ in range(RETRY):
+            emulator.connect()
+            if emulator.is_connected():
+                telegram_actions(emulator=emulator)
+                break
+            else:
+                ADB_PROCESS.reconnect()
+                sleep(SLEEP_OUT)
+                emulator.connect()
         emulator.stop()
 
 

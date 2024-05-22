@@ -9,7 +9,6 @@ import json
 with open('emulators.json', 'r') as f:
     EMULATORS = json.load(f)
 GAMES = [
-    HarvestMoon,
     Blum,
     HamsterKombat,
     PocketFi,
@@ -21,6 +20,7 @@ CHATS = [
     0,
     1,
     2,
+    4,
 ]
 SLEEP_OUT = 5
 

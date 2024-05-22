@@ -42,7 +42,11 @@ def folder_actions(folder):
 def bot_actions(bot):
     bot.connect()
     bot.set_game(games=GAMES)
-    game_actions(bot.game)
+    if bot.game is not None:
+        game_actions(bot.game)
+    else:
+        bot.session.press('back')
+        sleep(5)
 
 
 def game_actions(game):

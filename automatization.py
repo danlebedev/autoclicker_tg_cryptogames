@@ -32,7 +32,7 @@ def emulator_connect(emulator):
             emulator.connect()
             if emulator.is_connected():
                 tg = Telegram(device=emulator.device)
-                telegram_connect(tg=tg)
+                telegram_start(tg=tg)
                 break
             else:
                 ADB_PROCESS.reconnect()
@@ -40,7 +40,7 @@ def emulator_connect(emulator):
                 # TODO: add logging.
 
 
-def telegram_connect(tg):
+def telegram_start(tg):
     for _ in range(RETRY):
         tg.start()
         if tg.is_started():

@@ -27,13 +27,7 @@ SLEEP_OUT = 5
 RETRY = 3
 
 
-def emulator_actions():
-    for emulator in EMULATORS:
-        emulator = Emulator(
-            index=EMULATORS.index(emulator),
-            device_id=emulator,
-        )
-        emulator.start()
+def emulator_connect(emulator):
         for _ in range(RETRY):
             emulator.connect()
             if emulator.is_connected():
@@ -43,7 +37,6 @@ def emulator_actions():
                 ADB_PROCESS.reconnect()
                 sleep(SLEEP_OUT)
                 emulator.connect()
-        emulator.stop()
 
 
 def telegram_actions(emulator):
@@ -78,7 +71,14 @@ def game_actions(game):
 
 
 def main():
-    emulator_actions()
+    for emulator in EMULATORS:
+        emulator = Emulator(
+            index=EMULATORS.index(emulator),
+            device_id=emulator,
+        )
+        emulator.start()
+        emulator_connect(emulator=emulator)
+        emulator.stop()
 
 
 if '__main__' == __name__:

@@ -1,7 +1,7 @@
 from system_logic import Emulator, ADB
 from telegram_logic import Telegram
 from telegram_games import HarvestMoon, Blum, HamsterKombat, \
-    PocketFi, Vertus, PocketRocketGame
+    PocketFi, Vertus, PocketRocketGame, QappiMiner
 from time import sleep
 import json
 
@@ -15,6 +15,7 @@ GAMES = [
     PocketFi,
     Vertus,
     PocketRocketGame,
+    QappiMiner,
 ]
 FOLDERS = [
     1,

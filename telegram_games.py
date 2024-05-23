@@ -115,3 +115,16 @@ class Vertus():
             self.bot.session.click(*self.collect)
             self.bot.session.press('back')
             self.bot.session.press('back')
+
+
+class HoldWallet():
+    name = 'HOLD Wallet 💎'
+
+    def play(self):
+        try:
+            self.bot.click_inline_button(index=0)
+        except:
+            pass
+        else:
+            pass
+            # TODO: WRITE THIS CLASS

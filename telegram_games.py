@@ -171,3 +171,24 @@ class QappiMiner():
             self.bot.session.click(*self.claim)
             sleep(10)
             self.bot.session.press('back')
+
+
+class GleamAquaProtocol():
+    name = 'Gleam~AquaProtocol'
+
+    def __init__(self, bot):
+        self.bot = bot
+        self.claim = (0.500, 0.610)
+
+    def play(self):
+        try:
+            self.bot.run()
+        except:
+            pass
+        else:
+            sleep(10)
+            self.bot.session.click(*self.claim)
+            sleep(5)
+            self.bot.session.click(*self.claim)
+            sleep(5)
+            self.bot.session.press('back')

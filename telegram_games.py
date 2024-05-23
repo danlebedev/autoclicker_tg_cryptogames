@@ -128,3 +128,26 @@ class HoldWallet():
         else:
             pass
             # TODO: WRITE THIS CLASS
+
+
+class PocketRocketGame():
+    name = 'Pocket Rocket Game'
+
+    def __init__(self, bot):
+        self.bot = bot
+        self.rocket = (0.500, 0.730)
+        self.clicks = 100
+
+    def play(self):
+        try:
+            self.bot.click_inline_button(index=0)
+        except:
+            pass
+        else:
+            sleep(10)
+            self.clicker()
+            self.bot.session.press('back')
+
+    def clicker(self):
+        for _ in range(self.clicks):
+            self.bot.session.shell(click_generator(*self.rocket))

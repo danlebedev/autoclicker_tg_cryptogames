@@ -151,3 +151,23 @@ class PocketRocketGame():
     def clicker(self):
         for _ in range(self.clicks):
             self.bot.session.shell(click_generator(*self.rocket))
+
+
+class QappiMiner():
+    name = 'Qappi Miner'
+
+    def __init__(self, bot):
+        self.bot = bot
+        self.claim = (0.500, 0.740)
+        self.rocket = (0.515, 0.515)
+
+    def play(self):
+        try:
+            self.bot.click_inline_button(index=0)
+        except:
+            pass
+        else:
+            sleep(10)
+            self.bot.session.click(*self.claim)
+            sleep(10)
+            self.bot.session.press('back')

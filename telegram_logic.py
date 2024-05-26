@@ -95,7 +95,8 @@ class Bot(Chat):
         self._run_accept()
 
     def stop(self):
-        self.run()
+        self.session(description=self.menu).click()
+        self._stop_accept()
 
     def click_inline_button(self, index):
         super().click_inline_button(index)
@@ -104,6 +105,10 @@ class Bot(Chat):
     def _run_accept(self):
         if self.session(className='android.widget.TextView', text='Начать', clickable=True).exists():
             self.session(className='android.widget.TextView', text='Начать', clickable=True).click()
+
+    def _stop_accept(self):
+        if self.session(className='android.widget.TextView', text='Всё равно закрыть', clickable=True).exists():
+            self.session(className='android.widget.TextView', text='Всё равно закрыть', clickable=True).click()
 
     def set_game(self, games):
         for game in games:

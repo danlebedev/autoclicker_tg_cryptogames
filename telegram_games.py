@@ -153,6 +153,7 @@ class PocketRocketGame():
             sleep(10)
             self.clicker()
             self.bot.session.press('back')
+            self.bot._stop_accept()
 
     def clicker(self):
         for _ in range(self.clicks):

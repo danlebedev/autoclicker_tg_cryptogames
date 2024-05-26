@@ -82,6 +82,7 @@ def game_actions(game):
 
 def main():
     for emulator in EMULATORS:
+        print(EMULATORS.index(emulator))
         emulator = Emulator(
             index=EMULATORS.index(emulator),
             device_id=emulator,

@@ -27,8 +27,8 @@ CHATS = [
     0,
     1,
     2,
+    3,
     4,
-    5,
 ]
 SLEEP_OUT = 5
 RETRY = 3

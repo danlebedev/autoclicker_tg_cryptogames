@@ -28,16 +28,16 @@ RETRY = 3
 
 
 def emulator_connect(emulator):
-        for _ in range(RETRY):
-            emulator.connect()
-            if emulator.is_connected():
-                tg = Telegram(device=emulator.device)
-                telegram_start(tg=tg)
-                break
-            else:
-                ADB_PROCESS.reconnect()
-                sleep(SLEEP_OUT)
-                # TODO: add logging.
+    for _ in range(RETRY):
+        emulator.connect()
+        if emulator.is_connected():
+            tg = Telegram(device=emulator.device)
+            telegram_start(tg=tg)
+            break
+        else:
+            ADB_PROCESS.reconnect()
+            sleep(SLEEP_OUT)
+            # TODO: add logging.
 
 
 def telegram_start(tg):

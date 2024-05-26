@@ -10,12 +10,13 @@ ADB_PROCESS = ADB()
 with open('emulators.json', 'r') as f:
     EMULATORS = json.load(f)
 GAMES = [
+    #HarvestMoon,
     Blum,
     HamsterKombat,
     PocketFi,
     Vertus,
     PocketRocketGame,
-    QappiMiner,
+    #QappiMiner,
     GleamAquaProtocol,
 ]
 FOLDERS = [

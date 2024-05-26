@@ -15,11 +15,9 @@ def main():
             device_id=emulator,
         )
         emulator.start()
-        emulator.connect()
         input()
         emulator.stop()
 
 
 if '__main__' == __name__:
-    ADB_PROCESS.start()
     main()

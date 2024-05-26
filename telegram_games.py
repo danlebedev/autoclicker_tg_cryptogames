@@ -141,7 +141,7 @@ class PocketRocketGame():
 
     def __init__(self, bot):
         self.bot = bot
-        self.rocket = (450, 0.750)
+        self.rocket = (450, 750)
         self.clicks = 100
 
     def play(self):

@@ -19,17 +19,10 @@ GAMES = [
     #QappiMiner,
     GleamAquaProtocol,
 ]
-FOLDERS = [
-    1,
-    2,
-]
-CHATS = [
-    0,
-    1,
-    2,
-    3,
-    4,
-]
+FOLDERS = {
+    1: (0, 1, 2, 3, 4),
+    2: (0, 1, 2)
+}
 SLEEP_OUT = 5
 RETRY = 3
 
@@ -53,13 +46,13 @@ def telegram_start(tg):
         if tg.is_started():
             for index in FOLDERS:
                 tg.init_folder(index=index)
-                folder_connect(tg.folder)
+                folder_connect(tg.folder, FOLDERS[index])
             break
         else:
             pass    # TODO: add logging.
 
 
-def folder_connect(folder):
+def folder_connect(folder, CHATS):
     for _ in range(RETRY):
         folder.connect()
         if folder.is_connected():

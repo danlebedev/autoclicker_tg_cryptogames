@@ -15,7 +15,7 @@ def main():
             device_id=emulator,
         )
         emulator.start()
-        input()
+        input('Press enter to continue: ')
         emulator.stop()
 
 

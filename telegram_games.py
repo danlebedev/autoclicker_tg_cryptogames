@@ -106,6 +106,12 @@ class Vertus():
     def play(self):
         try:
             self.bot.click_inline_button(index=0)
+            # Skip daily reward.
+            # TODO: rewrite this to check screenshot with opencv later.
+            sleep(10)
+            self.bot.session.press('back')
+            sleep(5)
+            self.bot.click_inline_button(index=0)
         except:
             pass
         else:

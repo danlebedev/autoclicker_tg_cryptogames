@@ -2,11 +2,11 @@ from time import sleep
 from random import randint
 
 
-def click_generator(x, y, count=10):
+def click_generator(x, y, count=10, x_rand=20, y_rand=20):
     commands = []
     for _ in range(count):
-        x += randint(-20, 20)
-        y += randint(-20, 20)
+        x += randint(-x_rand, x_rand)
+        y += randint(-y_rand, y_rand)
         commands.append(f"input tap {x} {y}")
     return ' && '.join(commands)
 
@@ -141,7 +141,7 @@ class PocketRocketGame():
 
     def __init__(self, bot):
         self.bot = bot
-        self.rocket = (0.500, 0.730)
+        self.rocket = (450, 0.750)
         self.clicks = 100
 
     def play(self):
@@ -156,7 +156,11 @@ class PocketRocketGame():
 
     def clicker(self):
         for _ in range(self.clicks):
-            self.bot.session.shell(click_generator(*self.rocket))
+            self.bot.session.shell(click_generator(
+                *self.rocket,
+                x_rand=350,
+                y_rand=550,
+            ))
 
 
 class QappiMiner():

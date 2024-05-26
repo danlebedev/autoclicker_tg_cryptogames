@@ -1,6 +1,7 @@
 from subprocess import Popen, run
 from time import sleep
 import uiautomator2 as u2
+from os.path import abspath
 
 
 class Shell():
@@ -31,7 +32,7 @@ class Shell():
 
 class ADB(Shell):
     def __init__(self, shell=True):
-        self.cwd = r'C:\Users\spirit\Desktop\platform-tools'
+        self.cwd = abspath('platform-tools')
         self.name = 'adb'
         self.shell = shell
 

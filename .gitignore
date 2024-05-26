@@ -3,3 +3,6 @@ venv
 
 # Python files and folders
 **/__pycache__/
+
+# Android platform-tools
+platform-tools

@@ -5,8 +5,8 @@ from random import randint
 def click_generator(x, y, count=10, x_rand=20, y_rand=20):
     commands = []
     for _ in range(count):
-        new_x += randint(-x_rand, x_rand) + x
-        new_y += randint(-y_rand, y_rand) + y
+        new_x = randint(-x_rand, x_rand) + x
+        new_y = randint(-y_rand, y_rand) + y
         commands.append(f"input tap {new_x} {new_y}")
     return ' && '.join(commands)
 

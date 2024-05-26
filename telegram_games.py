@@ -202,4 +202,4 @@ class GleamAquaProtocol():
             sleep(5)
             self.bot.session.click(*self.claim)
             sleep(5)
-            self.bot.session.press('back')
+            self.bot.stop()

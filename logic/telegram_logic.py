@@ -134,3 +134,4 @@ class Bot(Chat):
 
     def send_message_start(self):
         self.send_message('/start')
+        self.session.sleep(2)

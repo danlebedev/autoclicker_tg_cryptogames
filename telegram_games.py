@@ -145,6 +145,7 @@ class PocketRocketGame():
         self.clicks = 100
 
     def play(self):
+        self.bot.send_message_start()
         try:
             self.bot.click_inline_button(index=0)
         except:

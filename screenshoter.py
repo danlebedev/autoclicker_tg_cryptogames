@@ -1,17 +1,21 @@
 from logic.system_logic import ADB, Emulator
 
 
-COUNT = 0
+count = 0
 
-def massive_screenshots(emulator):
+
+def multi_screenshots(emulator):
     input('Press enter to start screenshots record: ')
     screenshots = []
-    for count in range(count):
+    for _ in range(100):
         image = emulator.device.screenshot()
         screenshots.append(image)
 
-    for image in screenshots:
-        image.save(f'screenshots/{count}', format='PNG')
+    for index in range(len(screenshots)):
+        image = screenshots[index]
+        image.save(f'screenshots/{index + count}.png', format='PNG')
+    
+    count += len(screenshots)
 
 
 def main():
@@ -24,7 +28,7 @@ def main():
     )
     emulator.start()
     emulator.connect()
-    massive_screenshots(emulator=emulator)
+    multi_screenshots(emulator=emulator)
 
 
 if '__main__' == __name__:

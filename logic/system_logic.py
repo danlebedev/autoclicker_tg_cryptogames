@@ -89,6 +89,7 @@ class Emulator(Dnconsole):
             'press',
             'exists',
             'get_text',
+            'set_text',
         ]
 
     def is_connected(self) -> bool:

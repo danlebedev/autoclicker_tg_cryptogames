@@ -47,6 +47,8 @@ class Folder():
 class MessageMixin():
     message_classname = 'android.view.ViewGroup'
     inline_button_classname = 'android.widget.Button'
+    messagefield_classname = 'android.widget.EditText'
+    messagefield_longclickable = True
 
 
 class Chat(MessageMixin):
@@ -66,7 +68,7 @@ class Chat(MessageMixin):
                 return self.is_connected()
 
     def is_connected(self) -> bool:
-        return self.session(className='android.widget.EditText', longClickable=True).exists()
+        return self.get_messagefield().exists()
 
     def _set_name(self):
         self.name = self.session(className='android.widget.TextView')[0].get_text()
@@ -80,6 +82,18 @@ class Chat(MessageMixin):
                 className=self.inline_button_classname,
                 index=index,
             ).click()
+
+    def get_messagefield(self):
+        return self.session(
+            className=self.messagefield_classname,
+            longClickable=self.messagefield_longclickable,
+        )
+
+    def send_message(self, message):
+        messagefield = self.get_messagefield()
+        messagefield.clear_text()
+        messagefield.set_text(message)
+        self.session.press('enter')
 
 
 class Bot(Chat):

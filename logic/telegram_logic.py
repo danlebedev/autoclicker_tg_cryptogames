@@ -93,8 +93,7 @@ class Chat(MessageMixin):
         messagefield = self.get_messagefield()
         messagefield.clear_text()
         messagefield.set_text(message)
-        # Press left ctrl + enter.
-        self.session.press(0x00000071, 'enter')
+        self.session.press('enter')
 
 
 class Bot(Chat):

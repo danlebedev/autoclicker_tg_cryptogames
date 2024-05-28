@@ -1,5 +1,5 @@
-from system_logic import Emulator, ADB
-from telegram_logic import Telegram
+from logic.system_logic import Emulator, ADB
+from logic.telegram_logic import Telegram
 from telegram_games import HarvestMoon, Blum, HamsterKombat, \
     PocketFi, Vertus, PocketRocketGame, QappiMiner, GleamAquaProtocol
 from time import sleep

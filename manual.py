@@ -1,8 +1,7 @@
-from logic.system_logic import Emulator, ADB
+from logic.system_logic import Emulator
 import json
 
 
-ADB_PROCESS = ADB()
 with open('emulators.json', 'r') as f:
     EMULATORS = json.load(f)
 

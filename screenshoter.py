@@ -4,8 +4,28 @@ from logic.system_logic import ADB, Emulator
 count = 0
 
 
+def menu(emulator):
+    while True:
+        key = input(
+        """Send key and press enter:
+1) Single screen: s
+2) Multiple screen: m
+3) Quit: q
+"""
+    )
+        if key == 's':
+            pass
+        elif key == 'm':
+            multi_screenshots(emulator=emulator)
+        elif key == 'q':
+            break
+        else:
+            pass
+
+
 def multi_screenshots(emulator):
     input('Press enter to start screenshots record: ')
+    global count
     screenshots = []
     for _ in range(100):
         image = emulator.device.screenshot()
@@ -28,7 +48,7 @@ def main():
     )
     emulator.start()
     emulator.connect()
-    multi_screenshots(emulator=emulator)
+    menu(emulator=emulator)
 
 
 if '__main__' == __name__:

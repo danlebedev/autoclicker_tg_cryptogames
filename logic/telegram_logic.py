@@ -131,3 +131,6 @@ class Bot(Chat):
                 break
         else:
             self.game = None
+
+    def send_message_start(self):
+        self.send_message('/start')

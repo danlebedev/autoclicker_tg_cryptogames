@@ -1,4 +1,4 @@
-from system_logic import Emulator, ADB
+from logic.system_logic import Emulator, ADB
 import json
 
 

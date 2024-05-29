@@ -107,3 +107,24 @@ class Emulator(Dnconsole):
         if isinstance(name, datetime):
             name = name.strftime('%d-%m-%Y_%H-%M-%S-%f')
         screenshot.save(f'screenshots/{name}.{save_format.lower()}')
+
+    def make_and_save_screenshot(self, name=None, scr_format='pillow', save_format='PNG'):
+        """
+        Use this method only for single screenshots. Slow speed because it is saved
+        immediately after taking a screenshot.
+        For fast screenshots use methods make_screenshot() and append to list.
+        After finishing screenshots iterate through the list and save images
+        with method save_screenshot().
+        """
+        screenshot = self.make_screenshot(scr_format=scr_format)
+        if not name:
+            self.save_screenshot(
+                *screenshot,
+                save_format=save_format,
+            )
+        else:
+            self.save_screenshot(
+                screenshot=screenshot[1],
+                name=name,
+                save_format=save_format,
+            )

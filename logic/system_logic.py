@@ -96,3 +96,6 @@ class Emulator(Dnconsole):
         if self.device:
             return True
         return False
+
+    def make_screenshot(self, format='pillow'):
+        return self.device.screenshot(format=format)

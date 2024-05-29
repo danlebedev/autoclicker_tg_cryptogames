@@ -141,8 +141,8 @@ class PocketRocketGame():
 
     def __init__(self, bot):
         self.bot = bot
-        self.rocket = (450, 750)
-        self.clicks = 100
+        self.rocket = (450, 400)
+        self.clicks = 70
 
     def play(self):
         self.bot.send_message_start()
@@ -161,7 +161,7 @@ class PocketRocketGame():
             self.bot.session.shell(click_generator(
                 *self.rocket,
                 x_rand=350,
-                y_rand=550,
+                y_rand=50,
             ))
 
 

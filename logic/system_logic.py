@@ -1,5 +1,6 @@
 from subprocess import Popen, run
 from time import sleep
+from datetime import datetime
 import uiautomator2 as u2
 from os.path import abspath
 
@@ -98,4 +99,6 @@ class Emulator(Dnconsole):
         return False
 
     def make_screenshot(self, format='pillow'):
-        return self.device.screenshot(format=format)
+        screenshot = self.device.screenshot(format=format)
+        date = datetime.now()
+        return (screenshot, date)

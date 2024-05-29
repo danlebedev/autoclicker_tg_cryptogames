@@ -98,12 +98,12 @@ class Emulator(Dnconsole):
             return True
         return False
 
-    def make_screenshot(self, format='pillow'):
-        screenshot = self.device.screenshot(format=format)
+    def make_screenshot(self, scr_format='pillow'):
+        screenshot = self.device.screenshot(format=scr_format)
         date = datetime.now()
         return (screenshot, date)
 
-    def save_screenshot(self, screenshot, name, format='PNG'):
+    def save_screenshot(self, screenshot, name, save_format='PNG'):
         if isinstance(name, datetime):
             name = name.strftime('%d-%m-%Y_%H-%M-%S-%f')
-        screenshot.save(f'screenshots/{name}.{format.lower()}')
+        screenshot.save(f'screenshots/{name}.{save_format.lower()}')

@@ -102,3 +102,8 @@ class Emulator(Dnconsole):
         screenshot = self.device.screenshot(format=format)
         date = datetime.now()
         return (screenshot, date)
+
+    def save_screenshot(self, screenshot, name, format='PNG'):
+        if isinstance(name, datetime):
+            name = name.strftime('%d-%m-%Y_%H-%M-%S-%f')
+        screenshot.save(f'screenshots/{name}.{format.lower()}')

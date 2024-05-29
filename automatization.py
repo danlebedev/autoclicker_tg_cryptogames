@@ -66,6 +66,7 @@ def folder_connect(folder, CHATS):
 
 def bot_actions(bot):
     bot.connect()
+    sleep(2)
     bot.set_game(games=GAMES)
     if bot.game is not None:
         game_actions(bot.game)

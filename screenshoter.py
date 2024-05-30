@@ -1,5 +1,5 @@
 from logic.system_logic import ADB, Emulator
-from keyboard import is_pressed, wait
+from keyboard import is_pressed
 
 
 def menu(emulator):

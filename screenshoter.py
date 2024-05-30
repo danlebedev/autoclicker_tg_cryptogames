@@ -5,8 +5,8 @@ def menu(emulator):
     while True:
         key = input(
         """Send key and press enter:
-1) Single screen: s
-2) Multiple screen: m
+1) Single screenshot: s
+2) Multiple screenshot: m
 3) Quit: q
 """
     )

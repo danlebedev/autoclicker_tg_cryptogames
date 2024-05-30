@@ -11,13 +11,18 @@ def menu(emulator):
 """
     )
         if key == 's':
-            pass
+            single_screenshot(emulator=emulator)
         elif key == 'm':
             multi_screenshots(emulator=emulator)
         elif key == 'q':
             break
         else:
             pass
+
+
+def single_screenshot(emulator):
+    input('Press enter to make screenshot: ')
+    emulator.make_and_save_screenshot()
 
 
 def multi_screenshots(emulator):

@@ -1,4 +1,5 @@
 from logic.system_logic import ADB, Emulator
+from keyboard import is_pressed
 
 
 def menu(emulator):
@@ -8,6 +9,8 @@ def menu(emulator):
 1) Single screenshot: s
 2) Multiple screenshot: m
 3) Quit: q
+
+Input your choice: 
 """
     )
         if key == 's':
@@ -21,8 +24,12 @@ def menu(emulator):
 
 
 def single_screenshot(emulator):
-    input('Press enter to make screenshot: ')
-    emulator.make_and_save_screenshot()
+    print("Do screenshot: ctrl\nStop: q")
+    while True:
+        if is_pressed('ctrl'):
+            emulator.make_and_save_screenshot()
+        elif is_pressed('q'):
+            break
 
 
 def multi_screenshots(emulator):

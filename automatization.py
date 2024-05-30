@@ -82,11 +82,11 @@ def game_actions(game):
 
 
 def main():
-    for emulator in EMULATORS:
-        print(EMULATORS.index(emulator))
+    for device_id in EMULATORS:
+        print(EMULATORS.index(device_id))
         emulator = Emulator(
-            index=EMULATORS.index(emulator),
-            device_id=emulator,
+            index=EMULATORS.index(device_id),
+            device_id=device_id,
         )
         emulator.start()
         emulator_connect(emulator=emulator)

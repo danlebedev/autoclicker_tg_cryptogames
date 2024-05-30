@@ -1,5 +1,5 @@
 from logic.system_logic import ADB, Emulator
-from keyboard import is_pressed
+from keyboard import is_pressed, wait
 
 
 def menu(emulator):
@@ -10,8 +10,7 @@ def menu(emulator):
 2) Multiple screenshot: m
 3) Quit: q
 
-Input your choice: 
-"""
+Input your choice: """
     )
         if key == 's':
             single_screenshot(emulator=emulator)
@@ -19,12 +18,11 @@ Input your choice:
             multi_screenshots(emulator=emulator)
         elif key == 'q':
             break
-        else:
-            pass
+
 
 
 def single_screenshot(emulator):
-    print("Do screenshot: ctrl\nStop: q")
+    print("Start: ctrl\nStop: q")
     while True:
         if is_pressed('ctrl'):
             emulator.make_and_save_screenshot()
@@ -33,13 +31,26 @@ def single_screenshot(emulator):
 
 
 def multi_screenshots(emulator):
-    input('Press enter to start screenshots record: ')
+    print("Start: ctrl\nStop: q")
     screenshots = []
-    for _ in range(10):
-        screenshots.append(emulator.make_screenshot())
+    while True:
+        if is_pressed('ctrl'):
+            while True:
+                if is_pressed('q'):
+                    break
+                screenshots.append(emulator.make_screenshot())
+            break
+        elif is_pressed('q'):
+            break
+    key = input("""Screenshots is done.
+1) Save: s
+2) Don't save: q
 
-    for screenshot in screenshots:
-        emulator.save_screenshot(*screenshot)
+Input your choice: """)
+    if key == 's':
+        print("Wait for saving...")
+        for screenshot in screenshots:
+            emulator.save_screenshot(*screenshot)
 
 
 def main():

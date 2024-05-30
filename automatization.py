@@ -2,6 +2,7 @@ from logic.system_logic import Emulator, ADB
 from logic.telegram_logic import Telegram
 from telegram_games import HarvestMoon, Blum, HamsterKombat, \
     PocketFi, Vertus, PocketRocketGame, QappiMiner, GleamAquaProtocol
+from logging_tools.tools import screenshot
 from time import sleep
 import json
 
@@ -27,7 +28,7 @@ SLEEP_OUT = 5
 RETRY = 3
 
 
-def emulator_connect(emulator):
+def emulator_connect():
     for _ in range(RETRY):
         emulator.connect()
         if emulator.is_connected():
@@ -67,6 +68,7 @@ def folder_connect(folder, CHATS):
 def bot_actions(bot):
     bot.connect()
     sleep(2)
+    screenshot(emulator=emulator)
     bot.set_game(games=GAMES)
     if bot.game is not None:
         game_actions(bot.game)
@@ -84,12 +86,13 @@ def game_actions(game):
 def main():
     for device_id in EMULATORS:
         print(EMULATORS.index(device_id))
+        global emulator
         emulator = Emulator(
             index=EMULATORS.index(device_id),
             device_id=device_id,
         )
         emulator.start()
-        emulator_connect(emulator=emulator)
+        emulator_connect()
         emulator.stop()
 
 

@@ -214,15 +214,17 @@ class EmpiresBattleBot():
         self.clicks = 100
 
     def play(self):
+        self.bot.send_message_start()
         try:
-            self.bot.run()
+            self.bot.click_inline_button(index=0)
         except:
             pass
         else:
             sleep(10)
             self.bot.session.click(*self.thanks)
             self.clicker()
-            self.bot.stop()
+            self.bot.session.press('back')
+            self.bot._stop_accept()
 
     def clicker(self):
         for _ in range(self.clicks):

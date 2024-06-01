@@ -105,6 +105,7 @@ class Vertus():
 
     def play(self):
         try:
+            self.bot.send_message_start()
             self.bot.click_inline_button(index=0)
             # Skip daily reward.
             # TODO: rewrite this to check screenshot with opencv later.
@@ -145,8 +146,9 @@ class PocketRocketGame():
         self.clicks = 70
 
     def play(self):
-        self.bot.send_message_start()
         try:
+            self.bot.send_message_start()
+            sleep(5)
             self.bot.click_inline_button(index=0)
         except:
             pass
@@ -214,8 +216,9 @@ class EmpiresBattleBot():
         self.clicks = 100
 
     def play(self):
-        self.bot.send_message_start()
         try:
+            self.bot.send_message_start()
+            sleep(5)
             self.bot.click_inline_button(index=0)
         except:
             pass

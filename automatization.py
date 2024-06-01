@@ -66,13 +66,18 @@ def folder_connect(folder, CHATS):
 
 
 def bot_actions(bot):
-    bot.connect()
-    sleep(2)
-    screenshot(emulator=emulator)
-    bot.set_game(games=GAMES)
-    if bot.game is not None:
-        game_actions(bot.game)
-    else:
+    # Add try-except for pass bug. Need fix in the future.
+    try:
+        bot.connect()
+        sleep(2)
+        screenshot(emulator=emulator)
+        bot.set_game(games=GAMES)
+        if bot.game is not None:
+            game_actions(bot.game)
+        else:
+            bot.session.press('back')
+            sleep(SLEEP_OUT)
+    except:
         bot.session.press('back')
         sleep(SLEEP_OUT)
 

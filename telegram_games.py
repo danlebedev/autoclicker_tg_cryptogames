@@ -204,3 +204,26 @@ class GleamAquaProtocol():
             self.bot.session.click(*self.claim)
             sleep(5)
             self.bot.stop()
+
+class EmpiresBattleBot():
+    name = "Empire's Battle Bot"
+
+    def __init__(self, bot):
+        self.bot = bot
+        self.raccoon = (440, 990)
+        self.clicks = 100
+
+    def play(self):
+        try:
+            self.bot.run()
+        except:
+            pass
+        else:
+            sleep(10)
+            self.bot.session.click(*self.thanks)
+            self.clicker()
+            self.bot.stop()
+
+    def clicker(self):
+        for _ in range(self.clicks):
+            self.bot.session.shell(click_generator(*self.raccoon))

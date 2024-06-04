@@ -74,7 +74,7 @@ def bot_actions(bot):
     try:
         bot.connect()
         sleep(2)
-        screenshot(emulator=emulator)
+        #screenshot(emulator=emulator)
         bot.set_game(games=GAMES)
         if bot.game is not None:
             game_actions(bot.game)

@@ -3,7 +3,7 @@ from logic.telegram_logic import Telegram
 from telegram_games import HarvestMoon, Blum, HamsterKombat, \
     PocketFi, Vertus, PocketRocketGame, QappiMiner, GleamAquaProtocol, \
     EmpiresBattleBot
-from logging_tools.tools import screenshot
+from logging_tools.tools import screenshot, load_state, save_state
 from time import sleep
 import json
 
@@ -28,6 +28,8 @@ FOLDERS = {
 }
 SLEEP_OUT = 5
 RETRY = 3
+LAST_STATE = load_state()
+NEW_STATE = {}
 
 
 def emulator_connect():
@@ -92,15 +94,23 @@ def game_actions(game):
 
 def main():
     for device_id in EMULATORS:
-        print(EMULATORS.index(device_id))
-        global emulator
-        emulator = Emulator(
-            index=EMULATORS.index(device_id),
-            device_id=device_id,
-        )
-        emulator.start()
-        emulator_connect()
-        emulator.stop()
+        if LAST_STATE:
+            if not LAST_STATE['device_id'] == device_id:
+                continue
+        try:
+            NEW_STATE['device_id'] = device_id
+            print(EMULATORS.index(device_id))
+            global emulator
+            emulator = Emulator(
+                index=EMULATORS.index(device_id),
+                device_id=device_id,
+            )
+            emulator.start()
+            emulator_connect()
+            emulator.stop()
+        except Exception as err:
+            save_state(NEW_STATE)
+            raise err
 
 
 if '__main__' == __name__:

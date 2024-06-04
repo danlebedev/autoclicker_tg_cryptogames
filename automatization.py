@@ -97,6 +97,8 @@ def main():
         if LAST_STATE:
             if not LAST_STATE['device_id'] == device_id:
                 continue
+            else:
+                LAST_STATE.clear()
         try:
             NEW_STATE['device_id'] = device_id
             print(EMULATORS.index(device_id))

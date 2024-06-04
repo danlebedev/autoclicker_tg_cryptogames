@@ -9,13 +9,13 @@ def screenshot(emulator):
     emulator.make_and_save_screenshot(folder=SCREENSHOTS)
 
 
-def write_state(state: dict):
+def save_state(state: dict):
     # TODO: add checking folder exists.
     with open(SESSION, 'w') as f:
         json.dump(state, f)
 
 
-def read_state():
+def load_state():
     # TODO: add checking folder exists.
     try:
         with open(SESSION, 'r') as f:

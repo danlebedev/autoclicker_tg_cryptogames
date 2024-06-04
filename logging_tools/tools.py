@@ -21,4 +21,4 @@ def read_state():
         with open(SESSION, 'r') as f:
             return json.load(f)
     except FileNotFoundError:
-        return None
+        return {}

@@ -2,7 +2,7 @@ from time import sleep
 from random import randint
 
 
-def click_generator(x, y, count=10, x_rand=20, y_rand=20):
+def click_generator(x, y, count=1, x_rand=0, y_rand=0):
     commands = []
     for _ in range(count):
         new_x = randint(-x_rand, x_rand) + x
@@ -73,7 +73,12 @@ class HamsterKombat():
 
     def clicker(self):
         for _ in range(self.clicks):
-            self.bot.session.shell(click_generator(*self.hamster))
+            self.bot.session.shell(click_generator(
+                *self.hamster,
+                count=10,
+                x_rand=20,
+                y_rand=20,
+            ))
 
 
 class PocketFi():
@@ -163,6 +168,7 @@ class PocketRocketGame():
         for _ in range(self.clicks):
             self.bot.session.shell(click_generator(
                 *self.rocket,
+                count=10,
                 x_rand=350,
                 y_rand=50,
             ))
@@ -213,7 +219,7 @@ class EmpiresBattleBot():
 
     def __init__(self, bot):
         self.bot = bot
-        self.raccoon = (440, 990)
+        self.hero = (440, 990)
         self.clicks = 100
 
     def play(self):
@@ -231,4 +237,9 @@ class EmpiresBattleBot():
 
     def clicker(self):
         for _ in range(self.clicks):
-            self.bot.session.shell(click_generator(*self.raccoon))
+            self.bot.session.shell(click_generator(
+                *self.hero,
+                count=10,
+                x_rand=20,
+                y_rand=20,
+            ))

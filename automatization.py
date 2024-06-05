@@ -1,5 +1,5 @@
-from logic.system_logic import Emulator, ADB
-from logic.telegram_logic import Telegram
+from logic.system import Emulator, ADB
+from logic.telegram import Telegram
 from games.telegram_games import HarvestMoon, Blum, HamsterKombat, \
     PocketFi, Vertus, PocketRocketGame, QappiMiner, GleamAquaProtocol, \
     EmpiresBattleBot

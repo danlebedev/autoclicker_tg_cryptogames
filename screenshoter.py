@@ -1,4 +1,4 @@
-from logic.system_logic import ADB, Emulator
+from logic.system import ADB, Emulator
 from keyboard import is_pressed
 
 

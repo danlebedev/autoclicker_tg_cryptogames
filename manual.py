@@ -1,4 +1,4 @@
-from logic.system_logic import Emulator
+from logic.system import Emulator
 import json
 
 

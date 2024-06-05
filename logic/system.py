@@ -3,6 +3,12 @@ from time import sleep
 from datetime import datetime
 import uiautomator2 as u2
 from os.path import abspath
+from pyautogui import screenshot
+
+
+class System():
+    def make_screenshot(self):
+        return screenshot()
 
 
 class Shell():

@@ -1,6 +1,6 @@
 from cv2 import medianBlur, cvtColor, COLOR_BGR2HSV, \
     inRange, findContours, RETR_LIST, CHAIN_APPROX_SIMPLE, \
-    fitEllipse
+    fitEllipse, COLOR_RGB2BGR
 from numpy import array, uint8
 
 
@@ -9,6 +9,11 @@ def search_objects_by_color(
         color_min,
         color_max,
     ):
+    # Преобразуем RGB в BGR.
+    image = cvtColor(
+        src=array(image),
+        code=COLOR_RGB2BGR,
+    )
     # Делаем размытие изображения.
     image_blured = medianBlur(
         src=image,

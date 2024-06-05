@@ -19,7 +19,7 @@ def search_objects_by_color(
         src=image_blured,
         code=COLOR_BGR2HSV,
     )
-    # Подмираем минимальные и максимальные параметры цветового фильтра
+    # Подбираем минимальные и максимальные параметры цветового фильтра
     # для выделения объектов.
     hsv_min = array(
         object=color_min,
@@ -43,7 +43,7 @@ def search_objects_by_color(
         method=CHAIN_APPROX_SIMPLE,
     )
 
-    # Будем хранить найденные координаты:
+    # Будем сохранять в список найденные координаты эллипсов.
     coordinates = []
     # Перебираем первые 5 контуров в цикле.
     for contour in contours[:5]:

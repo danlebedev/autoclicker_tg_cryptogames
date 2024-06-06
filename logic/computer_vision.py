@@ -55,6 +55,8 @@ def search_objects_by_color(
     coordinates = []
     # Перебираем первые 5 контуров в цикле.
     for contour in contours:
+        if len(coordinates) >= 5:
+            break
         # Выбираем контуры с длиной больше 20 точек.
         if len(contour) > 20:
             # Записываем контур в форме эллипса.

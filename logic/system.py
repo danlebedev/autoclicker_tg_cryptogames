@@ -89,15 +89,20 @@ class Emulator(Dnconsole):
         sleep(5)
     
     def connect(self):
-        self.device = u2.connect(self.device_id)
-        self.device.settings['operation_delay'] = (2, 2)
-        self.device.settings['operation_delay_methods'] = [
-            'click',
-            'press',
-            'exists',
-            'get_text',
-            'set_text',
-        ]
+        try:
+            self.device = u2.connect(self.device_id)
+        except:
+            self.device = None
+            # TODO: catch exception.
+        else:
+            self.device.settings['operation_delay'] = (2, 2)
+            self.device.settings['operation_delay_methods'] = [
+                'click',
+                'press',
+                'exists',
+                'get_text',
+                'set_text',
+            ]
 
     def is_connected(self) -> bool:
         if self.device:

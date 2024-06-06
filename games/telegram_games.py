@@ -39,6 +39,8 @@ class Blum():
 
     def play(self):
         try:
+            self.bot.send_message_start()
+            sleep(5)
             self.bot.click_inline_button(index=0)
         except:
             pass
@@ -90,6 +92,8 @@ class PocketFi():
 
     def play(self):
         try:
+            self.bot.send_message_start()
+            sleep(5)
             self.bot.click_inline_button(index=0)
         except:
             pass

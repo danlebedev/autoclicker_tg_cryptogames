@@ -9,6 +9,9 @@ def search_objects_by_color(
         color_min,
         color_max,
     ):
+    """
+    return: [((x=координата центра, y=координата центра), (a=большая полуось, b=малая полуось), t=угол врщения), ...]
+    """
     # Преобразуем RGB в BGR.
     image = cvtColor(
         src=array(image),
@@ -59,5 +62,5 @@ def search_objects_by_color(
             # ((x=координата центра, y=координата центра), (a=большая полуось, b=малая полуось), t=угол врщения)
             ellipse = fitEllipse(contour)
             # Получаем координаты центра эллипса, приводя их к целому числу.
-            coordinates.append(map(int, ellipse[0]))
+            coordinates.append(ellipse)
     return coordinates

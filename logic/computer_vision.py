@@ -4,14 +4,11 @@ from cv2 import medianBlur, cvtColor, COLOR_BGR2HSV, \
 from numpy import array, uint8
 
 
-def search_objects_by_color(
+def apply_hsv_mask(
         image,
         color_min,
         color_max,
     ):
-    """
-    return: [((x=координата центра, y=координата центра), (a=большая полуось, b=малая полуось), t=угол врщения), ...]
-    """
     # Преобразуем RGB в BGR.
     image = cvtColor(
         src=array(image),
@@ -43,7 +40,13 @@ def search_objects_by_color(
         lowerb=hsv_min,
         upperb=hsv_max,
     )
+    return hsv_mask
 
+
+def search_contour_coordinates(hsv_mask):
+    """
+    return: [((x=координата центра, y=координата центра), (a=большая полуось, b=малая полуось), t=угол врщения), ...]
+    """
     # Ищем контуры и записываем их в переменную.
     contours, hierarchy = findContours(
         image=hsv_mask,
@@ -55,8 +58,6 @@ def search_objects_by_color(
     coordinates = []
     # Перебираем первые 5 контуров в цикле.
     for contour in contours:
-        if len(coordinates) >= 5:
-            break
         # Выбираем контуры с длиной больше 20 точек.
         if len(contour) > 20:
             # Записываем контур в форме эллипса.

@@ -226,7 +226,7 @@ class EmpiresBattleBot():
     def __init__(self, bot):
         self.bot = bot
         self.hero = (440, 990)
-        self.clicks = 150
+        self.clicks = 200
 
     def play(self):
         try:

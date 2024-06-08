@@ -1,6 +1,5 @@
 from cv2 import findContours, RETR_LIST, CHAIN_APPROX_SIMPLE, \
     fitEllipse
-from numpy import array
 
 
 def search_contour_coordinates(hsv_mask):
@@ -30,25 +29,22 @@ def search_contour_coordinates(hsv_mask):
 
 
 def search_pixel(
-        image,
+        image: list,
         color_min: tuple,
         color_max: tuple,
         step_string=1,
         step_pixel=1,
     ):
     """
-    image: PIL.Image;
+    image: converted to list image;
     color_min: (r, g, b);
     color_max: (r, g, b);
     step_string: step of selected elements from the array obtained from the image by y axis;
     step_pixel: step of selected elements from the array obtained from the image by x axis;
     return: (x, y) coordinates.
     """
-    image_array = array(image)
-    # TODO: избавиться от преобразования в list и перебирать np.array.
-    image_list = image_array.tolist()
 
-    image_slice = image_list[::step_string]
+    image_slice = image[::step_string]
     for string in image_slice:
         string_slice = string[::step_pixel]
         for pixel in string_slice:

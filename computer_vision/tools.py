@@ -3,6 +3,14 @@ from cv2 import medianBlur, cvtColor, COLOR_BGR2HSV, \
 from numpy import array, uint8
 
 
+def image_to_array(image):
+    return array(image)
+
+
+def image_to_list(image):
+    return array(image).tolist()
+
+
 def create_hsv_mask(
         image,
         color_min: tuple,

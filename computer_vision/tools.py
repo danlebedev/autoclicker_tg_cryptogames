@@ -1,6 +1,6 @@
 from cv2 import medianBlur, cvtColor, COLOR_BGR2HSV, \
     inRange, COLOR_RGB2BGR
-from numpy import array, uint8
+from numpy import array, uint8, typing
 
 
 def image_to_array(image):
@@ -12,19 +12,19 @@ def image_to_list(image):
 
 
 def create_hsv_mask(
-        image,
+        image: typing.NDArray,
         color_min: tuple,
         color_max: tuple,
     ):
     """
-    image: PIL.Image;
+    image: image converted to np.array;
     color_min: (r, g, b);
     color_max: (r, g, b);
     return: MathLike.
     """
     # Преобразуем RGB в BGR.
     image = cvtColor(
-        src=array(image),
+        src=image,
         code=COLOR_RGB2BGR,
     )
     # Делаем размытие изображения.

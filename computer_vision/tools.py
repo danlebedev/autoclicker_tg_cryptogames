@@ -11,6 +11,13 @@ def image_to_list(image):
     return array(image).tolist()
 
 
+def negative_index(arr, index):
+    arr_len = len(arr)
+    if index >= arr_len or index < 0:
+        raise IndexError
+    return -arr_len + index
+
+
 def create_hsv_mask(
         image: typing.NDArray,
         color_min: tuple,

@@ -1,5 +1,6 @@
 from cv2 import findContours, RETR_LIST, CHAIN_APPROX_SIMPLE, \
     fitEllipse
+from .tools import negative_index
 
 
 def search_contour_coordinates(hsv_mask):
@@ -34,6 +35,7 @@ def search_pixel(
         color_max: tuple,
         step_string=1,
         step_pixel=1,
+        reverse=False,
     ):
     """
     image: converted to list image;
@@ -41,8 +43,12 @@ def search_pixel(
     color_max: (r, g, b);
     step_string: step of selected elements from the array obtained from the image by y axis;
     step_pixel: step of selected elements from the array obtained from the image by x axis;
+    reverse: True - search from bottom right to top left;
     return: (x, y) coordinates.
     """
+    if reverse:
+        step_string = -step_string
+        step_pixel = -step_pixel
 
     image_slice = image[::step_string]
     for string in image_slice:
@@ -51,6 +57,10 @@ def search_pixel(
             if (pixel[0] >= color_min[0] and pixel[0] <= color_max[0]) and \
                 (pixel[1] >= color_min[1] and pixel[1] <= color_max[1]) and \
                 (pixel [2] >= color_min[2] and pixel[2] <= color_max[2]):
-                return (string_slice.index(pixel) * step_pixel, image_slice.index(string) * step_string)
+                pixel_index = string_slice.index(pixel) * abs(step_pixel)
+                string_index = image_slice.index(string) * abs(step_string)
+                if reverse:
+                    return abs(negative_index(string, pixel_index) + 1), abs(negative_index(image, string_index + 1))
+                return pixel_index, string_index
     else:
         return None

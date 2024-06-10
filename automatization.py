@@ -3,7 +3,7 @@ from logic.telegram import Telegram
 from games.telegram_games import HarvestMoon, Blum, HamsterKombat, \
     PocketFi, Vertus, PocketRocketGame, QappiMiner, GleamAquaProtocol, \
     EmpiresBattleBot
-from logging_tools.tools import screenshot, load_state, save_state
+from tools import screenshot, load_state, save_state
 from time import sleep
 import json
 

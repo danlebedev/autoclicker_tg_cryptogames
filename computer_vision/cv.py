@@ -33,6 +33,7 @@ def search_pixel(
         image: list,
         color_min: tuple,
         color_max: tuple,
+        skip_pixels: tuple = None,
         step_string=1,
         step_pixel=1,
         reverse=False,
@@ -41,6 +42,7 @@ def search_pixel(
     image: converted to list image;
     color_min: (r, g, b);
     color_max: (r, g, b);
+    skip_pixels: ((r, g, b), (r, g, b) ...)
     step_string: step of selected elements from the array obtained from the image by y axis;
     step_pixel: step of selected elements from the array obtained from the image by x axis;
     reverse: True - search from bottom right to top left;
@@ -54,13 +56,23 @@ def search_pixel(
     for string in image_slice:
         string_slice = string[::step_pixel]
         for pixel in string_slice:
-            if (pixel[0] >= color_min[0] and pixel[0] <= color_max[0]) and \
-                (pixel[1] >= color_min[1] and pixel[1] <= color_max[1]) and \
-                (pixel [2] >= color_min[2] and pixel[2] <= color_max[2]):
-                pixel_index = string_slice.index(pixel) * abs(step_pixel)
-                string_index = image_slice.index(string) * abs(step_string)
-                if reverse:
-                    return abs(negative_index(string, pixel_index) + 1), abs(negative_index(image, string_index + 1))
-                return pixel_index, string_index
+            skip = False
+            if skip_pixels:
+                for skip_pixel in skip_pixels:
+                    if (pixel[0] == skip_pixel[0]) and \
+                        (pixel[1] == skip_pixel[1]) and \
+                        (pixel[2] == skip_pixel[2]):
+                        skip = True
+                        break
+
+            if not skip:
+                if (pixel[0] >= color_min[0] and pixel[0] <= color_max[0]) and \
+                    (pixel[1] >= color_min[1] and pixel[1] <= color_max[1]) and \
+                    (pixel [2] >= color_min[2] and pixel[2] <= color_max[2]):
+                    pixel_index = string_slice.index(pixel) * abs(step_pixel)
+                    string_index = image_slice.index(string) * abs(step_string)
+                    if reverse:
+                        return abs(negative_index(string, pixel_index) + 1), abs(negative_index(image, string_index + 1))
+                    return pixel_index, string_index
     else:
         return None

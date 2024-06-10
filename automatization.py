@@ -115,7 +115,7 @@ def main():
             raise err
 
 
-if '__main__' == __name__:
+if __name__ == '__main__':
     ADB_PROCESS.start()
     while True:
         main()

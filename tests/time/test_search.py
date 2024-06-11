@@ -1,0 +1,64 @@
+from PIL import Image
+from computer_vision.cv import search_contour_coordinates, search_pixel_in_array, search_pixel_in_list
+from computer_vision.tools import image_to_list, create_hsv_mask, image_to_array
+from tests.tools import check_time
+
+
+src_image = "screenshots/31-05-2024_13-13-18-792172.png"
+image = Image.open(src_image)
+width = image.width
+height = image.height
+color_min = (102, 200, 0)
+color_max = (220, 255, 125)
+
+
+def test_search_pixel_list(image):
+    image = image_to_list(image)
+    drop_region_coordinates = search_pixel_in_list(
+        image=image,
+        color_min=color_min,
+        color_max=color_max,
+        step_string=20,
+        step_pixel=20,
+        reverse=False
+    )
+
+def test_search_pixel_array(image):
+    image = image_to_array(image)
+    drop_region_coordinates = search_pixel_in_array(
+        image=image,
+        color_min=color_min,
+        color_max=color_max,
+        step_string=20,
+        step_pixel=20,
+        reverse=False
+    )
+
+
+def test_blum_script(image):
+    width = image.width
+    height = image.height
+    for x in range(0, width, 20):
+        for y in range(0, height, 20):
+            r, g, b = image.getpixel((x, y))
+
+            # Проверка на зеленые бактерии
+            if (b in range(0, 125)) and (r in range(102, 220)) and (g in range(200, 255)):
+                screen_x = x
+                screen_y = y
+
+
+def test_search_contour(image):
+    image = image_to_array(image)
+    hsv_mask = create_hsv_mask(
+        image,
+        color_min=color_min,
+        color_max=color_max,
+    )
+    search_contour_coordinates(hsv_mask)
+
+
+check_time(test_search_pixel_list, image, iterations=10)
+check_time(test_search_pixel_array, image, iterations=10)
+check_time(test_blum_script, image, iterations=10)
+check_time(test_search_contour, image, iterations=10)

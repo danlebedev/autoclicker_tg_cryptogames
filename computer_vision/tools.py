@@ -1,6 +1,11 @@
 from cv2 import medianBlur, cvtColor, COLOR_BGR2HSV, \
     inRange, COLOR_RGB2BGR
-from numpy import array, uint8, typing
+from numpy import array, uint8, where
+from numpy.typing import NDArray
+
+
+def array_index(arr, item, axis):
+    return where((arr == item).all(axis=axis))[0][0]
 
 
 def image_to_array(image):
@@ -19,7 +24,7 @@ def negative_index(arr, index):
 
 
 def create_hsv_mask(
-        image: typing.NDArray,
+        image: NDArray,
         color_min: tuple,
         color_max: tuple,
     ):

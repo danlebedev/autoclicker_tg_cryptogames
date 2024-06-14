@@ -2,6 +2,7 @@ from cv2 import findContours, RETR_LIST, CHAIN_APPROX_SIMPLE, \
     fitEllipse
 from .tools import negative_index, array_index
 from numpy.typing import NDArray
+from pyautogui import locateOnScreen
 
 
 def search_contour_coordinates(hsv_mask):

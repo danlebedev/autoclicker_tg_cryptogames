@@ -201,7 +201,7 @@ class QappiMiner():
 
 
 class Gleam():
-    name = 'Gleam~AquaProtocol'
+    name = 'GLEAM'
 
     def __init__(self, bot):
         self.bot = bot

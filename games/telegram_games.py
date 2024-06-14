@@ -200,7 +200,7 @@ class QappiMiner():
             self.bot.session.press('back')
 
 
-class GleamAquaProtocol():
+class Gleam():
     name = 'Gleam~AquaProtocol'
 
     def __init__(self, bot):
@@ -220,7 +220,8 @@ class GleamAquaProtocol():
             sleep(5)
             self.bot.stop()
 
-class EmpiresBattleBot():
+
+class EmpiresBattle():
     name = "Empire's Battle Bot"
 
     def __init__(self, bot):

@@ -16,7 +16,7 @@ class HarvestMoon():
 
     def __init__(self, bot):
         self.bot = bot
-        self.button = (0.225, 0.390)
+        self.button = (0.16, 0.34)
 
     def play(self):
         try:

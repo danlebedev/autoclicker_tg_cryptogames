@@ -1,8 +1,8 @@
 from logic.system import Emulator, ADB
 from logic.telegram import Telegram
 from games.telegram_games import HarvestMoon, Blum, HamsterKombat, \
-    PocketFi, Vertus, PocketRocketGame, QappiMiner, GleamAquaProtocol, \
-    EmpiresBattleBot
+    PocketFi, Vertus, PocketRocketGame, QappiMiner, Gleam, \
+    EmpiresBattle
 from tools import screenshot, load_state, save_state
 from time import sleep
 import json
@@ -19,8 +19,8 @@ GAMES = [
     Vertus,
     PocketRocketGame,
     QappiMiner,
-    GleamAquaProtocol,
-    EmpiresBattleBot,
+    Gleam,
+    EmpiresBattle,
 ]
 FOLDERS = {
     1: (0, 1, 2, 3, 4),

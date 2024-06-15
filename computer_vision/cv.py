@@ -2,7 +2,8 @@ from cv2 import findContours, RETR_LIST, CHAIN_APPROX_SIMPLE, \
     fitEllipse
 from .tools import negative_index, array_index
 from numpy.typing import NDArray
-from pyautogui import locateOnScreen, locateCenterOnScreen
+from pyautogui import locate, ImageNotFoundException, center, screenshot
+import time
 
 
 def search_contour_coordinates(hsv_mask):
@@ -139,3 +140,50 @@ def search_pixel_in_array(
                     return pixel_index, string_index
     else:
         return None
+
+
+def locateOnScreen(
+        template,
+        screenshotIm=None,
+        minSearchTime=0,
+        **kwargs
+    ):
+    """TODO - rewrite this
+    minSearchTime - amount of time in seconds to repeat taking
+    screenshots and trying to locate a match.  The default of 0 performs
+    a single search.
+    """
+    start = time.time()
+    while True:
+        try:
+            # the locateAll() function must handle cropping to return accurate coordinates,
+            # so don't pass a region here.
+            if not screenshotIm:
+                screenshotIm = screenshot(region=None)
+            retVal = locate(template, screenshotIm, **kwargs)
+            try:
+                screenshotIm.fp.close()
+            except AttributeError:
+                # Screenshots on Windows won't have an fp since they came from
+                # ImageGrab, not a file. Screenshots on Linux will have fp set
+                # to None since the file has been unlinked
+                pass
+            if retVal or time.time() - start > minSearchTime:
+                return retVal
+        except ImageNotFoundException:
+            if time.time() - start > minSearchTime:
+                return None
+
+
+def locateCenterOnScreen(
+        template,
+        **kwargs
+    ):
+    """
+    TODO
+    """
+    coords = locateOnScreen(template, **kwargs)
+    if coords is None:
+        return None
+    else:
+        return center(coords)

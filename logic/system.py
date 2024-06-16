@@ -102,6 +102,7 @@ class Emulator(Dnconsole):
                 'exists',
                 'get_text',
                 'set_text',
+                'swipe_ext',
             ]
 
     def is_connected(self) -> bool:

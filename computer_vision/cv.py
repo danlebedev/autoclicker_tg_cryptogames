@@ -146,6 +146,7 @@ def locateOnScreen(
         template,
         screenshotIm=None,
         minSearchTime=0,
+        confidence=0.98,
         **kwargs
     ):
     """TODO - rewrite this
@@ -177,12 +178,21 @@ def locateOnScreen(
 
 def locateCenterOnScreen(
         template,
+        screenshotIm=None,
+        minSearchTime=0,
+        confidence=0.98,
         **kwargs
     ):
     """
     TODO
     """
-    coords = locateOnScreen(template, **kwargs)
+    coords = locateOnScreen(
+        template,
+        screenshotIm=screenshotIm,
+        minSearchTime=minSearchTime,
+        confidence=confidence
+        **kwargs
+    )
     if coords is None:
         return None
     else:

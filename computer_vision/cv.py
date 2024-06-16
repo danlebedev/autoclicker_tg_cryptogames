@@ -186,4 +186,5 @@ def locateCenterOnScreen(
     if coords is None:
         return None
     else:
-        return center(coords)
+        # Don't change, device.click() need float coordinates.
+        return tuple(map(float, center(coords)))

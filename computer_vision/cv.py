@@ -161,7 +161,12 @@ def locateOnScreen(
             # so don't pass a region here.
             if not screenshotIm:
                 screenshotIm = screenshot(region=None)
-            retVal = locate(template, screenshotIm, **kwargs)
+            retVal = locate(
+                needleImage=template,
+                haystackImage=screenshotIm,
+                confidence=confidence,
+                **kwargs
+            )
             try:
                 screenshotIm.fp.close()
             except AttributeError:
@@ -190,7 +195,7 @@ def locateCenterOnScreen(
         template,
         screenshotIm=screenshotIm,
         minSearchTime=minSearchTime,
-        confidence=confidence
+        confidence=confidence,
         **kwargs
     )
     if coords is None:

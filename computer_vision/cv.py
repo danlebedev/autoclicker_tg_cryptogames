@@ -62,10 +62,10 @@ def search_pixel_in_list(
         step_string = -step_string
         step_pixel = -step_pixel
 
-    image_slice = image[::step_string]
-    for string in image_slice:
-        string_slice = string[::step_pixel]
-        for pixel in string_slice:
+    strings = image[::step_string]
+    for string in strings:
+        pixels = string[::step_pixel]
+        for pixel in pixels:
             skip = False
             if skip_pixels:
                 for skip_pixel in skip_pixels:
@@ -79,8 +79,8 @@ def search_pixel_in_list(
                 if (pixel[0] >= color_min[0] and pixel[0] <= color_max[0]) and \
                     (pixel[1] >= color_min[1] and pixel[1] <= color_max[1]) and \
                     (pixel [2] >= color_min[2] and pixel[2] <= color_max[2]):
-                    pixel_index = string_slice.index(pixel) * abs(step_pixel)
-                    string_index = image_slice.index(string) * abs(step_string)
+                    pixel_index = pixels.index(pixel) * abs(step_pixel)
+                    string_index = strings.index(string) * abs(step_string)
                     if reverse:
                         return abs(negative_index(string, pixel_index) + 1), abs(negative_index(image, string_index + 1))
                     return pixel_index, string_index
@@ -116,10 +116,10 @@ def search_pixel_in_array(
         step_string = -step_string
         step_pixel = -step_pixel
 
-    image_slice = image[::step_string]
-    for string in image_slice:
-        string_slice = string[::step_pixel]
-        for pixel in string_slice:
+    strings = image[::step_string]
+    for string in strings:
+        pixels = string[::step_pixel]
+        for pixel in pixels:
             skip = False
             if skip_pixels:
                 for skip_pixel in skip_pixels:
@@ -133,8 +133,8 @@ def search_pixel_in_array(
                 if (pixel[0] >= color_min[0] and pixel[0] <= color_max[0]) and \
                     (pixel[1] >= color_min[1] and pixel[1] <= color_max[1]) and \
                     (pixel [2] >= color_min[2] and pixel[2] <= color_max[2]):
-                    pixel_index = array_index(string_slice, pixel, 1) * abs(step_pixel)
-                    string_index = array_index(image_slice, string, 1) * abs(step_string)
+                    pixel_index = array_index(pixels, pixel, 1) * abs(step_pixel)
+                    string_index = array_index(strings, string, 1) * abs(step_string)
                     if reverse:
                         return abs(negative_index(string, pixel_index) + 1), abs(negative_index(image, string_index + 1))
                     return pixel_index, string_index

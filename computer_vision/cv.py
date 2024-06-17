@@ -142,6 +142,55 @@ def search_pixel_in_array(
         return None
 
 
+def search_pixel_with_getpixel(
+        image,
+        color_min: tuple,
+        color_max: tuple,
+        skip_pixels: tuple = None,
+        step_string=1,
+        step_pixel=1,
+        reverse=False,
+    ):
+    """
+    Высокая скорость. Скорость значительно увеличивается при увеличении значений step_.
+    При skip_pixels = None работает быстрее всего.
+
+    image: PIL image;
+    color_min: (r, g, b);
+    color_max: (r, g, b);
+    skip_pixels: ((r, g, b), (r, g, b) ...)
+    step_string: step of selected elements from the array obtained from the image by y axis;
+    step_pixel: step of selected elements from the array obtained from the image by x axis;
+    reverse: True - search from bottom right to top left;
+    return: (x, y) coordinates.
+    """
+    if reverse:
+        step_string = -step_string
+        step_pixel = -step_pixel
+
+    strings = range(image.height)
+    pixels = range(image.width)
+    for string_index in strings[::step_string]:
+        for pixel_index in pixels[::step_pixel]:
+            pixel = image.getpixel((pixel_index, string_index))
+            skip = False
+            if skip_pixels:
+                for skip_pixel in skip_pixels:
+                    if (pixel[0] == skip_pixel[0]) and \
+                        (pixel[1] == skip_pixel[1]) and \
+                        (pixel[2] == skip_pixel[2]):
+                        skip = True
+                        break
+
+            if not skip:
+                if (pixel[0] >= color_min[0] and pixel[0] <= color_max[0]) and \
+                    (pixel[1] >= color_min[1] and pixel[1] <= color_max[1]) and \
+                    (pixel [2] >= color_min[2] and pixel[2] <= color_max[2]):
+                    return pixel_index, string_index
+    else:
+        return None
+
+
 def locateOnScreen(
         template,
         screenshotIm=None,

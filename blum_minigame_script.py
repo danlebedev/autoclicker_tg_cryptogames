@@ -1,6 +1,5 @@
 from keyboard import is_pressed
-from computer_vision.cv import search_pixel_in_array
-from computer_vision.tools import image_to_array
+from computer_vision.cv import search_pixel_with_getpixel
 from pyautogui import screenshot
 from pygetwindow import getActiveWindow
 from pynput.mouse import Controller, Button
@@ -41,13 +40,10 @@ def main():
             window = getActiveWindow()
             region = (window.left, window.top, window.width, window.height)
             image = screenshot(region=region)
-            image = image_to_array(image)
-            # TODO: need faster function to search pixel.
-            drop_region_coordinates = search_pixel_in_array(
+            drop_region_coordinates = search_pixel_with_getpixel(
                 image=image,
                 color_min=drop_min,
                 color_max=drop_max,
-                skip_pixels=skip_pixels,
                 step_string=20,
                 step_pixel=20,
                 reverse=True

@@ -3,7 +3,7 @@ from computer_vision.cv import search_pixel_in_list, search_pixel_with_getpixel
 from computer_vision.tools import image_to_list
 
 
-src_image = 'tests/3.png'
+src_image = 'tests/functions/3.png'
 image = Image.open(src_image)
 width = image.width
 height = image.height

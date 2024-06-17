@@ -1,5 +1,6 @@
 from time import sleep
-from games.tools import click_generator
+from games.tools import click_generator, load_templates
+from computer_vision.cv import locateCenterOnScreen
 
 
 class HarvestMoon():
@@ -210,6 +211,65 @@ class Gleam():
             self.bot.session.click(*self.claim)
             sleep(5)
             self.bot.stop()
+
+
+class HotWallet():
+    name = 'HOT Wallet'
+
+    def __init__(self, bot):
+        self.bot = bot
+        self.templates = self._load_templates()
+
+    @classmethod
+    def _load_templates(cls):
+        return load_templates(cls.__name__)
+
+    def play(self):
+        try:
+            self.bot.send_message_start()
+            sleep(5)
+            self.bot.click_inline_button(index=2)
+            sleep(10)
+
+            if locateCenterOnScreen(
+                template=self.templates['start'],
+                screenshotIm=self.bot.session.screenshot(),
+            ):
+                self.bot.session.click(*locateCenterOnScreen(
+                    template=self.templates['home'],
+                    screenshotIm=self.bot.session.screenshot(),
+                ))
+                self.bot.session.swipe_ext("up")
+                self.bot.session.click(*locateCenterOnScreen(
+                    template=self.templates['storage'],
+                    screenshotIm=self.bot.session.screenshot(),
+                ))
+
+                if locateCenterOnScreen(
+                    template=self.templates['check_news'],
+                    screenshotIm=self.bot.session.screenshot(),
+                ):
+                    self.bot.session.click(*locateCenterOnScreen(
+                        template=self.templates['check_news'],
+                        screenshotIm=self.bot.session.screenshot(),
+                    ))
+                    self.bot.session.press('back')
+                if locateCenterOnScreen(
+                    template=self.templates['claim_hot'],
+                    screenshotIm=self.bot.session.screenshot(),
+                ):
+                    self.bot.session.click(*locateCenterOnScreen(
+                        template=self.templates['claim_hot'],
+                        screenshotIm=self.bot.session.screenshot(),
+                    ))
+                sleep(5)
+                self.bot.session.press('back')
+
+            sleep(5)
+            self.bot.session.press('back')
+            self.bot._stop_accept()
+        except:
+            raise
 
 
 class EmpiresBattle():

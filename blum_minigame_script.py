@@ -14,8 +14,8 @@ def listen_keyboard():
 
 def main():
     mouse = Controller()
-    drop_min = (60, 210, 0)
-    drop_max = (130, 255, 50)
+    drop_min = (120, 210, 0)
+    drop_max = (240, 250, 50)
     freeze_min = (80, 150, 200)
     freeze_max = (170, 250, 255)
     bomb_min = (90, 90, 70)
@@ -27,6 +27,7 @@ def main():
         (37, 157, 66),
     )
 
+    last_click = None
     state = False
     while True:
         key = listen_keyboard()
@@ -46,8 +47,8 @@ def main():
                 image=image,
                 color_min=drop_min,
                 color_max=drop_max,
-                step_string=20,
-                step_pixel=20,
+                step_string=15,
+                step_pixel=15,
                 reverse=True
             )
 
@@ -56,8 +57,11 @@ def main():
                     window.left + drop_region_coordinates[0],
                     window.top + drop_region_coordinates[1],
                 )
-                mouse.position = drop_coordinates
-                mouse.click(Button.left)
+
+                if drop_coordinates != last_click:
+                    mouse.position = drop_coordinates
+                    mouse.click(Button.left)
+                    last_click = drop_coordinates
 
 
 if __name__ == '__main__':

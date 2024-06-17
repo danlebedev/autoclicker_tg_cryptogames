@@ -14,10 +14,12 @@ def listen_keyboard():
 
 def main():
     mouse = Controller()
-    drop_min = (50, 200, 0)
-    drop_max = (140, 255, 50)
-    bomb_min = (1, 1, 1)
-    bomb_max = (1, 1, 1)
+    drop_min = (60, 210, 0)
+    drop_max = (130, 255, 50)
+    freeze_min = (80, 150, 200)
+    freeze_max = (170, 250, 255)
+    bomb_min = (90, 90, 70)
+    bomb_max = (234, 200, 180)
     skip_pixels = (
         (0, 0, 0),
         (28, 117, 50),

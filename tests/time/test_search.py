@@ -11,6 +11,12 @@ width = image.width
 height = image.height
 color_min = (102, 200, 0)
 color_max = (220, 255, 125)
+skip_pixels = (
+    (0, 0, 0),
+    (28, 117, 50),
+    (24, 99, 42),
+    (37, 157, 66),
+)
 
 
 def test_search_pixel_list(image):
@@ -59,6 +65,17 @@ def test_search_pixel_with_getpixel(image):
         reverse=False
     )
 
+def test_search_pixel_with_getpixel_skip(image, skip):
+    drop_region_coordinates = search_pixel_with_getpixel(
+        image=image,
+        color_min=color_min,
+        color_max=color_max,
+        step_string=20,
+        step_pixel=20,
+        skip_pixels=skip,
+        reverse=False
+    )
+
 
 def test_search_contour(image):
     image = image_to_array(image)
@@ -74,4 +91,5 @@ check_time(test_search_pixel_list, image, iterations=10)
 check_time(test_search_pixel_array, image, iterations=10)
 check_time(test_blum_script, image, iterations=10)
 check_time(test_search_pixel_with_getpixel, image, iterations=10)
+check_time(test_search_pixel_with_getpixel_skip, image, skip_pixels, iterations=10)
 check_time(test_search_contour, image, iterations=10)

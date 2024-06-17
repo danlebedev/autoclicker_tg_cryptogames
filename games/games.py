@@ -262,7 +262,7 @@ class HotWallet():
                         template=self.templates['claim_hot'],
                         screenshotIm=self.bot.session.screenshot(),
                     ))
-                sleep(5)
+                sleep(10)
                 self.bot.session.press('back')
 
             sleep(5)

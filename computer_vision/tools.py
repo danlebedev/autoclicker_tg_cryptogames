@@ -1,6 +1,7 @@
 from __future__ import annotations
 from cv2 import medianBlur, cvtColor, COLOR_BGR2HSV, \
     inRange, COLOR_RGB2BGR
+from cv2.typing import MatLike
 from numpy import array, uint8, where
 from numpy.typing import NDArray
 import os
@@ -30,16 +31,9 @@ def negative_index(arr, index):
     return -arr_len + index
 
 
-def create_hsv_mask(
-        image: NDArray,
-        color_min: tuple,
-        color_max: tuple,
-    ):
+def convert_to_hsv_with_blur(image: NDArray) -> MatLike:
     """
     image: image converted to np.array;
-    color_min: (r, g, b);
-    color_max: (r, g, b);
-    return: MathLike.
     """
     # Преобразуем RGB в BGR.
     image = cvtColor(
@@ -56,26 +50,39 @@ def create_hsv_mask(
         src=image_blured,
         code=COLOR_BGR2HSV,
     )
-    # Подбираем минимальные и максимальные параметры цветового фильтра
-    # для выделения объектов.
-    hsv_min = array(
-        object=color_min,
-        dtype=uint8,
-    )
-    hsv_max = array(
-        object=color_max,
-        dtype=uint8,
-    )
-    # Применяем цветовой фильтр к исходному изображению.
+    return hsv_img
+
+
+def create_hsv_mask(
+    hsv_img: MatLike,
+    hsv_min: tuple,
+    hsv_max: tuple,
+) -> MatLike:
+    """
+    hsv_min: (h, s, v);
+    hsv_max: (h, s, v);
+    """
+    # Применяем цветовой фильтр к изображению.
     hsv_mask = inRange(
         src=hsv_img,
-        lowerb=hsv_min,
-        upperb=hsv_max,
+        lowerb=array(
+            object=hsv_min,
+            dtype=uint8,
+        ),
+        upperb=array(
+            object=hsv_max,
+            dtype=uint8,
+        ),
     )
     return hsv_mask
 
 
-def screenshot_hsv(bbox=None, include_layered_windows=False, all_screens=False, xdisplay=None):
+def screenshot_hsv(
+    bbox=None,
+    include_layered_windows=False,
+    all_screens=False,
+    xdisplay=None
+):
     """Working only on Windows."""
     if xdisplay is None:
         if sys.platform == "darwin":

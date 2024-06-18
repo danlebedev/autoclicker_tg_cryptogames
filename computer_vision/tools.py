@@ -31,28 +31,6 @@ def negative_index(arr, index):
     return -arr_len + index
 
 
-def convert_to_hsv_with_blur(image: NDArray) -> MatLike:
-    """
-    image: image converted to np.array;
-    """
-    # Преобразуем RGB в BGR.
-    image = cvtColor(
-        src=image,
-        code=COLOR_RGB2BGR,
-    )
-    # Делаем размытие изображения.
-    image_blured = medianBlur(
-        src=image,
-        ksize=19,
-    )
-    # Конвертируем исходное изображение в цветовую модель HSV.
-    hsv_img = cvtColor(
-        src=image_blured,
-        code=COLOR_BGR2HSV,
-    )
-    return hsv_img
-
-
 def create_hsv_mask(
     hsv_img: MatLike,
     hsv_min: tuple,

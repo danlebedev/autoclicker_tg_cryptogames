@@ -1,6 +1,5 @@
 from __future__ import annotations
-from cv2 import medianBlur, cvtColor, COLOR_BGR2HSV, \
-    inRange, COLOR_RGB2BGR
+from cv2 import inRange, createTrackbar, getTrackbarPos
 from cv2.typing import MatLike
 from numpy import array, uint8, where
 from numpy.typing import NDArray
@@ -12,15 +11,15 @@ import tempfile
 from PIL import Image
 
 
-def array_index(arr, item, axis):
+def array_index(arr, item, axis) -> NDArray:
     return where((arr == item).all(axis=axis))[0][0]
 
 
-def image_to_array(image):
+def image_to_array(image) -> NDArray:
     return array(image)
 
 
-def image_to_list(image):
+def image_to_list(image) -> list:
     return array(image).tolist()
 
 
@@ -53,6 +52,46 @@ def create_hsv_mask(
         ),
     )
     return hsv_mask
+
+
+def create_trackbars(
+    windowName,
+    name_suffix='',
+    mode='RGB',
+):
+    """
+    mode: 'RGB', 'HSV'.
+    """
+    if mode == 'RGB':
+        counts = (255, 255, 255)
+        trackbarNames = ('Red', 'Green', 'Blue')
+    elif mode == 'HSV':
+        counts = (180, 255, 255)
+        trackbarNames = ('Hue', 'Saturation', 'Value')
+    else:
+        raise ValueError
+
+    for count in counts:
+        createTrackbar(
+            trackbarName=f'{trackbarNames[counts.index(count)]}_{ name_suffix}'.rstrip('_'),
+            windowName=windowName,
+            value=0,
+            count=count,
+        )
+    return trackbarNames
+
+
+def get_trackbar_positions(
+    trackbarNames: tuple,
+    windowName,
+):
+    trackbars = []
+    for name in trackbarNames:
+        trackbars.append(getTrackbarPos(
+            trackbarname=name,
+            winname=windowName,
+        ))
+    return tuple(trackbars)
 
 
 def screenshot_hsv(

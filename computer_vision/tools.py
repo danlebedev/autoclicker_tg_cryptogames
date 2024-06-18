@@ -2,6 +2,13 @@ from cv2 import medianBlur, cvtColor, COLOR_BGR2HSV, \
     inRange, COLOR_RGB2BGR
 from numpy import array, uint8, where
 from numpy.typing import NDArray
+from __future__ import annotations
+import os
+import shutil
+import subprocess
+import sys
+import tempfile
+from PIL import Image
 
 
 def array_index(arr, item, axis):
@@ -66,3 +73,72 @@ def create_hsv_mask(
         upperb=hsv_max,
     )
     return hsv_mask
+
+
+def screenshot_hsv(bbox=None, include_layered_windows=False, all_screens=False, xdisplay=None):
+    """Работает только на Windows."""
+    if xdisplay is None:
+        if sys.platform == "darwin":
+            fh, filepath = tempfile.mkstemp(".png")
+            os.close(fh)
+            args = ["screencapture"]
+            if bbox:
+                left, top, right, bottom = bbox
+                args += ["-R", f"{left},{top},{right-left},{bottom-top}"]
+            subprocess.call(args + ["-x", filepath])
+            im = Image.open(filepath)
+            im.load()
+            os.unlink(filepath)
+            if bbox:
+                im_resized = im.resize((right - left, bottom - top))
+                im.close()
+                return im_resized
+            return im
+        elif sys.platform == "win32":
+            offset, size, data = Image.core.grabscreen_win32(
+                include_layered_windows, all_screens
+            )
+            im = Image.frombytes(
+                "HSV",
+                size,
+                data,
+                # RGB, 32-bit line padding, origin lower left corner
+                "raw",
+                "HSV",
+                (size[0] * 3 + 3) & -4,
+                -1,
+            )
+            if bbox:
+                x0, y0 = offset
+                left, top, right, bottom = bbox
+                im = im.crop((left - x0, top - y0, right - x0, bottom - y0))
+            return im
+    try:
+        if not Image.core.HAVE_XCB:
+            msg = "Pillow was built without XCB support"
+            raise OSError(msg)
+        size, data = Image.core.grabscreen_x11(xdisplay)
+    except OSError:
+        if (
+            xdisplay is None
+            and sys.platform not in ("darwin", "win32")
+            and shutil.which("gnome-screenshot")
+        ):
+            fh, filepath = tempfile.mkstemp(".png")
+            os.close(fh)
+            subprocess.call(["gnome-screenshot", "-f", filepath])
+            im = Image.open(filepath)
+            im.load()
+            os.unlink(filepath)
+            if bbox:
+                im_cropped = im.crop(bbox)
+                im.close()
+                return im_cropped
+            return im
+        else:
+            raise
+    else:
+        im = Image.frombytes("RGB", size, data, "raw", "BGRX", size[0] * 4, 1)
+        if bbox:
+            im = im.crop(bbox)
+        return im

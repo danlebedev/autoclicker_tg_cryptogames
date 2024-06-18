@@ -62,7 +62,7 @@ class HamsterKombat():
         else:
             sleep(10)
             self.bot.session.click(*self.thanks)
-            self.clicker()
+            #self.clicker()
             self.bot.stop()
 
     def clicker(self):

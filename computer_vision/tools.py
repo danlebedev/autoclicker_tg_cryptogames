@@ -62,6 +62,10 @@ def create_trackbars(
     """
     mode: 'RGB', 'HSV'.
     """
+    # This function need to callback createTrackbar.
+    def empty(*args):
+        pass
+
     if mode == 'RGB':
         counts = (255, 255, 255)
         trackbarNames = ('Red', 'Green', 'Blue')
@@ -71,12 +75,19 @@ def create_trackbars(
     else:
         raise ValueError
 
-    for count in counts:
+    if name_suffix:
+        trackbarNames = tuple([
+            f"{name}_{name_suffix}".rstrip('_')
+            for name in trackbarNames
+        ])
+
+    for index in range(len(trackbarNames)):
         createTrackbar(
-            trackbarName=f'{trackbarNames[counts.index(count)]}_{ name_suffix}'.rstrip('_'),
-            windowName=windowName,
-            value=0,
-            count=count,
+            trackbarNames[index],
+            windowName,
+            0,
+            counts[index],
+            empty,
         )
     return trackbarNames
 

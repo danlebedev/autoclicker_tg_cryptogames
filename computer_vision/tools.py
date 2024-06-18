@@ -1,6 +1,6 @@
 from __future__ import annotations
-from cv2 import medianBlur, cvtColor, COLOR_BGR2HSV, \
-    inRange, COLOR_RGB2BGR
+from cv2 import inRange, createTrackbar, getTrackbarPos
+from cv2.typing import MatLike
 from numpy import array, uint8, where
 from numpy.typing import NDArray
 import os
@@ -11,15 +11,15 @@ import tempfile
 from PIL import Image
 
 
-def array_index(arr, item, axis):
+def array_index(arr, item, axis) -> NDArray:
     return where((arr == item).all(axis=axis))[0][0]
 
 
-def image_to_array(image):
+def image_to_array(image) -> NDArray:
     return array(image)
 
 
-def image_to_list(image):
+def image_to_list(image) -> list:
     return array(image).tolist()
 
 
@@ -31,51 +31,86 @@ def negative_index(arr, index):
 
 
 def create_hsv_mask(
-        image: NDArray,
-        color_min: tuple,
-        color_max: tuple,
-    ):
+    hsv_img: MatLike,
+    hsv_min: tuple,
+    hsv_max: tuple,
+) -> MatLike:
     """
-    image: image converted to np.array;
-    color_min: (r, g, b);
-    color_max: (r, g, b);
-    return: MathLike.
+    hsv_min: (h, s, v);
+    hsv_max: (h, s, v);
     """
-    # Преобразуем RGB в BGR.
-    image = cvtColor(
-        src=image,
-        code=COLOR_RGB2BGR,
-    )
-    # Делаем размытие изображения.
-    image_blured = medianBlur(
-        src=image,
-        ksize=19,
-    )
-    # Конвертируем исходное изображение в цветовую модель HSV.
-    hsv_img = cvtColor(
-        src=image_blured,
-        code=COLOR_BGR2HSV,
-    )
-    # Подбираем минимальные и максимальные параметры цветового фильтра
-    # для выделения объектов.
-    hsv_min = array(
-        object=color_min,
-        dtype=uint8,
-    )
-    hsv_max = array(
-        object=color_max,
-        dtype=uint8,
-    )
-    # Применяем цветовой фильтр к исходному изображению.
+    # Применяем цветовой фильтр к изображению.
     hsv_mask = inRange(
         src=hsv_img,
-        lowerb=hsv_min,
-        upperb=hsv_max,
+        lowerb=array(
+            object=hsv_min,
+            dtype=uint8,
+        ),
+        upperb=array(
+            object=hsv_max,
+            dtype=uint8,
+        ),
     )
     return hsv_mask
 
 
-def screenshot_hsv(bbox=None, include_layered_windows=False, all_screens=False, xdisplay=None):
+def create_trackbars(
+    windowName,
+    name_suffix='',
+    mode='RGB',
+):
+    """
+    mode: 'RGB', 'HSV'.
+    """
+    # This function need to callback createTrackbar.
+    def empty(*args):
+        pass
+
+    if mode == 'RGB':
+        counts = (255, 255, 255)
+        trackbarNames = ('Red', 'Green', 'Blue')
+    elif mode == 'HSV':
+        counts = (180, 255, 255)
+        trackbarNames = ('Hue', 'Saturation', 'Value')
+    else:
+        raise ValueError
+
+    if name_suffix:
+        trackbarNames = tuple([
+            f"{name}_{name_suffix}".rstrip('_')
+            for name in trackbarNames
+        ])
+
+    for index in range(len(trackbarNames)):
+        createTrackbar(
+            trackbarNames[index],
+            windowName,
+            0,
+            counts[index],
+            empty,
+        )
+    return trackbarNames
+
+
+def get_trackbar_positions(
+    trackbarNames: tuple,
+    windowName,
+):
+    trackbars = []
+    for name in trackbarNames:
+        trackbars.append(getTrackbarPos(
+            trackbarname=name,
+            winname=windowName,
+        ))
+    return tuple(trackbars)
+
+
+def screenshot_hsv(
+    bbox=None,
+    include_layered_windows=False,
+    all_screens=False,
+    xdisplay=None
+):
     """Working only on Windows."""
     if xdisplay is None:
         if sys.platform == "darwin":

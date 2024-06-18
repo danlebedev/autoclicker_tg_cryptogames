@@ -12,7 +12,7 @@ def with_transform():
     image = image.convert(mode='HSV')
 
 def hsv_screenshot():
-    image = screenshot_hsv(0)
+    image = screenshot_hsv()
 
 def pg_screenshot():
     image = screenshot()

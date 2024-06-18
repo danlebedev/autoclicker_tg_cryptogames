@@ -288,7 +288,7 @@ class EmpiresBattle():
         except:
             pass
         else:
-            sleep(10)
+            sleep(15)
             self.clicker()
             self.bot.session.press('back')
             self.bot._stop_accept()

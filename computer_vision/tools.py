@@ -1,8 +1,8 @@
+from __future__ import annotations
 from cv2 import medianBlur, cvtColor, COLOR_BGR2HSV, \
     inRange, COLOR_RGB2BGR
 from numpy import array, uint8, where
 from numpy.typing import NDArray
-from __future__ import annotations
 import os
 import shutil
 import subprocess
@@ -76,7 +76,7 @@ def create_hsv_mask(
 
 
 def screenshot_hsv(bbox=None, include_layered_windows=False, all_screens=False, xdisplay=None):
-    """Работает только на Windows."""
+    """Working only on Windows."""
     if xdisplay is None:
         if sys.platform == "darwin":
             fh, filepath = tempfile.mkstemp(".png")

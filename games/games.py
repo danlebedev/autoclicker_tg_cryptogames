@@ -111,7 +111,7 @@ class Vertus():
             self.bot.click_inline_button(index=0)
             # Skip daily reward.
             # TODO: rewrite this to check screenshot with opencv later.
-            sleep(10)
+            sleep(20)
             self.bot.session.press('back')
             sleep(5)
             self.bot.click_inline_button(index=0)
@@ -288,7 +288,7 @@ class EmpiresBattle():
         except:
             pass
         else:
-            sleep(15)
+            sleep(20)
             self.clicker()
             self.bot.session.press('back')
             self.bot._stop_accept()

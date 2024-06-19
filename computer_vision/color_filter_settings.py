@@ -1,8 +1,10 @@
 from cv2 import namedWindow, imshow, WINDOW_NORMAL, \
-    waitKey, cvtColor, imread, COLOR_BGR2HSV, resizeWindow
+    waitKey, cvtColor, imread, COLOR_BGR2HSV, resizeWindow, \
+    inRange, COLOR_BGR2RGB
 from computer_vision.tools import create_hsv_mask, create_trackbars, \
     get_trackbar_positions
 from os import scandir
+from numpy import array, uint8
 
 
 def create_window_with_trackbars(
@@ -93,5 +95,58 @@ def hsv_color_settings(path):
                 break
 
 
+def rgb_color_settings(path):
+    namedWindow('Origin', WINDOW_NORMAL)
+    resizeWindow(
+        'Origin',
+        width=400,
+        height=600,
+    )
+    namedWindow('Result', WINDOW_NORMAL)
+    resizeWindow(
+        'Result',
+        width=400,
+        height=600,
+    )
+    windowName, names_min, names_max = create_window_with_trackbars(
+        'Settings',
+        mode='RGB',
+    )
+    stop = False
+
+    for image_path in scandir(path):
+        if stop:
+            break
+
+        image = imread(image_path)
+        rgb_image = cvtColor(
+            image,
+            COLOR_BGR2RGB,
+        )
+        while True:
+            rgb_min, rgb_max = listen_trackbars(
+                windowName=windowName,
+                names_min=names_min,
+                names_max=names_max,
+            )
+            rgb_mask = inRange(
+                rgb_image,
+                lowerb=array(rgb_min, uint8),
+                upperb=array(rgb_max, uint8),
+            )
+            imshow('Origin', image)
+            imshow('Result', rgb_mask)
+            # Ждем 30 мс, иначе зависают окна.
+            key = waitKey(30)
+
+            if key == ord('n'):
+                # Next image
+                break
+            if key == ord('q'):
+                stop = True
+                break
+
+
 path = 'screenshots'
-hsv_color_settings(path)
+#hsv_color_settings(path)
+rgb_color_settings(path)

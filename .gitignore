@@ -12,3 +12,6 @@ screenshots
 
 # last_session folder
 last_session
+
+# tests output
+tests/output/

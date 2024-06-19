@@ -105,6 +105,7 @@ def get_trackbar_positions(
     return tuple(trackbars)
 
 
+#FIXME: Function works wrong. Returns BRG, not HSV.
 def screenshot_hsv(
     bbox=None,
     include_layered_windows=False,

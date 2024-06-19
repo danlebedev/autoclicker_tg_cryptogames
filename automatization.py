@@ -6,6 +6,7 @@ from games.games import HarvestMoon, Blum, HamsterKombat, \
 from tools import screenshot, load_state, save_state
 from time import sleep
 import json
+from uiautomator2.exceptions import AdbShellError
 
 
 ADB_PROCESS = ADB()
@@ -111,6 +112,9 @@ def main():
             emulator.start()
             emulator_connect()
             emulator.stop()
+        #FIXME: Временное решение пропускать краш.
+        except AdbShellError:
+            pass
         except Exception as err:
             save_state(NEW_STATE)
             raise err

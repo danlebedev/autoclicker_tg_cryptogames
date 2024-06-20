@@ -47,8 +47,8 @@ def main():
                 image=image,
                 color_min=drop_min,
                 color_max=drop_max,
-                step_string=15,
-                step_pixel=15,
+                step_string=13,
+                step_pixel=13,
                 reverse=True
             )
 

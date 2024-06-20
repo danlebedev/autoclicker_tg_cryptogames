@@ -64,15 +64,14 @@ To stop press: q""")
                         mouse.click(Button.left)
                         last_click = drop_coordinates
 
-                locate_play = locateCenterOnScreen(
-                    template=PLAY_TEMPLATE,
-                    screenshotIm=image,
-                    confidence=0.90,
-                )
-
                 # Делаем проверку кнопки play каждые 50 скринов.
                 if count > 50:
                     count = 0
+                    locate_play = locateCenterOnScreen(
+                        template=PLAY_TEMPLATE,
+                        screenshotIm=image,
+                        confidence=0.90,
+                    )
                     if locate_play:
                         if spins_max <= spins:
                             return

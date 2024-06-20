@@ -17,10 +17,10 @@ GAMES = [
     Blum,
     HamsterKombat,
     PocketFi,
-    Vertus,
+    #Vertus,
     PocketRocketGame,
     QappiMiner,
-    Gleam,
+    #Gleam,
     HotWallet,
     EmpiresBattle,
 ]

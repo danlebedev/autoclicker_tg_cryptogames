@@ -86,4 +86,4 @@ To stop press: q""")
 
 if __name__ == '__main__':
     spins_max = input("Spins count: ")
-    main(spins_max)
+    main(int(spins_max))

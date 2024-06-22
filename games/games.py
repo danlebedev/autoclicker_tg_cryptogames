@@ -106,6 +106,11 @@ class Vertus(TimerMixin):
         self.bot = bot
         self.storage = (0.700, 0.460)
         self.collect = (0.840, 0.780)
+        self.templates = self._load_templates()
+    
+    @classmethod
+    def _load_templates(cls):
+        return load_templates(cls.__name__)
 
     def play(self):
         try:
@@ -121,7 +126,13 @@ class Vertus(TimerMixin):
         except:
             pass
         else:
-            sleep(10)
+            sleep(20)
+            collect = locateCenterOnScreen(
+                template=self.templates['collect'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if collect:
+                self.bot.session.click(*collect)
             self.bot.session.click(*self.storage)
             sleep(5)
             self.bot.session.click(*self.collect)

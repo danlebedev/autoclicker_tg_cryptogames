@@ -100,6 +100,7 @@ class PocketFi(TimerMixin):
 
 class Vertus(TimerMixin):
     name = 'Vertus'
+    timer = 4 * 60 * 60
 
     def __init__(self, bot):
         self.bot = bot
@@ -148,7 +149,7 @@ class PocketRocketGame(TimerMixin):
     def __init__(self, bot):
         self.bot = bot
         self.rocket = (450, 400)
-        self.clicks = 50
+        self.clicks = 10
 
     def play(self):
         try:

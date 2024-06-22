@@ -219,7 +219,7 @@ class Gleam(TimerMixin):
 
 class HotWallet(TimerMixin):
     name = 'HOT Wallet'
-    timer = 4 * 60 * 60
+    timer = 2 * 60 * 60
 
     def __init__(self, bot):
         self.bot = bot

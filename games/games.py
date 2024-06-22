@@ -279,7 +279,7 @@ class HotWallet(TimerMixin):
                         template=self.templates['claim_hot'],
                         screenshotIm=self.bot.session.screenshot(),
                     ))
-                sleep(10)
+                sleep(15)
                 self.bot.session.press('back')
 
             sleep(5)

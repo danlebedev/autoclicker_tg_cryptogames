@@ -3,7 +3,7 @@ from logic.telegram import Telegram
 from games.games import HarvestMoon, Blum, HamsterKombat, \
     PocketFi, Vertus, PocketRocketGame, QappiMiner, Gleam, \
     HotWallet, EmpiresBattle
-from tools import screenshot, load_state, save_state
+from tools import screenshot, load_state, save_state, load_times, save_times
 from time import sleep
 import json
 from uiautomator2.exceptions import AdbShellError
@@ -32,6 +32,7 @@ SLEEP_OUT = 5
 RETRY = 3
 LAST_STATE = load_state()
 NEW_STATE = {}
+TIMES = load_times()
 
 
 def emulator_connect():
@@ -89,7 +90,14 @@ def bot_actions(bot):
 
 
 def game_actions(game):
-    game.play()
+    if game.timer is not None:
+        last_time = EMULATOR_TIMES.setdefault(game.__class__.__name__, 0)
+        new_time = game.check_time(last_time)
+        if new_time is not None:
+            EMULATOR_TIMES[game.__class__.__name__] = new_time
+            game.play()
+    else:
+        game.play()
     game.bot.session.press('back')
     sleep(SLEEP_OUT)
 
@@ -104,6 +112,8 @@ def main():
         try:
             NEW_STATE['device_id'] = device_id
             print(EMULATORS.index(device_id))
+            global EMULATOR_TIMES
+            EMULATOR_TIMES = TIMES.setdefault(device_id, {})
             global emulator
             emulator = Emulator(
                 index=EMULATORS.index(device_id),
@@ -116,8 +126,10 @@ def main():
         except AdbShellError:
             pass
         except Exception as err:
-            save_state(NEW_STATE)
             raise err
+        finally:
+            save_times(TIMES)
+            save_state(NEW_STATE)
 
 
 if __name__ == '__main__':

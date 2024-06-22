@@ -1,10 +1,11 @@
 from time import sleep
-from games.tools import click_generator, load_templates
+from games.tools import click_generator, load_templates, TimerMixin
 from computer_vision.cv import locateCenterOnScreen
 
 
-class HarvestMoon():
+class HarvestMoon(TimerMixin):
     name = 'HarvestMoonBot'
+    timer = 8 * 60 * 60
 
     def __init__(self, bot):
         self.bot = bot
@@ -22,8 +23,9 @@ class HarvestMoon():
             self.bot.stop()
 
 
-class Blum():
+class Blum(TimerMixin):
     name = 'Blum'
+    timer = 8 * 60 * 60
 
     def __init__(self, bot):
         self.bot = bot
@@ -45,7 +47,7 @@ class Blum():
             self.bot.session.press('back')
 
 
-class HamsterKombat():
+class HamsterKombat(TimerMixin):
     name = 'Hamster Kombat'
 
     def __init__(self, bot):
@@ -75,7 +77,7 @@ class HamsterKombat():
             ))
 
 
-class PocketFi():
+class PocketFi(TimerMixin):
     name = 'PocketFi'
 
     def __init__(self, bot):
@@ -96,7 +98,7 @@ class PocketFi():
             self.bot.session.press('back')
 
 
-class Vertus():
+class Vertus(TimerMixin):
     name = 'Vertus'
 
     def __init__(self, bot):
@@ -126,7 +128,7 @@ class Vertus():
             self.bot.session.press('back')
 
 
-class HoldWallet():
+class HoldWallet(TimerMixin):
     name = 'HOLD Wallet 💎'
 
     def play(self):
@@ -139,8 +141,9 @@ class HoldWallet():
             # TODO: WRITE THIS CLASS
 
 
-class PocketRocketGame():
+class PocketRocketGame(TimerMixin):
     name = 'Pocket Rocket Game'
+    timer = 5 * 60 * 60
 
     def __init__(self, bot):
         self.bot = bot
@@ -170,8 +173,9 @@ class PocketRocketGame():
             ))
 
 
-class QappiMiner():
+class QappiMiner(TimerMixin):
     name = 'Qappi Miner'
+    timer = 4 * 60 * 60
 
     def __init__(self, bot):
         self.bot = bot
@@ -192,7 +196,7 @@ class QappiMiner():
             self.bot.session.press('back')
 
 
-class Gleam():
+class Gleam(TimerMixin):
     name = 'GLEAM'
 
     def __init__(self, bot):
@@ -213,8 +217,9 @@ class Gleam():
             self.bot.stop()
 
 
-class HotWallet():
+class HotWallet(TimerMixin):
     name = 'HOT Wallet'
+    timer = 4 * 60 * 60
 
     def __init__(self, bot):
         self.bot = bot
@@ -272,7 +277,7 @@ class HotWallet():
             raise
 
 
-class EmpiresBattle():
+class EmpiresBattle(TimerMixin):
     name = "Empire's Battle Bot"
 
     def __init__(self, bot):

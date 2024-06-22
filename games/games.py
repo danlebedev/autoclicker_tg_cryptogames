@@ -318,3 +318,25 @@ class EmpiresBattle(TimerMixin):
                 x_rand=20,
                 y_rand=20,
             ))
+
+
+class Gleam(TimerMixin):
+    name = 'Gleam'
+    timer = 3 * 60 * 60 + 300
+
+    def __init__(self, bot):
+        self.bot = bot
+        self.claim = (0.800, 0.645)
+
+    def play(self):
+        try:
+            self.bot.send_message_start()
+            sleep(5)
+            self.bot.click_inline_button(index=0)
+        except:
+            pass
+        else:
+            sleep(10)
+            self.bot.session.click(*self.claim)
+            sleep(10)
+            self.bot.session.press('back')

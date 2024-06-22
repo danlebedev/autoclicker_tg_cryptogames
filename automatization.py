@@ -20,13 +20,14 @@ GAMES = [
     Vertus,
     PocketRocketGame,
     QappiMiner,
-    #Gleam,
+    Gleam,
     HotWallet,
     EmpiresBattle,
 ]
 FOLDERS = {
     1: (0, 1, 2, 3, 4),
     2: (0, 1, 2, 3, 4),
+    3: (0,)
 }
 SLEEP_OUT = 5
 RETRY = 3

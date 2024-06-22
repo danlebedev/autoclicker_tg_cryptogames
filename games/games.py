@@ -208,7 +208,7 @@ class QappiMiner(TimerMixin):
             self.bot.session.press('back')
 
 
-class Gleam(TimerMixin):
+class Aqua(TimerMixin):
     name = 'GLEAM'
 
     def __init__(self, bot):

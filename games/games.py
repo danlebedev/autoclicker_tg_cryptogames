@@ -283,7 +283,7 @@ class EmpiresBattle(TimerMixin):
     def __init__(self, bot):
         self.bot = bot
         self.hero = (440, 990)
-        self.clicks = 260
+        self.clicks = 320
 
     def play(self):
         try:

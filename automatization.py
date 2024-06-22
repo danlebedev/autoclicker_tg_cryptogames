@@ -122,7 +122,6 @@ def main():
             )
             emulator.start()
             emulator_connect()
-            emulator.kill_process()
         #FIXME: Временное решение пропускать краш.
         except AdbShellError:
             pass
@@ -131,6 +130,7 @@ def main():
         finally:
             save_times(TIMES)
             save_state(NEW_STATE)
+            emulator.stop()
 
 
 if __name__ == '__main__':

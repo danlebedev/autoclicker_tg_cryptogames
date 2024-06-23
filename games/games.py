@@ -5,7 +5,7 @@ from computer_vision.cv import locateCenterOnScreen
 
 class HarvestMoon(TimerMixin):
     name = 'HarvestMoonBot'
-    timer = 8 * 60 * 60 + 300
+    timer = 12 * 60 * 60 + 300
 
     def __init__(self, bot):
         self.bot = bot

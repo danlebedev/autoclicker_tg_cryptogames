@@ -5,7 +5,7 @@ from computer_vision.cv import locateCenterOnScreen
 
 class HarvestMoon(TimerMixin):
     name = 'HarvestMoonBot'
-    timer = 12 * 60 * 60 + 300
+    timer = 12 * 60 * 60 + 120
 
     def __init__(self, bot):
         self.bot = bot
@@ -25,7 +25,7 @@ class HarvestMoon(TimerMixin):
 
 class Blum(TimerMixin):
     name = 'Blum'
-    timer = 8 * 60 * 60 + 300
+    timer = 8 * 60 * 60 + 120
 
     def __init__(self, bot):
         self.bot = bot
@@ -100,7 +100,7 @@ class PocketFi(TimerMixin):
 
 class Vertus(TimerMixin):
     name = 'Vertus'
-    timer = 4 * 60 * 60
+    timer = 4 * 60 * 120
 
     def __init__(self, bot):
         self.bot = bot
@@ -161,7 +161,7 @@ class HoldWallet(TimerMixin):
 
 class PocketRocketGame(TimerMixin):
     name = 'Pocket Rocket Game'
-    timer = 5 * 60 * 60 + 300
+    timer = 5 * 60 * 60 + 120
 
     def __init__(self, bot):
         self.bot = bot
@@ -193,7 +193,7 @@ class PocketRocketGame(TimerMixin):
 
 class QappiMiner(TimerMixin):
     name = 'Qappi Miner'
-    timer = 4 * 60 * 60 + 300
+    timer = 4 * 60 * 60 + 120
 
     def __init__(self, bot):
         self.bot = bot
@@ -237,7 +237,7 @@ class Aqua(TimerMixin):
 
 class HotWallet(TimerMixin):
     name = 'HOT Wallet'
-    timer = 2 * 60 * 60 + 300
+    timer = 2 * 60 * 60 + 120
 
     def __init__(self, bot):
         self.bot = bot
@@ -328,7 +328,7 @@ class EmpiresBattle(TimerMixin):
 
 class Gleam(TimerMixin):
     name = 'Gleam'
-    timer = 3 * 60 * 60 + 300
+    timer = 3 * 60 * 60 + 120
 
     def __init__(self, bot):
         self.bot = bot

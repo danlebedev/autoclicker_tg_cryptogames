@@ -346,3 +346,25 @@ class Gleam(TimerMixin):
             self.bot.session.click(*self.claim)
             sleep(10)
             self.bot.session.press('back')
+
+
+class AnonSpace(TimerMixin):
+    name = 'ANON Space: Onboarding'
+    timer = 8 * 60 * 60 + 120
+
+    def __init__(self, bot):
+        self.bot = bot
+        self.claim = (0.445, 0.720)
+
+    def play(self):
+        try:
+            self.bot.send_message_start()
+            sleep(5)
+            self.bot.click_inline_button(index=0)
+        except:
+            pass
+        else:
+            sleep(10)
+            self.bot.session.click(*self.claim)
+            sleep(10)
+            self.bot.session.press('back')

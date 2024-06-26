@@ -100,7 +100,7 @@ class PocketFi(TimerMixin):
 
 class Vertus(TimerMixin):
     name = 'Vertus'
-    timer = 4 * 60 * 120
+    timer = 2 * 60 * 60 + 120
 
     def __init__(self, bot):
         self.bot = bot
@@ -142,6 +142,13 @@ class Vertus(TimerMixin):
             self.bot.session.click(*self.storage)
             sleep(5)
             self.bot.session.click(*self.collect)
+            claim = locateCenterOnScreen(
+                template=self.templates['claim'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if claim:
+                self.bot.session.click(*claim)
+            sleep(5)
             self.bot.session.press('back')
             self.bot.session.press('back')
 

@@ -334,7 +334,7 @@ class EmpiresBattle(TimerMixin):
 
 
 class Gleam(TimerMixin):
-    name = 'Gleam'
+    name = 'Gleam Bot'
     timer = 3 * 60 * 60 + 120
 
     def __init__(self, bot):

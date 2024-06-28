@@ -200,12 +200,10 @@ class PocketRocketGame(TimerMixin):
 
 class QappiMiner(TimerMixin):
     name = 'Qappi Miner'
-    timer = 4 * 60 * 60 + 120
 
     def __init__(self, bot):
         self.bot = bot
-        self.claim = (0.500, 0.740)
-        self.rocket = (0.515, 0.515)
+        self.claim = (0.500, 0.500)
 
     def play(self):
         try:

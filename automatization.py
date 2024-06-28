@@ -53,6 +53,7 @@ def emulator_connect():
 def telegram_start(tg):
     for _ in range(RETRY):
         tg.start()
+        sleep(5)
         if tg.is_started():
             for index in FOLDERS:
                 tg.init_folder(index=index)

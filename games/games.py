@@ -203,7 +203,8 @@ class QappiMiner(TimerMixin):
 
     def __init__(self, bot):
         self.bot = bot
-        self.claim = (0.500, 0.500)
+        self.claim = (0.500, 0.740)
+        self.rocket = (0.500, 0.500)
 
     def play(self):
         try:
@@ -216,6 +217,7 @@ class QappiMiner(TimerMixin):
             sleep(10)
             self.bot.session.click(*self.claim)
             sleep(10)
+            self.bot.session.click(*self.rocket)
             self.bot.session.press('back')
 
 

@@ -115,6 +115,7 @@ def main():
         try:
             NEW_STATE['device_id'] = device_id
             print(EMULATORS.index(device_id))
+            save_state(NEW_STATE)
             global EMULATOR_TIMES
             EMULATOR_TIMES = TIMES.setdefault(device_id, {})
             global emulator

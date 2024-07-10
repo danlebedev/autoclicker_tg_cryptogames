@@ -373,7 +373,6 @@ class AnonSpace(TimerMixin):
 
     def __init__(self, bot):
         self.bot = bot
-        self.claim = (0.445, 0.720)
 
     def play(self):
         try:
@@ -384,6 +383,18 @@ class AnonSpace(TimerMixin):
             pass
         else:
             sleep(10)
-            self.bot.session.click(*self.claim)
+            daily = locateCenterOnScreen(
+                template=self.templates['daily'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if daily:
+                self.bot.session.click(*daily)
+            sleep(5)
+            claim = locateCenterOnScreen(
+                template=self.templates['claim'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if claim:
+                self.bot.session.click(*claim)
             sleep(10)
             self.bot.session.press('back')

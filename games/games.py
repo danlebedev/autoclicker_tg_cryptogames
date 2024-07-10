@@ -120,37 +120,34 @@ class Vertus(TimerMixin):
             # Skip daily reward.
             # TODO: rewrite this to check screenshot with opencv later.
             sleep(20)
-            collect = locateCenterOnScreen(
-                template=self.templates['collect'],
-                screenshotIm=self.bot.session.screenshot(),
-            )
-            if collect:
-                self.bot.session.click(*collect)
-            self.bot.session.press('back')
-            sleep(5)
             self.bot.click_inline_button(index=0)
         except:
             pass
         else:
             sleep(20)
             okx = locateCenterOnScreen(
-                template=self.templates['OKX'],
+                template=self.templates['okx'],
                 screenshotIm=self.bot.session.screenshot(),
             )
             if okx:
                 self.bot.session.click(*okx)
+                self.bot.session.press('back')
+            sleep(5)
             collect = locateCenterOnScreen(
                 template=self.templates['collect'],
                 screenshotIm=self.bot.session.screenshot(),
             )
             if collect:
                 self.bot.session.click(*collect)
+            sleep(5)
             okx = locateCenterOnScreen(
-                template=self.templates['OKX'],
+                template=self.templates['okx'],
                 screenshotIm=self.bot.session.screenshot(),
             )
             if okx:
                 self.bot.session.click(*okx)
+                self.bot.session.press('back')
+            sleep(5)
             self.bot.session.click(*self.storage)
             sleep(5)
             self.bot.session.click(*self.collect)

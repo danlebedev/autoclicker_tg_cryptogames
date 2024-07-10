@@ -129,7 +129,7 @@ def main():
         except AdbShellError:
             pass
         except Exception as err:
-            raise err
+            pass
         finally:
             save_times(TIMES)
             save_state(NEW_STATE)

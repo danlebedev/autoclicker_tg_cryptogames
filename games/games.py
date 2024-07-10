@@ -133,12 +133,24 @@ class Vertus(TimerMixin):
             pass
         else:
             sleep(20)
+            okx = locateCenterOnScreen(
+                template=self.templates['OKX'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if okx:
+                self.bot.session.click(*okx)
             collect = locateCenterOnScreen(
                 template=self.templates['collect'],
                 screenshotIm=self.bot.session.screenshot(),
             )
             if collect:
                 self.bot.session.click(*collect)
+            okx = locateCenterOnScreen(
+                template=self.templates['OKX'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if okx:
+                self.bot.session.click(*okx)
             self.bot.session.click(*self.storage)
             sleep(5)
             self.bot.session.click(*self.collect)

@@ -370,6 +370,11 @@ class AnonSpace(TimerMixin):
 
     def __init__(self, bot):
         self.bot = bot
+        self.templates = self._load_templates()
+
+    @classmethod
+    def _load_templates(cls):
+        return load_templates(cls.__name__)
 
     def play(self):
         try:
@@ -379,13 +384,13 @@ class AnonSpace(TimerMixin):
         except:
             pass
         else:
-            sleep(10)
-            daily = locateCenterOnScreen(
+            sleep(20)
+            """daily = locateCenterOnScreen(
                 template=self.templates['daily'],
                 screenshotIm=self.bot.session.screenshot(),
             )
             if daily:
-                self.bot.session.click(*daily)
+                self.bot.session.click(*daily)"""
             sleep(5)
             claim = locateCenterOnScreen(
                 template=self.templates['claim'],

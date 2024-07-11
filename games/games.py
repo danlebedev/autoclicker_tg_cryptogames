@@ -404,13 +404,13 @@ class AnonSpace(TimerMixin):
             pass
         else:
             sleep(20)
-            """daily = locateCenterOnScreen(
+            daily = locateCenterOnScreen(
                 template=self.templates['daily'],
                 screenshotIm=self.bot.session.screenshot(),
             )
             if daily:
-                self.bot.session.click(*daily)"""
-            sleep(5)
+                self.bot.session.click(*daily)
+                sleep(5)
             claim = locateCenterOnScreen(
                 template=self.templates['claim'],
                 screenshotIm=self.bot.session.screenshot(),

@@ -30,6 +30,11 @@ class Blum(TimerMixin):
     def __init__(self, bot):
         self.bot = bot
         self.button = (0.500, 0.870)
+        self.templates = self._load_templates()
+    
+    @classmethod
+    def _load_templates(cls):
+        return load_templates(cls.__name__)
 
     def play(self):
         try:
@@ -40,6 +45,13 @@ class Blum(TimerMixin):
             pass
         else:
             sleep(10)
+            daily = locateCenterOnScreen(
+                template=self.templates['daily'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if daily:
+                self.bot.session.click(*daily)
+                sleep(5)
             self.bot.session.click(*self.button)
             sleep(5)
             self.bot.session.click(*self.button)

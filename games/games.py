@@ -403,3 +403,28 @@ class AnonSpace(TimerMixin, LoadMixin):
                 self.bot.session.click(*claim)
             sleep(10)
             self.bot.session.press('back')
+
+
+class Tomarket(TimerMixin):
+    name = 'Tomarket App'
+    timer = 1 * 60 * 60 + 120
+
+    def __init__(self, bot):
+        self.bot = bot
+        self.claim = (0.480, 0.855)
+
+    def play(self):
+        try:
+            self.bot.send_message_start()
+            sleep(5)
+            self.bot.click_inline_button(index=0)
+        except:
+            pass
+        else:
+            sleep(15)
+            self.bot.session.click(*self.claim)
+            sleep(5)
+            self.bot.session.click(*self.claim)
+            sleep(5)
+            self.bot.session.press('back')
+            self.bot._stop_accept()

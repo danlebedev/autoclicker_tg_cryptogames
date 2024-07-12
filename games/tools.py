@@ -34,3 +34,10 @@ class TimerMixin:
             return time_now
         else:
             return None
+
+
+class LoadMixin:
+
+    @classmethod
+    def _load_templates(cls):
+        return load_templates(cls.__name__)

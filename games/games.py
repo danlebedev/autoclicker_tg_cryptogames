@@ -1,5 +1,5 @@
 from time import sleep
-from games.tools import click_generator, load_templates, TimerMixin
+from games.tools import click_generator, TimerMixin, LoadMixin
 from computer_vision.cv import locateCenterOnScreen
 
 
@@ -23,7 +23,7 @@ class HarvestMoon(TimerMixin):
             self.bot.stop()
 
 
-class Blum(TimerMixin):
+class Blum(TimerMixin, LoadMixin):
     name = 'Blum'
     timer = 8 * 60 * 60 + 120
 
@@ -31,10 +31,6 @@ class Blum(TimerMixin):
         self.bot = bot
         self.button = (0.500, 0.870)
         self.templates = self._load_templates()
-    
-    @classmethod
-    def _load_templates(cls):
-        return load_templates(cls.__name__)
 
     def play(self):
         try:
@@ -110,7 +106,7 @@ class PocketFi(TimerMixin):
             self.bot.session.press('back')
 
 
-class Vertus(TimerMixin):
+class Vertus(TimerMixin, LoadMixin):
     name = 'Vertus'
     timer = 2 * 60 * 60 + 120
 
@@ -119,10 +115,6 @@ class Vertus(TimerMixin):
         self.storage = (0.700, 0.460)
         self.collect = (0.840, 0.780)
         self.templates = self._load_templates()
-    
-    @classmethod
-    def _load_templates(cls):
-        return load_templates(cls.__name__)
 
     def play(self):
         try:
@@ -270,17 +262,13 @@ class Aqua(TimerMixin):
             self.bot.stop()
 
 
-class HotWallet(TimerMixin):
+class HotWallet(TimerMixin, LoadMixin):
     name = 'HOT Wallet'
     timer = 2 * 60 * 60 + 120
 
     def __init__(self, bot):
         self.bot = bot
         self.templates = self._load_templates()
-
-    @classmethod
-    def _load_templates(cls):
-        return load_templates(cls.__name__)
 
     def play(self):
         try:
@@ -383,17 +371,13 @@ class Gleam(TimerMixin):
             self.bot.session.press('back')
 
 
-class AnonSpace(TimerMixin):
+class AnonSpace(TimerMixin, LoadMixin):
     name = 'ANON Space: Onboarding'
     timer = 8 * 60 * 60 + 120
 
     def __init__(self, bot):
         self.bot = bot
         self.templates = self._load_templates()
-
-    @classmethod
-    def _load_templates(cls):
-        return load_templates(cls.__name__)
 
     def play(self):
         try:

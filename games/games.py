@@ -405,6 +405,33 @@ class AnonSpace(TimerMixin, LoadMixin):
             self.bot.session.press('back')
 
 
+class PixelTap(TimerMixin, LoadMixin):
+    name = 'PixelTap by Pixelverse'
+
+    def __init__(self, bot):
+        self.bot = bot
+        self.claim = (0.49, 0.695)
+        self.templates = self._load_templates()
+    
+    def play(self):
+        try:
+            self.bot.run()
+        except:
+            pass
+        else:
+            sleep(10)
+            close = locateCenterOnScreen(
+                template=self.templates['close'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if close:
+                self.bot.session.click(*close)
+            sleep(5)
+            self.bot.session.click(*self.claim)
+            sleep(5)
+            self.bot.stop()
+
+
 class Tomarket(TimerMixin):
     name = 'Tomarket App'
     timer = 1 * 60 * 60 + 120

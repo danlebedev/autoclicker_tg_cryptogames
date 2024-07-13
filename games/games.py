@@ -426,7 +426,14 @@ class PixelTap(TimerMixin, LoadMixin):
             )
             if close:
                 self.bot.session.click(*close)
-            sleep(5)
+                sleep(5)
+            close = locateCenterOnScreen(
+                template=self.templates['close'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if close:
+                self.bot.session.click(*close)
+                sleep(5)
             self.bot.session.click(*self.claim)
             sleep(5)
             self.bot.stop()

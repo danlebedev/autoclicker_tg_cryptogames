@@ -256,12 +256,12 @@ class PocketRocketGame(TimerMixin, LoadMixin):
                     sleep(10)
                 
                     roulette_claim = locateCenterOnScreen(
-                        template=self.templates['roulette_spin'],
+                        template=self.templates['roulette_claim'],
                         screenshotIm=self.bot.session.screenshot(),
                     )
                     if roulette_claim:
-                        self.bot.session.click(*roulette_spin)
-                        sleep(10)
+                        self.bot.session.click(*roulette_claim)
+                        sleep(5)
             
             daily = locateCenterOnScreen(
                 template=self.templates['daily'],

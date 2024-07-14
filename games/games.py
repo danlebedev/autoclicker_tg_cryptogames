@@ -212,14 +212,15 @@ class HoldWallet(TimerMixin):
             # TODO: WRITE THIS CLASS
 
 
-class PocketRocketGame(TimerMixin):
+class PocketRocketGame(TimerMixin, LoadMixin):
     name = 'Pocket Rocket Game'
-    timer = 5 * 60 * 60 + 120
+    timer = 4 * 60 * 60 + 120
 
     def __init__(self, bot):
         self.bot = bot
         self.rocket = (450, 400)
         self.clicks = 10
+        self.templates = self._load_templates()
 
     def play(self):
         try:
@@ -230,6 +231,55 @@ class PocketRocketGame(TimerMixin):
             pass
         else:
             sleep(10)
+            start_continue = locateCenterOnScreen(
+                template=self.templates['start_continue'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if start_continue:
+                self.bot.session.click(*start_continue)
+                sleep(5)
+
+            roulette = locateCenterOnScreen(
+                template=self.templates['roulette'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if roulette:
+                self.bot.session.click(*roulette)
+                sleep(5)
+
+                roulette_spin = locateCenterOnScreen(
+                    template=self.templates['roulette_spin'],
+                    screenshotIm=self.bot.session.screenshot(),
+                )
+                if roulette_spin:
+                    self.bot.session.click(*roulette_spin)
+                    sleep(10)
+                
+                    roulette_claim = locateCenterOnScreen(
+                        template=self.templates['roulette_spin'],
+                        screenshotIm=self.bot.session.screenshot(),
+                    )
+                    if roulette_claim:
+                        self.bot.session.click(*roulette_spin)
+                        sleep(10)
+            
+            daily = locateCenterOnScreen(
+                template=self.templates['daily'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if daily:
+                self.bot.session.click(*daily)
+                sleep(5)
+
+                daily_claim = locateCenterOnScreen(
+                    template=self.templates['daily_claim'],
+                    screenshotIm=self.bot.session.screenshot(),
+                )
+                if daily_claim:
+                    self.bot.session.click(*daily_claim)
+                    sleep(5)
+                    self.bot.session.press('back')
+
             self.clicker()
             self.bot.session.press('back')
             self.bot._stop_accept()

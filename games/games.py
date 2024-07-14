@@ -86,12 +86,13 @@ class HamsterKombat(TimerMixin):
             ))
 
 
-class PocketFi(TimerMixin):
+class PocketFi(TimerMixin, LoadMixin):
     name = 'PocketFi'
 
     def __init__(self, bot):
         self.bot = bot
         self.button = (0.75, 0.645)
+        self.templates = self._load_templates()
 
     def play(self):
         try:
@@ -102,6 +103,28 @@ class PocketFi(TimerMixin):
             pass
         else:
             sleep(10)
+            quests = locateCenterOnScreen(
+                template=self.templates['quests'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if quests:
+                self.bot.session.click(*quests)
+                sleep(5)
+                everyday = locateCenterOnScreen(
+                    template=self.templates['everyday'],
+                    screenshotIm=self.bot.session.screenshot(),
+                )
+                if everyday:
+                    self.bot.session.click(*everyday)
+                    sleep(5)
+                claim_everyday = locateCenterOnScreen(
+                    template=self.templates['claim_everyday'],
+                    screenshotIm=self.bot.session.screenshot(),
+                )
+                if claim_everyday:
+                    self.bot.session.click(*claim_everyday)
+                    sleep(5)
+                self.bot.session.press('back')
             self.bot.session.click(*self.button)
             sleep(5)
             self.bot.session.press('back')

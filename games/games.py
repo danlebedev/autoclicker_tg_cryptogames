@@ -53,6 +53,7 @@ class Blum(TimerMixin, LoadMixin):
             self.bot.session.click(*self.button)
             sleep(5)
             self.bot.session.press('back')
+            self.bot._stop_accept()
 
 
 class HamsterKombat(TimerMixin):
@@ -104,6 +105,7 @@ class PocketFi(TimerMixin):
             self.bot.session.click(*self.button)
             sleep(5)
             self.bot.session.press('back')
+            self.bot._stop_accept()
 
 
 class Vertus(TimerMixin, LoadMixin):
@@ -171,6 +173,7 @@ class Vertus(TimerMixin, LoadMixin):
             sleep(5)
             self.bot.session.press('back')
             self.bot.session.press('back')
+            self.bot._stop_accept()
 
 
 class HoldWallet(TimerMixin):
@@ -239,6 +242,7 @@ class QappiMiner(TimerMixin):
             sleep(10)
             self.bot.session.click(*self.rocket)
             self.bot.session.press('back')
+            self.bot._stop_accept()
 
 
 class Aqua(TimerMixin):
@@ -315,7 +319,7 @@ class HotWallet(TimerMixin, LoadMixin):
             self.bot.session.press('back')
             self.bot._stop_accept()
         except:
-            raise
+            pass
 
 
 class EmpiresBattle(TimerMixin):
@@ -369,6 +373,7 @@ class Gleam(TimerMixin):
             self.bot.session.click(*self.claim)
             sleep(10)
             self.bot.session.press('back')
+            self.bot._stop_accept()
 
 
 class AnonSpace(TimerMixin, LoadMixin):
@@ -401,8 +406,9 @@ class AnonSpace(TimerMixin, LoadMixin):
             )
             if claim:
                 self.bot.session.click(*claim)
-            sleep(10)
+                sleep(10)
             self.bot.session.press('back')
+            self.bot._stop_accept()
 
 
 class PixelTap(TimerMixin, LoadMixin):

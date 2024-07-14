@@ -231,17 +231,19 @@ class PocketRocketGame(TimerMixin, LoadMixin):
             pass
         else:
             sleep(10)
-            start_continue = locateCenterOnScreen(
-                template=self.templates['start_continue'],
-                screenshotIm=self.bot.session.screenshot(),
-            )
-            if start_continue:
-                self.bot.session.click(*start_continue)
-                sleep(5)
+            for _ in range(2):
+                start_continue = locateCenterOnScreen(
+                    template=self.templates['start_continue'],
+                    screenshotIm=self.bot.session.screenshot(),
+                )
+                if start_continue:
+                    self.bot.session.click(*start_continue)
+                    sleep(5)
 
             roulette = locateCenterOnScreen(
                 template=self.templates['roulette'],
                 screenshotIm=self.bot.session.screenshot(),
+                confidence=0.95,
             )
             if roulette:
                 self.bot.session.click(*roulette)
@@ -266,6 +268,7 @@ class PocketRocketGame(TimerMixin, LoadMixin):
             daily = locateCenterOnScreen(
                 template=self.templates['daily'],
                 screenshotIm=self.bot.session.screenshot(),
+                confidence=0.95,
             )
             if daily:
                 self.bot.session.click(*daily)

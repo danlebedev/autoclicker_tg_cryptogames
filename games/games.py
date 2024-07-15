@@ -283,6 +283,35 @@ class PocketRocketGame(TimerMixin, LoadMixin):
                     sleep(5)
                     self.bot.session.press('back')
 
+            for _ in range(3):
+                for _ in range(5):
+                    boosts = locateCenterOnScreen(
+                        template=self.templates['boosts'],
+                        screenshotIm=self.bot.session.screenshot(),
+                    )
+                    if boosts:
+                        self.bot.session.click(*boosts)
+                        sleep(5)
+
+                        turbo = locateCenterOnScreen(
+                            template=self.templates['turbo'],
+                            screenshotIm=self.bot.session.screenshot(),
+                        )
+                        if turbo:
+                            self.bot.session.click(*turbo)
+                            sleep(5)
+
+                            turbo_claim = locateCenterOnScreen(
+                                template=self.templates['turbo_claim'],
+                                screenshotIm=self.bot.session.screenshot(),
+                            )
+                            if turbo_claim:
+                                self.bot.session.click(*turbo_claim)
+                                sleep(5)
+                            else:
+                                self.bot.session.press('back')
+                        break
+
             self.clicker()
             self.bot.session.press('back')
             self.bot._stop_accept()

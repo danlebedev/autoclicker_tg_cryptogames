@@ -56,7 +56,7 @@ class Blum(TimerMixin, LoadMixin):
             self.bot._stop_accept()
 
 
-class HamsterKombat(TimerMixin):
+class HamsterKombat(TimerMixin, LoadMixin):
     name = 'Hamster Kombat'
 
     def __init__(self, bot):
@@ -64,6 +64,7 @@ class HamsterKombat(TimerMixin):
         self.thanks = (0.500, 0.830)
         self.hamster = (440, 990)
         self.clicks = 60
+        self.templates = self._load_templates()
 
     def play(self):
         try:
@@ -72,6 +73,37 @@ class HamsterKombat(TimerMixin):
             pass
         else:
             sleep(10)
+            earn = locateCenterOnScreen(
+                template=self.templates['earn'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if earn:
+                self.bot.session.click(*earn)
+                sleep(5)
+
+                claimed = locateCenterOnScreen(
+                    template=self.templates['claimed'],
+                    screenshotIm=self.bot.session.screenshot(),
+                )
+                if claimed:
+                    self.bot.session.press('back')
+                else:
+                    everyday = locateCenterOnScreen(
+                        template=self.templates['everyday'],
+                        screenshotIm=self.bot.session.screenshot(),
+                    )
+                    if everyday:
+                        self.bot.session.click(*everyday)
+                        sleep(5)
+                        claim_everyday = locateCenterOnScreen(
+                            template=self.templates['claim_everyday'],
+                            screenshotIm=self.bot.session.screenshot(),
+                        )
+                        if claim_everyday:
+                            self.bot.session.click(*claim_everyday)
+                            sleep(5)
+                            self.bot.session.press('back')
+
             self.bot.session.click(*self.thanks)
             #self.clicker()
             self.bot.stop()

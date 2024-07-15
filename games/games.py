@@ -458,13 +458,14 @@ class EmpiresBattle(TimerMixin):
             ))
 
 
-class Gleam(TimerMixin):
+class Gleam(TimerMixin, LoadMixin):
     name = 'Gleam Bot'
-    timer = 3 * 60 * 60 + 120
+    timer = 8 * 60 * 60 + 120
 
     def __init__(self, bot):
         self.bot = bot
         self.claim = (0.800, 0.645)
+        self.templates = self._load_templates()
 
     def play(self):
         try:
@@ -475,6 +476,31 @@ class Gleam(TimerMixin):
             pass
         else:
             sleep(10)
+            menu = locateCenterOnScreen(
+                template=self.templates['menu'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if menu:
+                self.bot.session.click(*menu)
+                sleep(5)
+
+                while True:
+                    project_claim = locateCenterOnScreen(
+                        template=self.templates['project_claim'],
+                        screenshotIm=self.bot.session.screenshot(),
+                    )
+                    if project_claim:
+                        self.bot.session.click(*project_claim)
+                        sleep(5)
+                    else:
+                        close = locateCenterOnScreen(
+                            template=self.templates['close'],
+                            screenshotIm=self.bot.session.screenshot(),
+                        )
+                        if close:
+                            self.bot.session.click(*close)
+                        break
+
             self.bot.session.click(*self.claim)
             sleep(10)
             self.bot.session.press('back')

@@ -3,13 +3,14 @@ from games.tools import click_generator, TimerMixin, LoadMixin
 from computer_vision.cv import locateCenterOnScreen
 
 
-class HarvestMoon(TimerMixin):
+class HarvestMoon(TimerMixin, LoadMixin):
     name = 'HarvestMoonBot'
     timer = 12 * 60 * 60 + 120
 
     def __init__(self, bot):
         self.bot = bot
         self.button = (0.16, 0.34)
+        self.templates = self._load_templates()
 
     def play(self):
         try:
@@ -17,7 +18,14 @@ class HarvestMoon(TimerMixin):
         except:
             pass
         else:
-            sleep(10)
+            sleep(15)
+            close = locateCenterOnScreen(
+                template=self.templates['close'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if close:
+                self.bot.session.click(*close)
+                sleep(5)
             self.bot.session.click(*self.button)
             sleep(10)
             self.bot.stop()

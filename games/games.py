@@ -576,13 +576,14 @@ class PixelTap(TimerMixin, LoadMixin):
             self.bot.stop()
 
 
-class Tomarket(TimerMixin):
+class Tomarket(TimerMixin, LoadMixin):
     name = 'Tomarket App'
     timer = 1 * 60 * 60 + 120
 
     def __init__(self, bot):
         self.bot = bot
         self.claim = (0.480, 0.855)
+        self.templates = self._load_templates()
 
     def play(self):
         try:
@@ -593,6 +594,13 @@ class Tomarket(TimerMixin):
             pass
         else:
             sleep(15)
+            daily = locateCenterOnScreen(
+                template=self.templates['daily'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if daily:
+                self.bot.session.click(*daily)
+                sleep(5)
             self.bot.session.click(*self.claim)
             sleep(5)
             self.bot.session.click(*self.claim)

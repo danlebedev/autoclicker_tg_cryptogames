@@ -76,6 +76,7 @@ class HamsterKombat(TimerMixin, LoadMixin):
             thanks = locateCenterOnScreen(
                 template=self.templates['thanks'],
                 screenshotIm=self.bot.session.screenshot(),
+                confidence=0.95,
             )
             if thanks:
                 self.bot.session.click(*thanks)

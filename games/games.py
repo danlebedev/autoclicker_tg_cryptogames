@@ -626,7 +626,7 @@ class PixelTap(TimerMixin, LoadMixin):
 
 class MemeFi(TimerMixin, LoadMixin):
     name = 'MemeFi Coin'
-    timer = 8 * 60 * 60 + 120
+    timer = 6 * 60 * 60 + 120
 
     def __init__(self, bot):
         self.bot = bot

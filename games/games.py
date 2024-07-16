@@ -624,6 +624,55 @@ class PixelTap(TimerMixin, LoadMixin):
             self.bot.stop()
 
 
+class MemeFi(TimerMixin, LoadMixin):
+    name = 'MemeFi Coin'
+    timer = 8 * 60 * 60 + 120
+
+    def __init__(self, bot):
+        self.bot = bot
+        self.templates = self._load_templates()
+
+    def play(self):
+        try:
+            self.bot.run()
+        except:
+            pass
+        else:
+            sleep(10)
+            boosters = locateCenterOnScreen(
+                template=self.templates['boosters'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if boosters:
+                self.bot.session.click(*boosters)
+                sleep(5)
+                tapbot = locateCenterOnScreen(
+                    template=self.templates['tapbot'],
+                    screenshotIm=self.bot.session.screenshot(),
+                )
+                for _ in range(2):
+                    if tapbot:
+                        self.bot.session.click(*tapbot)
+                        sleep(5)
+                        tapbot_claim = locateCenterOnScreen(
+                            template=self.templates['tapbot_claim'],
+                            screenshotIm=self.bot.session.screenshot(),
+                        )
+                        if tapbot_claim:
+                            self.bot.session.click(*tapbot_claim)
+                            sleep(5)
+                        tapbot_activate = locateCenterOnScreen(
+                            template=self.templates['tapbot_activate'],
+                            screenshotIm=self.bot.session.screenshot(),
+                        )
+                        if tapbot_activate:
+                            self.bot.session.click(*tapbot_activate)
+                            sleep(5)
+                            self.bot.session.press('back')
+                            break
+            self.bot.stop()
+
+
 class Tomarket(TimerMixin, LoadMixin):
     name = 'Tomarket App'
     timer = 1 * 60 * 60 + 120

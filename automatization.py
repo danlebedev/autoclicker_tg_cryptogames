@@ -2,7 +2,8 @@ from logic.system import Emulator, ADB
 from logic.telegram import Telegram
 from games.games import HarvestMoon, Blum, HamsterKombat, \
     PocketFi, Vertus, PocketRocketGame, QappiMiner, Gleam, \
-    HotWallet, EmpiresBattle, AnonSpace, PixelTap, Tomarket
+    HotWallet, EmpiresBattle, AnonSpace, PixelTap, Tomarket, \
+    MemeFi
 from tools import screenshot, load_state, save_state, load_times, save_times
 from time import sleep
 import json
@@ -25,12 +26,13 @@ GAMES = [
     EmpiresBattle,
     AnonSpace,
     PixelTap,
+    MemeFi,
     Tomarket,
 ]
 FOLDERS = {
     1: (0, 1, 2, 3, 4),
     2: (0, 1, 2, 3, 4),
-    3: (0, 1, 2, 4),
+    3: (0, 1, 2, 3, 4),
 }
 SLEEP_OUT = 5
 RETRY = 3

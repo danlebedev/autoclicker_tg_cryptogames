@@ -621,6 +621,7 @@ class PixelTap(TimerMixin, LoadMixin):
             claim = locateCenterOnScreen(
                 template=self.templates['claim'],
                 screenshotIm=self.bot.session.screenshot(),
+                confidence=0.95,
             )
             if claim:
                 self.bot.session.click(*claim)

@@ -639,6 +639,13 @@ class MemeFi(TimerMixin, LoadMixin):
             pass
         else:
             sleep(10)
+            close = locateCenterOnScreen(
+                template=self.templates['close'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if close:
+                self.bot.session.click(*close)
+                sleep(5)
             boosters = locateCenterOnScreen(
                 template=self.templates['boosters'],
                 screenshotIm=self.bot.session.screenshot(),

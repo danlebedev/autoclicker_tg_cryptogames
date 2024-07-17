@@ -603,7 +603,7 @@ class PixelTap(TimerMixin, LoadMixin):
         except:
             pass
         else:
-            sleep(30)
+            sleep(60)
             close = locateCenterOnScreen(
                 template=self.templates['close'],
                 screenshotIm=self.bot.session.screenshot(),
@@ -666,13 +666,6 @@ class MemeFi(TimerMixin, LoadMixin):
                     if tapbot:
                         self.bot.session.click(*tapbot)
                         sleep(5)
-                        tapbot_claim = locateCenterOnScreen(
-                            template=self.templates['tapbot_claim'],
-                            screenshotIm=self.bot.session.screenshot(),
-                        )
-                        if tapbot_claim:
-                            self.bot.session.click(*tapbot_claim)
-                            sleep(5)
                         tapbot_activate = locateCenterOnScreen(
                             template=self.templates['tapbot_activate'],
                             screenshotIm=self.bot.session.screenshot(),
@@ -680,8 +673,6 @@ class MemeFi(TimerMixin, LoadMixin):
                         if tapbot_activate:
                             self.bot.session.click(*tapbot_activate)
                             sleep(5)
-                            self.bot.session.press('back')
-                            break
             self.bot.stop()
 
 

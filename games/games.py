@@ -31,8 +31,6 @@ class HarvestMoon(TimerMixin, LoadMixin):
             self.bot.session.click(*self.button)
             sleep(10)
             self.bot.session.press('back')
-            sleep(5)
-            self.bot.session.press('back')
             self.bot._stop_accept()
 
 

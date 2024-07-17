@@ -14,7 +14,9 @@ class HarvestMoon(TimerMixin, LoadMixin):
 
     def play(self):
         try:
-            self.bot.run()
+            self.bot.send_message_start()
+            sleep(5)
+            self.bot.click_inline_button(index=0)
         except:
             pass
         else:
@@ -28,7 +30,10 @@ class HarvestMoon(TimerMixin, LoadMixin):
                 sleep(5)
             self.bot.session.click(*self.button)
             sleep(10)
-            self.bot.stop()
+            self.bot.session.press('back')
+            sleep(5)
+            self.bot.session.press('back')
+            self.bot._stop_accept()
 
 
 class Blum(TimerMixin, LoadMixin):

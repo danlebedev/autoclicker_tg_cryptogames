@@ -603,7 +603,7 @@ class PixelTap(TimerMixin, LoadMixin):
         except:
             pass
         else:
-            sleep(20)
+            sleep(30)
             close = locateCenterOnScreen(
                 template=self.templates['close'],
                 screenshotIm=self.bot.session.screenshot(),

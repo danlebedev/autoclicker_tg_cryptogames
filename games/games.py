@@ -669,6 +669,7 @@ class MemeFi(TimerMixin, LoadMixin):
                         tapbot_activate = locateCenterOnScreen(
                             template=self.templates['tapbot_activate'],
                             screenshotIm=self.bot.session.screenshot(),
+                            confidence=0.95,
                         )
                         if tapbot_activate:
                             self.bot.session.click(*tapbot_activate)

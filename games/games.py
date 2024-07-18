@@ -36,7 +36,6 @@ class HarvestMoon(TimerMixin, LoadMixin):
 
 class Blum(TimerMixin, LoadMixin):
     name = 'Blum'
-    timer = 8 * 60 * 60 + 120
 
     def __init__(self, bot):
         self.bot = bot
@@ -59,20 +58,22 @@ class Blum(TimerMixin, LoadMixin):
             if daily:
                 self.bot.session.click(*daily)
                 sleep(5)
-            claim = locateCenterOnScreen(
-                template=self.templates['claim'],
-                screenshotIm=self.bot.session.screenshot(),
-            )
-            if claim:
-                self.bot.session.click(*claim)
-                sleep(5)
-            start = locateCenterOnScreen(
-                template=self.templates['start'],
-                screenshotIm=self.bot.session.screenshot(),
-            )
-            if start:
-                self.bot.session.click(*start)
-                sleep(5)
+            for _ in range(2):
+                claim = locateCenterOnScreen(
+                    template=self.templates['claim'],
+                    screenshotIm=self.bot.session.screenshot(),
+                )
+                if claim:
+                    self.bot.session.click(*claim)
+                    sleep(5)
+            for _ in range(2):
+                start = locateCenterOnScreen(
+                    template=self.templates['start'],
+                    screenshotIm=self.bot.session.screenshot(),
+                )
+                if start:
+                    self.bot.session.click(*start)
+                    sleep(5)
             self.bot.session.press('back')
             self.bot._stop_accept()
 
@@ -644,7 +645,6 @@ class PixelTap(TimerMixin, LoadMixin):
 
 class MemeFi(TimerMixin, LoadMixin):
     name = 'MemeFi Coin'
-    timer = 6 * 60 * 60 + 120
 
     def __init__(self, bot):
         self.bot = bot
@@ -679,14 +679,6 @@ class MemeFi(TimerMixin, LoadMixin):
                     if tapbot:
                         self.bot.session.click(*tapbot)
                         sleep(5)
-                        tapbot_activate = locateCenterOnScreen(
-                            template=self.templates['tapbot_activate'],
-                            screenshotIm=self.bot.session.screenshot(),
-                            confidence=0.95,
-                        )
-                        if tapbot_activate:
-                            self.bot.session.click(*tapbot_activate)
-                            sleep(5)
                         tapbot_claim = locateCenterOnScreen(
                             template=self.templates['tapbot_claim'],
                             screenshotIm=self.bot.session.screenshot(),
@@ -694,6 +686,14 @@ class MemeFi(TimerMixin, LoadMixin):
                         )
                         if tapbot_claim:
                             self.bot.session.click(*tapbot_claim)
+                            sleep(5)
+                        tapbot_activate = locateCenterOnScreen(
+                            template=self.templates['tapbot_activate'],
+                            screenshotIm=self.bot.session.screenshot(),
+                            confidence=0.95,
+                        )
+                        if tapbot_activate:
+                            self.bot.session.click(*tapbot_activate)
                             sleep(5)
                             break
             self.bot.stop()

@@ -59,10 +59,20 @@ class Blum(TimerMixin, LoadMixin):
             if daily:
                 self.bot.session.click(*daily)
                 sleep(5)
-            self.bot.session.click(*self.button)
-            sleep(5)
-            self.bot.session.click(*self.button)
-            sleep(5)
+            claim = locateCenterOnScreen(
+                template=self.templates['claim'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if claim:
+                self.bot.session.click(*claim)
+                sleep(5)
+            start = locateCenterOnScreen(
+                template=self.templates['start'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if start:
+                self.bot.session.click(*start)
+                sleep(5)
             self.bot.session.press('back')
             self.bot._stop_accept()
 

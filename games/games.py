@@ -448,10 +448,27 @@ class HotWallet(TimerMixin, LoadMixin):
             self.bot.click_inline_button(index=2)
             sleep(10)
 
+            follow = locateCenterOnScreen(
+                template=self.templates['follow'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if follow:
+                self.bot.session.click(*follow)
+                self.bot.session.press("back")
+                sleep(5)
             if locateCenterOnScreen(
                 template=self.templates['start'],
                 screenshotIm=self.bot.session.screenshot(),
             ):
+                follow = locateCenterOnScreen(
+                    template=self.templates['follow'],
+                    screenshotIm=self.bot.session.screenshot(),
+                )
+                if follow:
+                    self.bot.session.click(*follow)
+                    self.bot.session.press("back")
+                    sleep(5)
+                    
                 self.bot.session.click(*locateCenterOnScreen(
                     template=self.templates['home'],
                     screenshotIm=self.bot.session.screenshot(),

@@ -25,7 +25,7 @@ GAMES = [
     HotWallet,
     EmpiresBattle,
     AnonSpace,
-    PixelTap,
+    #PixelTap,
     MemeFi,
     Tomarket,
 ]

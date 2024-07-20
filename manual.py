@@ -1,8 +1,6 @@
-from logic.system import Emulator, ADB
+from logic.system import Emulator
 import json
 
-
-ADB_PROCESS = ADB()
 
 with open('emulators.json', 'r') as f:
     EMULATORS = json.load(f)
@@ -21,5 +19,4 @@ def main():
 
 
 if __name__ == '__main__':
-    ADB_PROCESS.start()
     main()

@@ -453,8 +453,7 @@ class HotWallet(TimerMixin, LoadMixin):
                 screenshotIm=self.bot.session.screenshot(),
             )
             if follow:
-                self.bot.session.click(*follow)
-                self.bot.session.press("back")
+                self.bot.session.click(0.5, 0.3)
                 sleep(5)
             if locateCenterOnScreen(
                 template=self.templates['start'],
@@ -465,10 +464,9 @@ class HotWallet(TimerMixin, LoadMixin):
                     screenshotIm=self.bot.session.screenshot(),
                 )
                 if follow:
-                    self.bot.session.click(*follow)
-                    self.bot.session.press("back")
+                    self.bot.session.click(0.5, 0.3)
                     sleep(5)
-                    
+
                 self.bot.session.click(*locateCenterOnScreen(
                     template=self.templates['home'],
                     screenshotIm=self.bot.session.screenshot(),

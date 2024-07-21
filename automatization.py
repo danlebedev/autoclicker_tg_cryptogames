@@ -22,7 +22,7 @@ GAMES = [
     PocketRocketGame,
     QappiMiner,
     #Gleam,
-    HotWallet,
+    #HotWallet,
     #EmpiresBattle,
     AnonSpace,
     #PixelTap,

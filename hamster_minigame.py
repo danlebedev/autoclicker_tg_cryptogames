@@ -54,11 +54,11 @@ with open('games/HamsterKombat/minigame.json', 'r') as f:
 
 
 def main():
-    for emulator in EMULATORS:
-        print(EMULATORS.index(emulator))
+    for index in EMULATORS:
+        print(index)
         emulator = Emulator(
-            index=EMULATORS.index(emulator),
-            device_id=emulator,
+            index=int(index),
+            device_id=EMULATORS[index],
         )
         emulator.start()
         emulator.connect()

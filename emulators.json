@@ -1,14 +1,14 @@
-[
-    "emulator-5554",
-    "emulator-5556",
-    "emulator-5558",
-    "emulator-5560",
-    "emulator-5562",
-    "emulator-5564",
-    "emulator-5566",
-    "emulator-5568",
-    "emulator-5570",
-    "emulator-5572",
-    "emulator-5574",
-    "emulator-5576"
-]
+{
+    "0": "emulator-5554",
+    "1": "emulator-5556",
+    "2": "emulator-5558",
+    "3": "emulator-5560",
+    "4": "emulator-5562",
+    "5": "emulator-5564",
+    "6": "emulator-5566",
+    "7": "emulator-5568",
+    "8": "emulator-5570",
+    "9": "emulator-5572",
+    "10": "emulator-5574",
+    "11": "emulator-5576"
+}

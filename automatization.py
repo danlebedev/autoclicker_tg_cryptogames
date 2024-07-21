@@ -110,22 +110,22 @@ def game_actions(game):
 
 
 def main():
-    for device_id in EMULATORS:
+    for index in EMULATORS:
         if LAST_STATE:
-            if not LAST_STATE['device_id'] == device_id:
+            if not LAST_STATE['device_id'] == EMULATORS[index]:
                 continue
             else:
                 LAST_STATE.clear()
         try:
-            NEW_STATE['device_id'] = device_id
-            print(EMULATORS.index(device_id))
+            NEW_STATE['device_id'] = EMULATORS[index]
+            print(index)
             save_state(NEW_STATE)
             global EMULATOR_TIMES
-            EMULATOR_TIMES = TIMES.setdefault(device_id, {})
+            EMULATOR_TIMES = TIMES.setdefault(EMULATORS[index], {})
             global emulator
             emulator = Emulator(
-                index=EMULATORS.index(device_id),
-                device_id=device_id,
+                index=int(index),
+                device_id=EMULATORS[index],
             )
             emulator.start()
             emulator_connect()

@@ -110,6 +110,7 @@ To break press: o""")
                     0.1,
                 )
             state = False
+            print('Stop')
 
 
 if __name__ == '__main__':

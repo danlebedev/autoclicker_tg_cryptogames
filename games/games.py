@@ -36,6 +36,7 @@ class HarvestMoon(TimerMixin, LoadMixin):
 
 class Blum(TimerMixin, LoadMixin):
     name = 'Blum'
+    timer = 8 * 60 * 60 + 120
 
     def __init__(self, bot):
         self.bot = bot

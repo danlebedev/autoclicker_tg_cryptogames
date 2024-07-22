@@ -58,8 +58,8 @@ def main():
     adb.start()
 
     emulator = Emulator(
-        index=0,
-        device_id='emulator-5554',
+        index=3,
+        device_id='emulator-5560',
     )
     emulator.start()
     emulator.connect()

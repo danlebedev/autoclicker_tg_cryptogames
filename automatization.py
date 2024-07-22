@@ -3,7 +3,7 @@ from logic.telegram import Telegram
 from games.games import HarvestMoon, Blum, HamsterKombat, \
     PocketFi, Vertus, PocketRocketGame, QappiMiner, Gleam, \
     HotWallet, EmpiresBattle, AnonSpace, PixelTap, Tomarket, \
-    MemeFi, OKX
+    MemeFi, OKX, PikeMan
 from tools import screenshot, load_state, save_state, load_times, save_times
 from time import sleep
 import json
@@ -29,6 +29,7 @@ GAMES = [
     MemeFi,
     Tomarket,
     OKX,
+    PikeMan,
 ]
 FOLDERS = {
     1: (0, 1, 2, 3, 4),

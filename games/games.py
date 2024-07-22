@@ -781,3 +781,24 @@ class OKX(TimerMixin, LoadMixin):
                     self.bot.session.click(*button)
                     sleep(5)
             self.bot.stop()
+
+class PikeMan(TimerMixin):
+    name = 'pike_man'
+    timer = 4 * 60 * 60 + 120
+
+    def __init__(self, bot):
+        self.bot = bot
+        self.spins = 10
+        self.click = (0.500, 0.700)
+
+    def play(self):
+        try:
+            self.bot.run()
+        except:
+            pass
+        else:
+            sleep(10)
+            for _ in range(self.spins):
+                self.bot.session.click(*self.click)
+                sleep(2)
+            self.bot.stop()

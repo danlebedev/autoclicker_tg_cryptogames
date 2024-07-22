@@ -1,6 +1,7 @@
 from time import sleep
 from games.tools import click_generator, TimerMixin, LoadMixin
 from computer_vision.cv import locateCenterOnScreen
+from random import choice
 
 
 class HarvestMoon(TimerMixin, LoadMixin):
@@ -746,3 +747,37 @@ class Tomarket(TimerMixin, LoadMixin):
             sleep(5)
             self.bot.session.press('back')
             self.bot._stop_accept()
+
+
+class OKX(TimerMixin, LoadMixin):
+    name = 'OKX Racer'
+
+    def __init__(self, bot):
+        self.bot = bot
+        self.spins = 25
+        self.templates = self._load_templates()
+        self.choice = ('moon', 'doom')
+
+    def play(self):
+        try:
+            self.bot.run()
+        except:
+            pass
+        else:
+            sleep(10)
+            for _ in range(self.spins):
+                empty = locateCenterOnScreen(
+                    template=self.templates['empty'],
+                    screenshotIm=self.bot.session.screenshot(),
+                )
+                if empty:
+                    sleep(5)
+                    break
+                button = locateCenterOnScreen(
+                    template=self.templates[choice(self.choice)],
+                    screenshotIm=self.bot.session.screenshot(),
+                )
+                if button:
+                    self.bot.session.click(*button)
+                    sleep(5)
+            self.bot.stop()

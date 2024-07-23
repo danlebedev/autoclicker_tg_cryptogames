@@ -782,7 +782,7 @@ class OKX(TimerMixin, LoadMixin):
                     sleep(3.5)
             self.bot.stop()
 
-class PikeMan(TimerMixin):
+class PikeMan(TimerMixin, LoadMixin):
     name = 'pike_man'
     timer = 4 * 60 * 60 + 120
 
@@ -790,6 +790,7 @@ class PikeMan(TimerMixin):
         self.bot = bot
         self.spins = 12
         self.click = (0.500, 0.700)
+        self.templates = self._load_templates()
 
     def play(self):
         try:
@@ -800,4 +801,25 @@ class PikeMan(TimerMixin):
             sleep(10)
             for _ in range(self.spins):
                 self.bot.session.click(*self.click)
+            quests = locateCenterOnScreen(
+                template=self.templates['quests'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if quests:
+                self.bot.session.click(*quests)
+                sleep(5)
+                daily = locateCenterOnScreen(
+                    template=self.templates['daily'],
+                    screenshotIm=self.bot.session.screenshot(),
+                )
+                if daily:
+                    self.bot.session.click(*daily)
+                    sleep(5)
+                    daily_accept = locateCenterOnScreen(
+                        template=self.templates['daily_accept'],
+                        screenshotIm=self.bot.session.screenshot(),
+                    )
+                    if daily_accept:
+                        self.bot.session.click(*daily_accept)
+                        sleep(5)
             self.bot.stop()

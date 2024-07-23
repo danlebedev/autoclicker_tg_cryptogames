@@ -785,6 +785,7 @@ class Tomarket(TimerMixin, LoadMixin):
             if daily:
                 self.bot.session.click(*daily)
                 sleep(5)
+            self.daily_cipher()
             self.bot.session.click(*self.claim)
             sleep(5)
             self.bot.session.click(*self.claim)

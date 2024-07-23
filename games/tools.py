@@ -25,6 +25,16 @@ def load_templates(classname):
     return templates
 
 
+def load_scripts(classname):
+    scripts = {}
+    path = join(GAMES_DIR, classname, 'scripts')
+    for script in scandir(path):
+        script_name = splitext(script.name)[0]
+        with open(script.path, 'r') as f:
+            scripts[script_name] = json.load(f)
+    return scripts
+
+
 class TimerMixin:
     timer = None
 
@@ -41,3 +51,7 @@ class LoadMixin:
     @classmethod
     def _load_templates(cls):
         return load_templates(cls.__name__)
+
+    @classmethod
+    def _load_scripts(cls):
+        return load_scripts(cls.__name__)

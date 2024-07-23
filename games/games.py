@@ -824,6 +824,27 @@ class OKX(TimerMixin, LoadMixin):
                 if button:
                     self.bot.session.click(*button)
                     sleep(3.5)
+            tasks = locateCenterOnScreen(
+                template=self.templates["tasks"],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if tasks:
+                self.bot.session.click(*tasks)
+                sleep(5)
+                daily = locateCenterOnScreen(
+                    template=self.templates["daily"],
+                    screenshotIm=self.bot.session.screenshot(),
+                )
+                if daily:
+                    self.bot.session.click(*daily)
+                    sleep(5)
+                    daily_checkin = locateCenterOnScreen(
+                        template=self.templates["daily_checkin"],
+                        screenshotIm=self.bot.session.screenshot(),
+                    )
+                    if daily_checkin:
+                        self.bot.session.click(*daily_checkin)
+                        sleep(5)
             self.bot.stop()
 
 class PikeMan(TimerMixin, LoadMixin):

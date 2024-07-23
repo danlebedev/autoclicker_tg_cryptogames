@@ -49,7 +49,7 @@ with open('emulators.json', 'r') as f:
     EMULATORS = json.load(f)
 
 
-with open('games/HamsterKombat/minigame.json', 'r') as f:
+with open('games/HamsterKombat/scripts/minigame.json', 'r') as f:
     script = json.load(f)
 
 

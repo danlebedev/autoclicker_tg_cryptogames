@@ -678,6 +678,13 @@ class MemeFi(TimerMixin, LoadMixin):
         for num in self.scripts["cipher"]:
             self.bot.session.shell(f"input tap {' '.join(map(str, self.coordinates[num]))}")
         sleep(5)
+        close = locateCenterOnScreen(
+            template=self.templates['close'],
+            screenshotIm=self.bot.session.screenshot(),
+        )
+        if close:
+            self.bot.session.click(*close)
+            sleep(5)
 
     def play(self):
         try:
@@ -692,6 +699,13 @@ class MemeFi(TimerMixin, LoadMixin):
             )
             if close:
                 self.bot.session.click(*close)
+                sleep(5)
+            accept_terms = locateCenterOnScreen(
+                template=self.templates['accept_terms'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if accept_terms:
+                self.bot.session.click(*accept_terms)
                 sleep(5)
             self.daily_cipher()
             boosters = locateCenterOnScreen(

@@ -666,6 +666,18 @@ class MemeFi(TimerMixin, LoadMixin):
     def __init__(self, bot):
         self.bot = bot
         self.templates = self._load_templates()
+        self.scripts = self._load_scripts()
+        self.coordinates = {
+            "1": (450, 645),
+            "2": (450, 800),
+            "3": (450, 950),
+            "4": (450, 1150),
+        }
+
+    def daily_cipher(self):
+        for num in self.scripts["cipher"]:
+            self.bot.session.shell(f"input tap {' '.join(map(str, self.coordinates[num]))}")
+        sleep(5)
 
     def play(self):
         try:
@@ -674,6 +686,7 @@ class MemeFi(TimerMixin, LoadMixin):
             pass
         else:
             sleep(10)
+            self.daily_cipher()
             close = locateCenterOnScreen(
                 template=self.templates['close'],
                 screenshotIm=self.bot.session.screenshot(),

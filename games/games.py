@@ -148,6 +148,9 @@ class HamsterKombat(TimerMixin, LoadMixin):
                 self.bot.session.click(*cipher_claim)
                 sleep(5)
 
+    def daily_reward():
+
+
     def play(self):
         try:
             self.bot.run()
@@ -164,11 +167,11 @@ class HamsterKombat(TimerMixin, LoadMixin):
                 self.bot.session.click(*thanks)
                 sleep(5)
 
-            cipher_daily = locateCenterOnScreen(
-                template=self.templates['cipher_daily'],
+            cipher_claimed = locateCenterOnScreen(
+                template=self.templates['cipher_claimed'],
                 screenshotIm=self.bot.session.screenshot(),
             )
-            if cipher_daily:
+            if not cipher_claimed:
                 self.daily_cipher()
 
             earn = locateCenterOnScreen(

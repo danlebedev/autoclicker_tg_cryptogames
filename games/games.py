@@ -148,6 +148,30 @@ class HamsterKombat(TimerMixin, LoadMixin):
                 self.bot.session.click(*cipher_claim)
                 sleep(5)
 
+    def daily_reward(self):
+        reward_daily = locateCenterOnScreen(
+            template=self.templates['reward_daily'],
+            screenshotIm=self.bot.session.screenshot(),
+        )
+        if reward_daily:
+            self.bot.session.click(*reward_daily)
+            sleep(5)
+
+            reward = locateCenterOnScreen(
+                template=self.templates['reward'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if reward:
+                self.bot.session.click(*reward)
+                sleep(5)
+                reward_claim = locateCenterOnScreen(
+                    template=self.templates['reward_claim'],
+                    screenshotIm=self.bot.session.screenshot(),
+                )
+                if reward_claim:
+                    self.bot.session.click(*reward_claim)
+                    sleep(5)
+
     def play(self):
         try:
             self.bot.run()
@@ -171,36 +195,12 @@ class HamsterKombat(TimerMixin, LoadMixin):
             if not cipher_claimed:
                 self.daily_cipher()
 
-            earn = locateCenterOnScreen(
-                template=self.templates['earn'],
+            reward_claimed = locateCenterOnScreen(
+                template=self.templates['reward_claimed'],
                 screenshotIm=self.bot.session.screenshot(),
             )
-            if earn:
-                self.bot.session.click(*earn)
-                sleep(5)
-
-                claimed = locateCenterOnScreen(
-                    template=self.templates['claimed'],
-                    screenshotIm=self.bot.session.screenshot(),
-                )
-                if claimed:
-                    self.bot.session.press('back')
-                else:
-                    everyday = locateCenterOnScreen(
-                        template=self.templates['everyday'],
-                        screenshotIm=self.bot.session.screenshot(),
-                    )
-                    if everyday:
-                        self.bot.session.click(*everyday)
-                        sleep(5)
-                        claim_everyday = locateCenterOnScreen(
-                            template=self.templates['claim_everyday'],
-                            screenshotIm=self.bot.session.screenshot(),
-                        )
-                        if claim_everyday:
-                            self.bot.session.click(*claim_everyday)
-                            sleep(5)
-                            self.bot.session.press('back')
+            if not reward_claimed:
+                self.daily_reward()
 
             #self.clicker()
             self.bot.stop()

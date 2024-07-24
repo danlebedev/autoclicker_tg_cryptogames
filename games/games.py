@@ -732,6 +732,7 @@ class MemeFi(TimerMixin, LoadMixin):
         self.bot = bot
         self.templates = self._load_templates()
         self.scripts = self._load_scripts()
+        self.time_between_clicks = 0.3
         self.coordinates = {
             "1": (450, 645),
             "2": (450, 800),
@@ -742,7 +743,7 @@ class MemeFi(TimerMixin, LoadMixin):
     def daily_cipher(self):
         for k in self.scripts["cipher"]:
             self.bot.session.shell(f"input tap {' '.join(map(str, self.coordinates[k]))}")
-            sleep(0.2)
+            sleep(0self.time_between_clicks)
         sleep(5)
         close = locateCenterOnScreen(
             template=self.templates['close'],
@@ -818,6 +819,7 @@ class Tomarket(TimerMixin, LoadMixin):
         self.claim = (0.480, 0.855)
         self.templates = self._load_templates()
         self.scripts = self._load_scripts()
+        self.time_between_clicks = 0.3
         self.coordinates = {
             "h": (85, 1180),
             "t": (665, 1048),
@@ -827,7 +829,7 @@ class Tomarket(TimerMixin, LoadMixin):
         for _ in range(2):
             for k in self.scripts["cipher"]:
                 self.bot.session.shell(f"input tap {' '.join(map(str, self.coordinates[k]))}")
-                sleep(0.2)
+                sleep(self.time_between_clicks)
         sleep(5)
         cipher_close = locateCenterOnScreen(
             template=self.templates['cipher_close'],

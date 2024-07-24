@@ -159,9 +159,27 @@ class HamsterKombat(TimerMixin, LoadMixin):
         }
 
     def minigame(self):
-        for item in self.scripts['minigame']:
-            self.bot.session.shell(f"input swipe {' '.join(map(str, self.minigame_coords[item[0]]))} {' '.join(map(str, self.minigame_coords[item[1]]))} 200")
-            sleep(0.2)
+        try:
+            self.bot.session.settings['operation_delay'] = (0, 0)
+            self.bot.session.settings['operation_delay_methods'] = ["click", "swipe"]
+            for item in self.scripts['minigame']:
+                self.bot.session.swipe_points(
+                    [
+                        self.minigame_coords[item[0]],
+                        self.minigame_coords[item[1]],
+                    ],
+                    0.1,
+                )
+        finally:
+            self.bot.session.settings['operation_delay'] = (2, 2)
+            self.bot.session.settings['operation_delay_methods'] = [
+                'click',
+                'press',
+                'exists',
+                'get_text',
+                'set_text',
+                'swipe_ext',
+            ]
 
     def daily_minigame(self):
         minigame_daily = locateCenterOnScreen(

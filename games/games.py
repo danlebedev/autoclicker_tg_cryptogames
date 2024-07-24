@@ -89,7 +89,7 @@ class HamsterKombat(TimerMixin, LoadMixin):
         self.hamster = (440, 990)
         self.clicks = 60
         self.templates = self._load_templates()
-        self.templates = self._load_scripts()
+        self.scripts = self._load_scripts()
         self.morze = {
             "A": "sl",
             "B": "lsss",
@@ -178,7 +178,7 @@ class HamsterKombat(TimerMixin, LoadMixin):
         except:
             pass
         else:
-            sleep(10)
+            sleep(15)
             thanks = locateCenterOnScreen(
                 template=self.templates['thanks'],
                 screenshotIm=self.bot.session.screenshot(),

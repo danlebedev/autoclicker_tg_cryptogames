@@ -88,6 +88,7 @@ class HamsterKombat(TimerMixin, LoadMixin):
         self.thanks = (0.500, 0.830)
         self.hamster = (440, 990)
         self.clicks = 60
+        self.time_between_clicks = 0.3
         self.templates = self._load_templates()
         self.scripts = self._load_scripts()
         self.morze = {
@@ -124,11 +125,10 @@ class HamsterKombat(TimerMixin, LoadMixin):
             for click_type in self.morze[k]:
                 if click_type == "s":
                     self.bot.session.shell(f"input tap {' '.join(map(str, self.hamster))}")
-                    sleep(0.2)
                 elif click_type == "l":
-                    self.bot.session.shell(f"input swipe {' '.join(map(str, self.hamster))} {' '.join(map(str, self.hamster))} 100")
-                    sleep(0.2)
-            sleep(2)
+                    self.bot.session.shell(f"input swipe {' '.join(map(str, self.hamster))} {' '.join(map(str, self.hamster))} 600")
+                sleep(self.time_between_clicks)
+            sleep(3)
 
     def daily_cipher(self):
         cipher_daily = locateCenterOnScreen(

@@ -89,6 +89,64 @@ class HamsterKombat(TimerMixin, LoadMixin):
         self.hamster = (440, 990)
         self.clicks = 60
         self.templates = self._load_templates()
+        self.templates = self._load_scripts()
+        self.morze = {
+            "A": "sl",
+            "B": "lsss",
+            "C": "lsls",
+            "D": "lss",
+            "E": "s",
+            "F": "ssls",
+            "G": "lls",
+            "H": "ssss",
+            "I": "ss",
+            "J": "slll",
+            "K": "lsl",
+            "L": "slss",
+            "M": "ll",
+            "N": "ls",
+            "O": "lll",
+            "P": "slls",
+            "Q": "llsl",
+            "R": "sls",
+            "S": "sss",
+            "T": "l",
+            "U": "ssl",
+            "V": "sssl",
+            "W": "sll",
+            "X": "lssl",
+            "Y": "lsll",
+            "Z": "llss",
+        }
+
+    def cipher(self):
+        for k in self.scripts["cipher"]:
+            for click_type in self.morze[k]:
+                if click_type == "s":
+                    self.bot.session.shell(f"input tap {' '.join(map(str, self.hamster))}")
+                    sleep(0.2)
+                elif click_type == "l":
+                    self.bot.session.shell(f"input swipe {' '.join(map(str, self.hamster))} {' '.join(map(str, self.hamster))} 100")
+                    sleep(0.2)
+            sleep(2)
+
+    def daily_cipher(self):
+        cipher_daily = locateCenterOnScreen(
+            template=self.templates['cipher_daily'],
+            screenshotIm=self.bot.session.screenshot(),
+        )
+        if cipher_daily:
+            self.bot.session.click(*cipher_daily)
+            sleep(5)
+            self.cipher()
+            sleep(5)
+            cipher_claim = locateCenterOnScreen(
+                template=self.templates['cipher_claim'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if cipher_claim:
+                self.bot.session.click(*cipher_claim)
+                sleep(5)
 
     def play(self):
         try:
@@ -105,6 +163,13 @@ class HamsterKombat(TimerMixin, LoadMixin):
             if thanks:
                 self.bot.session.click(*thanks)
                 sleep(5)
+
+            cipher_daily = locateCenterOnScreen(
+                template=self.templates['cipher_daily'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if cipher_daily:
+                self.daily_cipher()
 
             earn = locateCenterOnScreen(
                 template=self.templates['earn'],

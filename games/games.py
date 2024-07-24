@@ -119,6 +119,67 @@ class HamsterKombat(TimerMixin, LoadMixin):
             "Y": "lsll",
             "Z": "llss",
         }
+        self.minigame_coords = {
+            "1_1": (80, 615),
+            "1_2": (215, 615),
+            "1_3": (350, 615),
+            "1_4": (485, 615),
+            "1_5": (620, 615),
+            "1_6": (755, 615),
+            "2_1": (80, 750),
+            "2_2": (215, 750),
+            "2_3": (350, 750),
+            "2_4": (485, 750),
+            "2_5": (620, 750),
+            "2_6": (755, 750),
+            "3_1": (80, 885),
+            "3_2": (215, 885),
+            "3_3": (350, 885),
+            "3_4": (485, 885),
+            "3_5": (620, 885),
+            "3_6": (755, 885),
+            "4_1": (80, 1020),
+            "4_2": (215, 1020),
+            "4_3": (350, 1020),
+            "4_4": (485, 1020),
+            "4_5": (620, 1020),
+            "4_6": (755, 1020),
+            "5_1": (80, 1155),
+            "5_2": (215, 1155),
+            "5_3": (350, 1155),
+            "5_4": (485, 1155),
+            "5_5": (620, 1155),
+            "5_6": (755, 1155),
+            "6_1": (80, 1290),
+            "6_2": (215, 1290),
+            "6_3": (350, 1290),
+            "6_4": (485, 1290),
+            "6_5": (620, 1290),
+            "6_6": (755, 1290),
+        }
+
+    def minigame(self):
+        for item in self.scripts['minigame']:
+            self.bot.session.shell(f"input swipe {' '.join(map(str, self.minigame_coords[item[0]]))} {' '.join(map(str, self.minigame_coords[item[1]]))} 200")
+            sleep(0.2)
+
+    def daily_minigame(self):
+        minigame_daily = locateCenterOnScreen(
+            template=self.templates['minigame_daily'],
+            screenshotIm=self.bot.session.screenshot(),
+        )
+        if minigame_daily:
+            self.bot.session.click(*minigame_daily)
+            sleep(5)
+            minigame_start = locateCenterOnScreen(
+                template=self.templates['minigame_start'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if minigame_start:
+                self.bot.session.click(*minigame_start)
+                sleep(2)
+                self.minigame()
+                sleep(5)
 
     def cipher(self):
         for k in self.scripts["cipher"]:
@@ -194,6 +255,13 @@ class HamsterKombat(TimerMixin, LoadMixin):
             )
             if not cipher_claimed:
                 self.daily_cipher()
+
+            minigame_claimed = locateCenterOnScreen(
+                template=self.templates['minigame_claimed'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if not minigame_claimed:
+                self.daily_minigame()
 
             reward_claimed = locateCenterOnScreen(
                 template=self.templates['reward_claimed'],

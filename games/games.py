@@ -148,9 +148,6 @@ class HamsterKombat(TimerMixin, LoadMixin):
                 self.bot.session.click(*cipher_claim)
                 sleep(5)
 
-    def daily_reward():
-
-
     def play(self):
         try:
             self.bot.run()

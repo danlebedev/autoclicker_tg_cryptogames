@@ -187,7 +187,7 @@ class HamsterKombat(TimerMixin, LoadMixin):
                 if click_type == "s":
                     self.bot.session.shell(f"input tap {' '.join(map(str, self.hamster))}")
                 elif click_type == "l":
-                    self.bot.session.shell(f"input swipe {' '.join(map(str, self.hamster))} {' '.join(map(str, self.hamster))} 600")
+                    self.bot.session.shell(f"input swipe {' '.join(map(str, self.hamster))} {' '.join(map(str, self.hamster))} 1000")
                 sleep(self.time_between_clicks)
             sleep(3)
 

@@ -743,7 +743,7 @@ class MemeFi(TimerMixin, LoadMixin):
     def daily_cipher(self):
         for k in self.scripts["cipher"]:
             self.bot.session.shell(f"input tap {' '.join(map(str, self.coordinates[k]))}")
-            sleep(0self.time_between_clicks)
+            sleep(self.time_between_clicks)
         sleep(5)
         close = locateCenterOnScreen(
             template=self.templates['close'],

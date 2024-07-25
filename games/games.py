@@ -11,6 +11,7 @@ class HarvestMoon(TimerMixin, LoadMixin):
     def __init__(self, bot):
         self.bot = bot
         self.button = (0.16, 0.34)
+        self.center = (450, 800)
         self.templates = self._load_templates()
 
     def play(self):
@@ -31,6 +32,10 @@ class HarvestMoon(TimerMixin, LoadMixin):
                 sleep(5)
             self.bot.session.click(*self.button)
             sleep(10)
+            self.bot.session.click(*self.center)
+            sleep(5)
+            self.bot.session.click(*self.center)
+            sleep(5)
             self.bot.session.press('back')
             self.bot._stop_accept()
 

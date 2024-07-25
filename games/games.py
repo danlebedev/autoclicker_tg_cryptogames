@@ -909,14 +909,13 @@ class Tomarket(TimerMixin, LoadMixin):
         self.coordinates = {
             "h": (85, 1180),
             "t": (665, 1048),
+            "c": (450, 800),
         }
 
     def daily_cipher(self):
-        for _ in range(2):
-            for k in self.scripts["cipher"]:
-                self.bot.session.shell(f"input tap {' '.join(map(str, self.coordinates[k]))}")
-                sleep(self.time_between_clicks)
-            sleep(2)
+        for k in self.scripts["cipher"]:
+            self.bot.session.shell(f"input tap {' '.join(map(str, self.coordinates[k]))}")
+            sleep(self.time_between_clicks)
         sleep(5)
         cipher_close = locateCenterOnScreen(
             template=self.templates['cipher_close'],

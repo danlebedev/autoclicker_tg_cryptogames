@@ -625,37 +625,39 @@ class HotWallet(TimerMixin, LoadMixin):
                     self.bot.session.click(0.5, 0.3)
                     sleep(5)
 
-                self.bot.session.click(*locateCenterOnScreen(
+                home = locateCenterOnScreen(
                     template=self.templates['home'],
                     screenshotIm=self.bot.session.screenshot(),
-                ))
-                self.bot.session.swipe_ext("up")
-                self.bot.session.click(*locateCenterOnScreen(
+                )
+                if home:
+                    self.bot.session.click(*home)
+                    self.bot.session.swipe_ext("up")
+                
+                storage = locateCenterOnScreen(
                     template=self.templates['storage'],
                     screenshotIm=self.bot.session.screenshot(),
-                ))
+                )
+                if storage:
+                    self.bot.session.click(*storage)
 
-                if locateCenterOnScreen(
+                check_news = locateCenterOnScreen(
                     template=self.templates['check_news'],
                     screenshotIm=self.bot.session.screenshot(),
-                ):
-                    self.bot.session.click(*locateCenterOnScreen(
-                        template=self.templates['check_news'],
-                        screenshotIm=self.bot.session.screenshot(),
-                    ))
+                )
+                if check_news:
+                    self.bot.session.click(*check_news)
+                    sleep(2)
                     self.bot.session.press('back')
-                if locateCenterOnScreen(
+
+                claim_hot = locateCenterOnScreen(
                     template=self.templates['claim_hot'],
                     screenshotIm=self.bot.session.screenshot(),
-                ):
-                    self.bot.session.click(*locateCenterOnScreen(
-                        template=self.templates['claim_hot'],
-                        screenshotIm=self.bot.session.screenshot(),
-                    ))
-                sleep(15)
-                self.bot.session.press('back')
+                )
+                if claim_hot:
+                    self.bot.session.click(*claim_hot)
+                    sleep(15)
+                    self.bot.session.press('back')
 
-            sleep(5)
             self.bot.session.press('back')
             self.bot._stop_accept()
         except:

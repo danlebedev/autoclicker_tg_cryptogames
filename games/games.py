@@ -867,6 +867,15 @@ class MemeFi(TimerMixin, LoadMixin):
             if accept_terms:
                 self.bot.session.click(*accept_terms)
                 sleep(5)
+
+            continue_game = locateCenterOnScreen(
+                template=self.templates['continue_game'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if continue_game:
+                self.bot.session.click(*continue_game)
+                sleep(5)
+
             self.daily_cipher()
             boosters = locateCenterOnScreen(
                 template=self.templates['boosters'],

@@ -827,10 +827,10 @@ class MemeFi(TimerMixin, LoadMixin):
         self.scripts = self._load_scripts()
         self.time_between_clicks = 0.3
         self.coordinates = {
-            "1": (450, 645),
-            "2": (450, 800),
-            "3": (450, 950),
-            "4": (450, 1150),
+            "1": (450, 720),
+            "2": (450, 850),
+            "3": (450, 980),
+            "4": (450, 1100),
         }
 
     def daily_cipher(self):

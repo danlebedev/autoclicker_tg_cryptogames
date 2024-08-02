@@ -990,6 +990,13 @@ class OKX(TimerMixin, LoadMixin):
             pass
         else:
             sleep(10)
+            continue_racing = locateCenterOnScreen(
+                template=self.templates['continue_racing'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if continue_racing:
+                self.bot.session.click(*continue_racing)
+                sleep(5)
             for _ in range(self.spins):
                 empty = locateCenterOnScreen(
                     template=self.templates['empty'],

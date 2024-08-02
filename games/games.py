@@ -655,6 +655,10 @@ class HotWallet(TimerMixin, LoadMixin):
                 )
                 if claim_hot:
                     self.bot.session.click(*claim_hot)
+                    sleep(5)
+                    self.bot.session.press('back')
+                    sleep(5)
+                    self.bot.session.click(*claim_hot)
                     sleep(15)
                     self.bot.session.press('back')
 

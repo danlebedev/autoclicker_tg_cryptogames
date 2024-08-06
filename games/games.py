@@ -649,18 +649,19 @@ class HotWallet(TimerMixin, LoadMixin):
                     sleep(2)
                     self.bot.session.press('back')
 
-                claim_hot = locateCenterOnScreen(
-                    template=self.templates['claim_hot'],
-                    screenshotIm=self.bot.session.screenshot(),
-                )
-                if claim_hot:
-                    self.bot.session.click(*claim_hot)
-                    sleep(5)
-                    self.bot.session.press('back')
-                    sleep(5)
-                    self.bot.session.click(*claim_hot)
-                    sleep(15)
-                    self.bot.session.press('back')
+                for _ in range(2):
+                    claim_hot = locateCenterOnScreen(
+                        template=self.templates['claim_hot'],
+                        screenshotIm=self.bot.session.screenshot(),
+                    )
+                    if claim_hot:
+                        self.bot.session.click(*claim_hot)
+                        sleep(5)
+                        if self.bot.get_name != self.name:
+                            self.bot.session.press('back')
+                            sleep(5)
+                sleep(15)
+                self.bot.session.press('back')
 
             self.bot.session.press('back')
             self.bot._stop_accept()

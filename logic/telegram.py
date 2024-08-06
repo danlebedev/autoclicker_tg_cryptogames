@@ -63,15 +63,15 @@ class Chat(MessageMixin):
                 self.session(className=self.parent_classname) \
                     .child(className=self.classname, index=self.index) \
                     .click()
-                self._set_name()
+                self.name = self.get_name()
             finally:
                 return self.is_connected()
 
     def is_connected(self) -> bool:
         return self.get_messagefield().exists()
 
-    def _set_name(self):
-        self.name = self.session(className='android.widget.TextView')[0].get_text()
+    def get_name(self):
+        return self.session(className='android.widget.TextView')[0].get_text()
 
     def get_last_message(self):
         return self.session(className=self.message_classname)[-1]

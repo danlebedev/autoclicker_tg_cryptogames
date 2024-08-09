@@ -3,6 +3,9 @@ from games.tools import TimerMixin, LoadMixin
 from computer_vision.cv import locateCenterOnScreen
 
 
+PAUSE = 2
+
+
 class HamsterKombat(TimerMixin, LoadMixin):
     name = 'Hamster Kombat'
 
@@ -20,9 +23,9 @@ class HamsterKombat(TimerMixin, LoadMixin):
         )
         if key_field:
             self.bot.session.click(*key_field)
-            sleep(5)
+            sleep(PAUSE)
             self.bot.session.send_keys(key)
-            sleep(5)
+            sleep(PAUSE)
             key_activate = locateCenterOnScreen(
                 template=self.templates['key_activate'],
                 screenshotIm=self.bot.session.screenshot(),
@@ -46,7 +49,7 @@ class HamsterKombat(TimerMixin, LoadMixin):
             )
             if thanks:
                 self.bot.session.click(*thanks)
-                sleep(5)
+                sleep(PAUSE)
 
             playground = locateCenterOnScreen(
                 template=self.templates['playground'],
@@ -55,7 +58,7 @@ class HamsterKombat(TimerMixin, LoadMixin):
             )
             if playground:
                 self.bot.session.click(*playground)
-                sleep(5)
+                sleep(PAUSE)
                 match key.split('-')[0]:
                     case 'CLONE':
                         key_clone = locateCenterOnScreen(
@@ -65,7 +68,7 @@ class HamsterKombat(TimerMixin, LoadMixin):
                         )
                         if key_clone:
                             self.bot.session.click(*key_clone)
-                            sleep(5)
+                            sleep(PAUSE)
                             self.send_key(key)
                     case 'CUBE':
                         key_cube = locateCenterOnScreen(
@@ -75,7 +78,7 @@ class HamsterKombat(TimerMixin, LoadMixin):
                         )
                         if key_cube:
                             self.bot.session.click(*key_cube)
-                            sleep(5)
+                            sleep(PAUSE)
                             self.send_key(key)
                     case 'TRAIN':
                         key_train = locateCenterOnScreen(
@@ -85,7 +88,7 @@ class HamsterKombat(TimerMixin, LoadMixin):
                         )
                         if key_train:
                             self.bot.session.click(*key_train)
-                            sleep(5)
+                            sleep(PAUSE)
                             self.send_key(key)
                     case 'BIKE':
                         key_bike = locateCenterOnScreen(
@@ -95,7 +98,7 @@ class HamsterKombat(TimerMixin, LoadMixin):
                         )
                         if key_bike:
                             self.bot.session.click(*key_bike)
-                            sleep(5)
+                            sleep(PAUSE)
                             self.send_key(key)
 
             self.bot.stop()

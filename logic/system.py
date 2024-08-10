@@ -4,6 +4,7 @@ from datetime import datetime
 import uiautomator2 as u2
 from os.path import abspath
 from pyautogui import screenshot
+from logic.proxy import Proxy
 
 
 class System():
@@ -104,6 +105,9 @@ class Emulator(Dnconsole):
                 'set_text',
                 'swipe_ext',
             ]
+            self.proxy = Proxy(self.device)
+            self.proxy.start()
+            sleep(5)
 
     def is_connected(self) -> bool:
         if self.device:

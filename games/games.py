@@ -643,6 +643,7 @@ class HotWallet(TimerMixin, LoadMixin):
                 check_news = locateCenterOnScreen(
                     template=self.templates['check_news'],
                     screenshotIm=self.bot.session.screenshot(),
+                    confidence=0.95
                 )
                 if check_news:
                     self.bot.session.click(*check_news)

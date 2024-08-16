@@ -60,6 +60,16 @@ class HamsterKombat(TimerMixin, LoadMixin):
                 self.bot.session.click(*playground)
                 sleep(PAUSE)
                 match key.split('-')[0]:
+                    case 'MERGE':
+                        key_merge = locateCenterOnScreen(
+                            template=self.templates['key_merge'],
+                            screenshotIm=self.bot.session.screenshot(),
+                            confidence=0.95,
+                        )
+                        if key_merge:
+                            self.bot.session.click(*key_merge)
+                            sleep(PAUSE)
+                            self.send_key(key)
                     case 'CLONE':
                         key_clone = locateCenterOnScreen(
                             template=self.templates['key_clone'],

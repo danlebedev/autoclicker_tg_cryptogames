@@ -86,7 +86,7 @@ def game_actions(game):
 
 def main():
     global key
-    for index, key in zip(list(EMULATORS)*16, KEYS):
+    for index, key in zip(list(EMULATORS)*100, KEYS):
         try:
             print(index)
             global emulator

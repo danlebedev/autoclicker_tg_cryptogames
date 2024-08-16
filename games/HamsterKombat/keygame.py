@@ -111,4 +111,5 @@ class HamsterKombat(TimerMixin, LoadMixin):
                             sleep(PAUSE)
                             self.send_key(key)
 
+            sleep(10)
             self.bot.stop()

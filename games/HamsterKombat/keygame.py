@@ -4,7 +4,7 @@ from computer_vision.cv import locateCenterOnScreen
 
 
 PAUSE1 = 2
-PAUSE2 = 10
+PAUSE2 = 2
 
 
 class HamsterKombat(TimerMixin, LoadMixin):

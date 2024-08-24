@@ -123,6 +123,16 @@ class HamsterKombat(TimerMixin, LoadMixin):
             "X": "lssl",
             "Y": "lsll",
             "Z": "llss",
+            "1": "sllll",
+            "2": "sslll",
+            "3": "sssll",
+            "4": "ssssl",
+            "5": "sssss",
+            "6": "lssss",
+            "7": "llsss",
+            "8": "lllss",
+            "9": "lllls",
+            "0": "lllll",
         }
         self.minigame_coords = {
             "1_1": (80, 615),

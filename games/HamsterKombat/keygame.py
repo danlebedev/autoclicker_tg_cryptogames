@@ -51,13 +51,13 @@ class HamsterKombat(TimerMixin, LoadMixin):
             if thanks:
                 self.bot.session.click(*thanks)
                 sleep(PAUSE1)
-                key = locateCenterOnScreen(
-                    template=self.templates['key'],
+                key_game = locateCenterOnScreen(
+                    template=self.templates['key_game'],
                     screenshotIm=self.bot.session.screenshot(),
                     confidence=0.95,
                 )
-                if key:
-                    self.bot.session.click(*key)
+                if key_game:
+                    self.bot.session.click(*key_game)
                     sleep(PAUSE2)
                     self.send_key(key)
 

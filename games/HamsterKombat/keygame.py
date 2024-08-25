@@ -51,76 +51,15 @@ class HamsterKombat(TimerMixin, LoadMixin):
             if thanks:
                 self.bot.session.click(*thanks)
                 sleep(PAUSE1)
-
-            playground = locateCenterOnScreen(
-                template=self.templates['playground'],
-                screenshotIm=self.bot.session.screenshot(),
-                confidence=0.95,
-            )
-            if playground:
-                self.bot.session.click(*playground)
-                sleep(PAUSE1)
-                match key.split('-')[0]:
-                    case 'TWERK':
-                        key_twerk = locateCenterOnScreen(
-                            template=self.templates['key_twerk'],
-                            screenshotIm=self.bot.session.screenshot(),
-                            confidence=0.95,
-                        )
-                        if key_twerk:
-                            self.bot.session.click(*key_twerk)
-                            sleep(PAUSE2)
-                            self.send_key(key)
-                    case 'MERGE':
-                        key_merge = locateCenterOnScreen(
-                            template=self.templates['key_merge'],
-                            screenshotIm=self.bot.session.screenshot(),
-                            confidence=0.95,
-                        )
-                        if key_merge:
-                            self.bot.session.click(*key_merge)
-                            sleep(PAUSE2)
-                            self.send_key(key)
-                    case 'CLONE':
-                        key_clone = locateCenterOnScreen(
-                            template=self.templates['key_clone'],
-                            screenshotIm=self.bot.session.screenshot(),
-                            confidence=0.95,
-                        )
-                        if key_clone:
-                            self.bot.session.click(*key_clone)
-                            sleep(PAUSE2)
-                            self.send_key(key)
-                    case 'CUBE':
-                        key_cube = locateCenterOnScreen(
-                            template=self.templates['key_cube'],
-                            screenshotIm=self.bot.session.screenshot(),
-                            confidence=0.95,
-                        )
-                        if key_cube:
-                            self.bot.session.click(*key_cube)
-                            sleep(PAUSE2)
-                            self.send_key(key)
-                    case 'TRAIN':
-                        key_train = locateCenterOnScreen(
-                            template=self.templates['key_train'],
-                            screenshotIm=self.bot.session.screenshot(),
-                            confidence=0.95,
-                        )
-                        if key_train:
-                            self.bot.session.click(*key_train)
-                            sleep(PAUSE2)
-                            self.send_key(key)
-                    case 'BIKE':
-                        key_bike = locateCenterOnScreen(
-                            template=self.templates['key_bike'],
-                            screenshotIm=self.bot.session.screenshot(),
-                            confidence=0.95,
-                        )
-                        if key_bike:
-                            self.bot.session.click(*key_bike)
-                            sleep(PAUSE2)
-                            self.send_key(key)
+                key = locateCenterOnScreen(
+                    template=self.templates['key'],
+                    screenshotIm=self.bot.session.screenshot(),
+                    confidence=0.95,
+                )
+                if key:
+                    self.bot.session.click(*key)
+                    sleep(PAUSE2)
+                    self.send_key(key)
 
             sleep(10)
             self.bot.stop()

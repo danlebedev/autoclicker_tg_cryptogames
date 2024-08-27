@@ -289,12 +289,12 @@ class HamsterKombat(TimerMixin, LoadMixin):
             if not cipher_claimed:
                 self.daily_cipher()
 
-            minigame_claimed = locateCenterOnScreen(
+            """minigame_claimed = locateCenterOnScreen(
                 template=self.templates['minigame_claimed'],
                 screenshotIm=self.bot.session.screenshot(),
             )
             if not minigame_claimed:
-                self.daily_minigame()
+                self.daily_minigame()"""
 
             reward_claimed = locateCenterOnScreen(
                 template=self.templates['reward_claimed'],

@@ -204,15 +204,24 @@ class HamsterKombat(TimerMixin, LoadMixin):
         if minigame_daily:
             self.bot.session.click(*minigame_daily)
             sleep(5)
-            minigame_start = locateCenterOnScreen(
-                template=self.templates['minigame_start'],
+            minigame_play = locateCenterOnScreen(
+                template=self.templates['minigame_play'],
                 screenshotIm=self.bot.session.screenshot(),
             )
-            if minigame_start:
-                self.bot.session.click(*minigame_start)
-                sleep(2)
-                self.minigame()
+            if minigame_play:
+                self.bot.session.click(*minigame_play)
                 sleep(5)
+                minigame_start = locateCenterOnScreen(
+                    template=self.templates['minigame_start'],
+                    screenshotIm=self.bot.session.screenshot(),
+                )
+                if minigame_start:
+                    self.bot.session.click(*minigame_start)
+                    sleep(2)
+                    self.minigame()
+                    sleep(5)
+            else:
+                self.bot.session.press('back')
 
     def cipher(self):
         for k in self.scripts["cipher"]:

@@ -106,15 +106,16 @@ def game_actions(game):
 
 
 def main():
-    keys = load_keys()
-    index = load_emulators()
-    while not keys.empty():
+    keys_q = load_keys()
+    emulators_q = load_emulators()
+    while not keys_q.empty():
         global key
-        key = keys.get()
+        key = keys_q.get()
 
-        if index.empty():
-            index = load_emulators()
+        if emulators_q.empty():
+            emulators_q = load_emulators()
         
+        index = emulators_q.get()
         try:
             print(index)
             global emulator

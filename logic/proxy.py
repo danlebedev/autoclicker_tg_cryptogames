@@ -1,3 +1,5 @@
+from time import sleep
+
 class Proxy():
     def __init__(self, device):
         self.name = 'org.proxydroid'
@@ -11,6 +13,7 @@ class Proxy():
             self.session = None
         else:
             self.session.settings = self.device.settings
+            sleep(5)
             self.run()
 
     def is_started(self) -> bool | None:

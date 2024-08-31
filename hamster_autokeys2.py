@@ -51,6 +51,7 @@ def load_emulators():
 def emulator_connect(emulator, key):
     for _ in range(RETRY):
         emulator.connect()
+        sleep(5)
         if emulator.is_connected():
             tg = Telegram(device=emulator.device)
             telegram_start(tg, key)
@@ -94,6 +95,7 @@ def bot_actions(bot, key):
         #screenshot(emulator=emulator)
         bot.set_game(games=GAMES)
         if bot.game is not None:
+            sleep(5)
             game_actions(bot.game, key)
         else:
             bot.session.press('back')
@@ -109,11 +111,8 @@ def game_actions(game, key):
     sleep(SLEEP_OUT)
 
 
-def emulator_actions():
+def emulator_actions(KEYS_Q, emulators_q):
     key = KEYS_Q.get()
-
-    if emulators_q.empty():
-        emulators_q = load_emulators()
     
     index = emulators_q.get()
     try:
@@ -123,6 +122,7 @@ def emulator_actions():
             device_id=EMULATORS[index],
         )
         emulator.start()
+        sleep(5)
         emulator_connect(emulator, key)
     #FIXME: Временное решение пропускать краш.
     except AdbShellError:
@@ -134,11 +134,16 @@ def emulator_actions():
 
 
 def main():
+    emulators_q = load_emulators()
     while not KEYS_Q.empty():
-        threads = [Thread(target=emulator_actions) for _ in range(2)]
+        if emulators_q.empty():
+            emulators_q = load_emulators()
+        
+        threads = [Thread(target=emulator_actions, args=(KEYS_Q, emulators_q)) for _ in range(2)]
 
         for thread in threads:
             thread.start()
+            sleep(5)
 
         for thread in threads:
             thread.join()
@@ -146,5 +151,4 @@ def main():
 
 if __name__ == '__main__':
     ADB_PROCESS.start()
-    emulators_q = load_emulators()
     main()

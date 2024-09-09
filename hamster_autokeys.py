@@ -15,9 +15,6 @@ ADB_PROCESS = ADB()
 with open('emulators.json', 'r') as f:
     EMULATORS = json.load(f)
 
-with open('keys.json', 'r') as f:
-    KEYS = json.load(f)
-
 GAMES = [
     HamsterKombat,
 ]

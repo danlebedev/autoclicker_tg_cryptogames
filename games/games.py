@@ -364,13 +364,15 @@ class PocketFi(TimerMixin, LoadMixin):
                 if everyday:
                     self.bot.session.click(*everyday)
                     sleep(5)
-                claim_everyday = locateCenterOnScreen(
-                    template=self.templates['claim_everyday'],
-                    screenshotIm=self.bot.session.screenshot(),
-                )
-                if claim_everyday:
-                    self.bot.session.click(*claim_everyday)
-                    sleep(5)
+                    claim_everyday = locateCenterOnScreen(
+                        template=self.templates['claim_everyday'],
+                        screenshotIm=self.bot.session.screenshot(),
+                    )
+                    if claim_everyday:
+                        self.bot.session.click(*claim_everyday)
+                        sleep(5)
+                        self.bot.session.click(0.5, 0.2)
+                        sleep(5)
                 mining = locateCenterOnScreen(
                     template=self.templates['mining'],
                     screenshotIm=self.bot.session.screenshot(),

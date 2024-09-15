@@ -109,7 +109,8 @@ class Bot(Chat):
         self._run_accept()
 
     def stop(self):
-        self.session(description=self.menu).click()
+        self.session(className='android.widget.ImageButton', index=0).click()
+        self.session.click(0.059, 0.963)    # крестик бота после сворачивания
         self._stop_accept()
 
     def click_inline_button(self, index):

@@ -36,8 +36,7 @@ class HarvestMoon(TimerMixin, LoadMixin):
             sleep(5)
             self.bot.session.click(*self.center)
             sleep(5)
-            self.bot.session.press('back')
-            self.bot._stop_accept()
+            self.bot.stop()
 
 
 class Blum(TimerMixin, LoadMixin):
@@ -81,8 +80,7 @@ class Blum(TimerMixin, LoadMixin):
                 if start:
                     self.bot.session.click(*start)
                     sleep(5)
-            self.bot.session.press('back')
-            self.bot._stop_accept()
+            self.bot.stop()
 
 
 class HamsterKombat(TimerMixin, LoadMixin):
@@ -383,8 +381,7 @@ class PocketFi(TimerMixin, LoadMixin):
 
             self.bot.session.click(*self.button)
             sleep(5)
-            self.bot.session.press('back')
-            self.bot._stop_accept()
+            self.bot.stop()
 
 
 class Vertus(TimerMixin, LoadMixin):
@@ -450,9 +447,7 @@ class Vertus(TimerMixin, LoadMixin):
             if claim:
                 self.bot.session.click(*claim)
             sleep(5)
-            self.bot.session.press('back')
-            self.bot.session.press('back')
-            self.bot._stop_accept()
+            self.bot.stop()
 
 
 class HoldWallet(TimerMixin):
@@ -569,8 +564,7 @@ class PocketRocketGame(TimerMixin, LoadMixin):
                         break
 
             self.clicker()
-            self.bot.session.press('back')
-            self.bot._stop_accept()
+            self.bot.stop()
 
     def clicker(self):
         for _ in range(self.clicks):
@@ -602,8 +596,7 @@ class QappiMiner(TimerMixin):
             self.bot.session.click(*self.claim)
             sleep(10)
             self.bot.session.click(*self.rocket)
-            self.bot.session.press('back')
-            self.bot._stop_accept()
+            self.bot.stop()
 
 
 class Aqua(TimerMixin):
@@ -700,8 +693,7 @@ class HotWallet(TimerMixin, LoadMixin):
                 sleep(15)
                 self.bot.session.press('back')
 
-            self.bot.session.press('back')
-            self.bot._stop_accept()
+            self.bot.stop()
         except:
             pass
 
@@ -724,8 +716,7 @@ class EmpiresBattle(TimerMixin):
         else:
             sleep(20)
             self.clicker()
-            self.bot.session.press('back')
-            self.bot._stop_accept()
+            self.bot.stop()
 
     def clicker(self):
         for _ in range(self.clicks):
@@ -782,8 +773,7 @@ class Gleam(TimerMixin, LoadMixin):
 
             self.bot.session.click(*self.claim)
             sleep(10)
-            self.bot.session.press('back')
-            self.bot._stop_accept()
+            self.bot.stop()
 
 
 class AnonSpace(TimerMixin, LoadMixin):
@@ -817,8 +807,7 @@ class AnonSpace(TimerMixin, LoadMixin):
             if claim:
                 self.bot.session.click(*claim)
                 sleep(10)
-            self.bot.session.press('back')
-            self.bot._stop_accept()
+            self.bot.stop()
 
 
 class PixelTap(TimerMixin, LoadMixin):
@@ -1019,8 +1008,7 @@ class Tomarket(TimerMixin, LoadMixin):
             sleep(5)
             self.bot.session.click(*self.claim)
             sleep(5)
-            self.bot.session.press('back')
-            self.bot._stop_accept()
+            self.bot.stop()
 
 
 class OKX(TimerMixin, LoadMixin):

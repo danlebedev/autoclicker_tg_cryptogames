@@ -112,7 +112,7 @@ def emulator_actions(KEYS_Q, emulators_q):
     keys = []
     for _ in range(4):
         keys.append(KEYS_Q.get())
-    
+    print(keys)
     index = emulators_q.get()
     try:
         print(index)

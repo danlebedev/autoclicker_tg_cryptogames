@@ -16,8 +16,7 @@ class HamsterKombat(TimerMixin, LoadMixin):
         self.hamster = (440, 990)
         self.templates = self._load_templates()
 
-    def send_key(self, keys):
-        for key in keys:
+    def send_key(self, key):
             key_field = locateCenterOnScreen(
                 template=self.templates['key_field'],
                 screenshotIm=self.bot.session.screenshot(),
@@ -35,7 +34,8 @@ class HamsterKombat(TimerMixin, LoadMixin):
                 )
                 if key_activate:
                     self.bot.session.click(*key_activate)
-                sleep(2)
+                sleep(3)
+                self.bot.session.click(*self.hamster)
 
     def play(self, keys):
         try:
@@ -52,15 +52,16 @@ class HamsterKombat(TimerMixin, LoadMixin):
             if thanks:
                 self.bot.session.click(*thanks)
                 sleep(PAUSE1)
-                key_game = locateCenterOnScreen(
-                    template=self.templates['key_game'],
-                    screenshotIm=self.bot.session.screenshot(),
-                    confidence=0.95,
-                )
-                if key_game:
-                    self.bot.session.click(*key_game)
-                    sleep(PAUSE2)
-                    self.send_key(keys)
+                for key in keys:
+                    key_game = locateCenterOnScreen(
+                        template=self.templates['key_game'],
+                        screenshotIm=self.bot.session.screenshot(),
+                        confidence=0.95,
+                    )
+                    if key_game:
+                        self.bot.session.click(*key_game)
+                        sleep(PAUSE2)
+                        self.send_key(key)
 
             sleep(10)
             self.bot.stop()

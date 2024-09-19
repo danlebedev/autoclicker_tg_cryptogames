@@ -45,13 +45,13 @@ def load_emulators():
     return q
 
 
-def emulator_connect(emulator, key):
+def emulator_connect(emulator, keys):
     for _ in range(RETRY):
         emulator.connect()
         sleep(5)
         if emulator.is_connected():
             tg = Telegram(device=emulator.device)
-            telegram_start(tg, key)
+            telegram_start(tg, keys)
             break
         else:
             ADB_PROCESS.reconnect()
@@ -59,32 +59,32 @@ def emulator_connect(emulator, key):
             # TODO: add logging.
 
 
-def telegram_start(tg, key):
+def telegram_start(tg, keys):
     for _ in range(RETRY):
         tg.start()
         sleep(5)
         if tg.is_started():
             for index in FOLDERS:
                 tg.init_folder(index=index)
-                folder_connect(tg.folder, FOLDERS[index], key)
+                folder_connect(tg.folder, FOLDERS[index], keys)
             break
         else:
             pass    # TODO: add logging.
 
 
-def folder_connect(folder, CHATS, key):
+def folder_connect(folder, CHATS, keys):
     for _ in range(RETRY):
         folder.connect()
         if folder.is_connected():
             for index in CHATS:
                 folder.init_bot(index=index)
-                bot_actions(folder.bot, key)
+                bot_actions(folder.bot, keys)
             break
         else:
             pass    # TODO: add logging.
 
 
-def bot_actions(bot, key):
+def bot_actions(bot, keys):
     # Add try-except for pass bug. Need fix in the future.
     try:
         bot.connect()
@@ -93,7 +93,7 @@ def bot_actions(bot, key):
         bot.set_game(games=GAMES)
         if bot.game is not None:
             sleep(5)
-            game_actions(bot.game, key)
+            game_actions(bot.game, keys)
         else:
             bot.session.press('back')
             sleep(SLEEP_OUT)
@@ -102,14 +102,16 @@ def bot_actions(bot, key):
         sleep(SLEEP_OUT)
 
 
-def game_actions(game, key):
-    game.play(key)
+def game_actions(game, keys):
+    game.play(keys)
     game.bot.session.press('back')
     sleep(SLEEP_OUT)
 
 
 def emulator_actions(KEYS_Q, emulators_q):
-    key = KEYS_Q.get()
+    keys = []
+    for _ in range(4):
+        keys.append(KEYS_Q.get())
     
     index = emulators_q.get()
     try:
@@ -120,7 +122,7 @@ def emulator_actions(KEYS_Q, emulators_q):
         )
         emulator.start()
         sleep(5)
-        emulator_connect(emulator, key)
+        emulator_connect(emulator, keys)
     #FIXME: Временное решение пропускать краш.
     except AdbShellError:
         pass

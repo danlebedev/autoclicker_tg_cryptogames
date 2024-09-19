@@ -138,7 +138,7 @@ def main():
         if emulators_q.empty():
             emulators_q = load_emulators()
         
-        threads = [Thread(target=emulator_actions, args=(KEYS_Q, emulators_q)) for _ in range(2)]
+        threads = [Thread(target=emulator_actions, args=(KEYS_Q, emulators_q)) for _ in range(4)]
 
         for thread in threads:
             thread.start()

@@ -53,7 +53,7 @@ class ADB(Shell):
         self.run_command()
 
     def reconnect(self):
-        self.args = f'{self.name} reconnect'
+        self.args = f'{self.name} reconnect offline'
         self.run_command()
 
 

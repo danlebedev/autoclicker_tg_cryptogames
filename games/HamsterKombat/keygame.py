@@ -17,15 +17,15 @@ class HamsterKombat(TimerMixin, LoadMixin):
         self.templates = self._load_templates()
 
     def send_key(self, keys):
-        key_field = locateCenterOnScreen(
-            template=self.templates['key_field'],
-            screenshotIm=self.bot.session.screenshot(),
-            confidence=0.95,
-        )
-        if key_field:
-            self.bot.session.click(*key_field)
-            sleep(PAUSE1)
-            for key in keys:
+        for key in keys:
+            key_field = locateCenterOnScreen(
+                template=self.templates['key_field'],
+                screenshotIm=self.bot.session.screenshot(),
+                confidence=0.95,
+            )
+            if key_field:
+                self.bot.session.click(*key_field)
+                sleep(PAUSE1)
                 self.bot.session.send_keys(key)
                 sleep(PAUSE1)
                 key_activate = locateCenterOnScreen(

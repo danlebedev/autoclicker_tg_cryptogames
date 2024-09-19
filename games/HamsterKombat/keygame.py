@@ -43,7 +43,7 @@ class HamsterKombat(TimerMixin, LoadMixin):
         except:
             pass
         else:
-            sleep(15)
+            sleep(20)
             thanks = locateCenterOnScreen(
                 template=self.templates['thanks'],
                 screenshotIm=self.bot.session.screenshot(),

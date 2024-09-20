@@ -136,3 +136,6 @@ class Bot(Chat):
     def send_message_start(self):
         self.send_message('/start')
         self.session.sleep(2)
+
+    def expand(self):
+        self.session.click(0.923, 0.963)

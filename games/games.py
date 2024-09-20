@@ -677,7 +677,7 @@ class HotWallet(TimerMixin, LoadMixin):
                 if check_news:
                     self.bot.session.click(*check_news)
                     sleep(2)
-                    self.bot.session.press('back')
+                    self.bot.expand()
 
                 for _ in range(2):
                     claim_hot = locateCenterOnScreen(

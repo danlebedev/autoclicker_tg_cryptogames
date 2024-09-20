@@ -3,7 +3,7 @@ from logic.telegram import Telegram
 from time import sleep
 import json
 from uiautomator2.exceptions import AdbShellError
-from games.HamsterKombat.keygame import HamsterKombat
+from games.HamsterKombat2.keygame import HamsterKombat
 from queue import Queue
 from os.path import join
 from os import scandir

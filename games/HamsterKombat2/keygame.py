@@ -7,7 +7,7 @@ PAUSE1 = 2
 PAUSE2 = 2
 
 
-class HamsterKombat(TimerMixin, LoadMixin):
+class HamsterKombat2(TimerMixin, LoadMixin):
     name = 'Hamster Kombat'
 
     def __init__(self, bot):
@@ -45,32 +45,24 @@ class HamsterKombat(TimerMixin, LoadMixin):
             pass
         else:
             sleep(20)
-            thanks = locateCenterOnScreen(
-                template=self.templates['thanks'],
+            playground = locateCenterOnScreen(
+                template=self.templates['playground'],
                 screenshotIm=self.bot.session.screenshot(),
                 confidence=0.95,
             )
-            if thanks:
-                self.bot.session.click(*thanks)
+            if playground:
+                self.bot.session.click(*playground)
                 sleep(PAUSE1)
-                playground = locateCenterOnScreen(
-                    template=self.templates['playground'],
-                    screenshotIm=self.bot.session.screenshot(),
-                    confidence=0.95,
-                )
-                if playground:
-                    self.bot.session.click(*playground)
-                    sleep(PAUSE1)
-                    for key in keys:
-                        key_game = locateCenterOnScreen(
-                            template=self.templates['key_game'],
-                            screenshotIm=self.bot.session.screenshot(),
-                            confidence=0.95,
-                        )
-                        if key_game:
-                            self.bot.session.click(*key_game)
-                            sleep(PAUSE2)
-                            self.send_key(key)
+                for key in keys:
+                    key_game = locateCenterOnScreen(
+                        template=self.templates['key_game'],
+                        screenshotIm=self.bot.session.screenshot(),
+                        confidence=0.95,
+                    )
+                    if key_game:
+                        self.bot.session.click(*key_game)
+                        sleep(PAUSE2)
+                        self.send_key(key)
 
             sleep(10)
             self.bot.stop()

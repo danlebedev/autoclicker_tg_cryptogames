@@ -3,7 +3,7 @@ from logic.telegram import Telegram
 from time import sleep
 import json
 from uiautomator2.exceptions import AdbShellError
-from games.HamsterKombat2.keygame import HamsterKombat
+from games.HamsterKombat2.keygame import HamsterKombat2
 from queue import Queue
 from os.path import join
 from os import scandir
@@ -16,7 +16,7 @@ with open('emulators.json', 'r') as f:
     EMULATORS = json.load(f)
 
 GAMES = [
-    HamsterKombat,
+    HamsterKombat2,
 ]
 FOLDERS = {
     1: (2,)

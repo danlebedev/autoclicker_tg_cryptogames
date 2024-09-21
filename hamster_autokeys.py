@@ -27,7 +27,7 @@ RETRY = 3
 
 def load_keys():
     q = Queue()
-    path = join(GAMES_DIR, 'HamsterKombat', 'keys')
+    path = join(GAMES_DIR, 'HamsterKombat2', 'keys')
     for keys in scandir(path):
         with open(keys.path, 'r') as f:
             for key in f:

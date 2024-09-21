@@ -110,7 +110,7 @@ def game_actions(game, keys):
 
 def emulator_actions(KEYS_Q, emulators_q):
     keys = []
-    for _ in range(4):
+    for _ in range(2):
         keys.append(KEYS_Q.get())
     print(keys)
     index = emulators_q.get()

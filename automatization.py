@@ -16,7 +16,7 @@ with open('emulators.json', 'r') as f:
 GAMES = [
     HarvestMoon,
     Blum,
-    HamsterKombat,
+    #HamsterKombat,
     PocketFi,
     Vertus,
     PocketRocketGame,

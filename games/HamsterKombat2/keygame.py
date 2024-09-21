@@ -45,6 +45,15 @@ class HamsterKombat2(TimerMixin, LoadMixin):
             pass
         else:
             sleep(20)
+            thanks = locateCenterOnScreen(
+                template=self.templates['thanks'],
+                screenshotIm=self.bot.session.screenshot(),
+                confidence=0.95,
+            )
+            if thanks:
+                self.bot.session.click(*thanks)
+                sleep(PAUSE1)
+
             playground = locateCenterOnScreen(
                 template=self.templates['playground'],
                 screenshotIm=self.bot.session.screenshot(),

@@ -1,6 +1,6 @@
 from logic.system import Emulator, ADB
 from logic.telegram import Telegram
-from games.games import HarvestMoon, Blum, HamsterKombat, \
+from games.games import HarvestMoon, Blum, HamsterKombat2, \
     PocketFi, Vertus, PocketRocketGame, QappiMiner, Gleam, \
     HotWallet, EmpiresBattle, AnonSpace, PixelTap, Tomarket, \
     MemeFi, OKX, PikeMan
@@ -16,7 +16,7 @@ with open('emulators.json', 'r') as f:
 GAMES = [
     HarvestMoon,
     Blum,
-    #HamsterKombat,
+    HamsterKombat2,
     PocketFi,
     #Vertus,
     PocketRocketGame,

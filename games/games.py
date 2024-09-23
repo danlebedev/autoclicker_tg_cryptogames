@@ -331,6 +331,36 @@ class HamsterKombat(TimerMixin, LoadMixin):
             ))
 
 
+class HamsterKombat2(TimerMixin, LoadMixin):
+    name = 'Hamster Kombat'
+
+    def __init__(self, bot):
+        self.bot = bot
+        self.thanks = (0.500, 0.830)
+        self.hamster = (440, 990)
+        self.first_game = (0.190, 0.270)
+        self.templates = self._load_templates()
+
+    def play(self):
+        try:
+            self.bot.run()
+        except:
+            pass
+        else:
+            sleep(20)
+            thanks = locateCenterOnScreen(
+                template=self.templates['thanks'],
+                screenshotIm=self.bot.session.screenshot(),
+                confidence=0.95,
+            )
+            if thanks:
+                self.bot.session.click(*thanks)
+                sleep(5)
+
+            sleep(10)
+            self.bot.stop()
+
+
 class PocketFi(TimerMixin, LoadMixin):
     name = 'PocketFi'
 

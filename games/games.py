@@ -914,12 +914,28 @@ class MemeFi(TimerMixin, LoadMixin):
             pass
         else:
             sleep(10)
+            close_quest = locateCenterOnScreen(
+                template=self.templates['close_quest'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if close_quest:
+                self.bot.session.click(*close_quest)
+                sleep(5)
+
             close = locateCenterOnScreen(
                 template=self.templates['close'],
                 screenshotIm=self.bot.session.screenshot(),
             )
             if close:
                 self.bot.session.click(*close)
+                sleep(5)
+
+            close_quest = locateCenterOnScreen(
+                template=self.templates['close_quest'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if close_quest:
+                self.bot.session.click(*close_quest)
                 sleep(5)
             accept_terms = locateCenterOnScreen(
                 template=self.templates['accept_terms'],

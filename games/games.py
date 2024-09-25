@@ -366,7 +366,7 @@ class PocketFi(TimerMixin, LoadMixin):
 
     def __init__(self, bot):
         self.bot = bot
-        self.button = (0.75, 0.645)
+        self.button = (0.5, 0.59)
         self.templates = self._load_templates()
 
     def play(self):

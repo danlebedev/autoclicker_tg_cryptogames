@@ -6,7 +6,7 @@ from random import choice
 
 class HarvestMoon(TimerMixin, LoadMixin):
     name = 'HarvestMoonBot'
-    timer = 12 * 60 * 60 + 120
+    timer = 16 * 60 * 60 + 120
 
     def __init__(self, bot):
         self.bot = bot

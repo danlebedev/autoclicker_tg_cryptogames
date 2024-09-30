@@ -1,7 +1,11 @@
 from time import sleep
 from games.tools import click_generator, TimerMixin, LoadMixin
 from computer_vision.cv import locateCenterOnScreen
-from random import choice
+from random import choice, randint
+from computer_vision.cv import search_pixel_with_getpixel
+from pyautogui import screenshot
+from pygetwindow import getActiveWindow
+from pynput.mouse import Controller, Button
 
 
 class HarvestMoon(TimerMixin, LoadMixin):
@@ -80,6 +84,104 @@ class Blum(TimerMixin, LoadMixin):
                 if start:
                     self.bot.session.click(*start)
                     sleep(5)
+            self.bot.stop()
+
+
+class Blum2(TimerMixin, LoadMixin):
+    name = 'Blum'
+
+    def __init__(self, bot):
+        self.bot = bot
+        self.button = (0.500, 0.870)
+        self.templates = self._load_templates()
+
+    def minigame(self):        
+        mouse = Controller()
+        drop_min = (153, 201, 0)
+        drop_max = (213, 255, 50)
+        spins = 0
+        SPINS_MAX = randint(8, 12)
+
+        while True:
+            last_click = None
+            # Хранит количество сделанных скриншотов
+            count = 0
+            while True:
+                count += 1
+                window = getActiveWindow()
+                region = (window.left, window.top, window.width, window.height)
+                image = screenshot(region=region)
+                drop_region_coordinates = search_pixel_with_getpixel(
+                    image=image,
+                    color_min=drop_min,
+                    color_max=drop_max,
+                    step_string=13,
+                    step_pixel=13,
+                    reverse=True
+                )
+
+                if drop_region_coordinates:
+                    drop_coordinates = (
+                        window.left + drop_region_coordinates[0],
+                        window.top + drop_region_coordinates[1],
+                    )
+
+                    if drop_coordinates != last_click:
+                        mouse.position = drop_coordinates
+                        mouse.click(Button.left)
+                        last_click = drop_coordinates
+
+                # Делаем проверку кнопки play каждые 50 скринов.
+                if count > 50:
+                    count = 0
+                    locate_play = locateCenterOnScreen(
+                        template=self.templates['play_minigame1'],
+                        screenshotIm=image,
+                        confidence=0.90,
+                    )
+                    if locate_play:
+                        if SPINS_MAX <= spins:
+                            return
+                        locate_play = (
+                            window.left + locate_play[0],
+                            window.top + locate_play[1],
+                        )
+                        mouse.position = locate_play
+                        mouse.click(Button.left)
+                        spins += 1
+                    locate_play = locateCenterOnScreen(
+                        template=self.templates['play_minigame2'],
+                        screenshotIm=image,
+                        confidence=0.90,
+                    )
+                    if locate_play:
+                        if SPINS_MAX <= spins:
+                            return
+                        locate_play = (
+                            window.left + locate_play[0],
+                            window.top + locate_play[1],
+                        )
+                        mouse.position = locate_play
+                        mouse.click(Button.left)
+                        spins += 1
+
+    def play(self):
+        try:
+            self.bot.send_message_start()
+            sleep(5)
+            self.bot.click_inline_button(index=0)
+        except:
+            pass
+        else:
+            sleep(20)
+            daily = locateCenterOnScreen(
+                template=self.templates['daily'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if daily:
+                self.bot.session.click(*daily)
+                sleep(5)
+            self.minigame()
             self.bot.stop()
 
 

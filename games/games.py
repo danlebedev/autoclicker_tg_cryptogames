@@ -939,7 +939,7 @@ class AnonSpace(TimerMixin, LoadMixin):
             if claim:
                 self.bot.session.click(*claim)
                 sleep(10)
-            self.bot.stop()
+        self.bot.stop()
 
 
 class PixelTap(TimerMixin, LoadMixin):

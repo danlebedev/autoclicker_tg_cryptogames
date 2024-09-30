@@ -151,7 +151,12 @@ class Blum2(TimerMixin, LoadMixin):
                         confidence=0.90,
                     )
                     if collapse:
-                        self.bot.session.click(*collapse)
+                        collapse = (
+                            window.left + collapse[0],
+                            window.top + collapse[1],
+                        )
+                        mouse.position = collapse
+                        mouse.click(Button.left)
                         sleep(5)
 
                     locate_play = locateCenterOnScreen(

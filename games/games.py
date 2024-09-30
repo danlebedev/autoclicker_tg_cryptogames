@@ -134,6 +134,26 @@ class Blum2(TimerMixin, LoadMixin):
                 # Делаем проверку кнопки play каждые 50 скринов.
                 if count > 50:
                     count = 0
+                    wrong = locateCenterOnScreen(
+                        template=self.templates['wrong'],
+                        screenshotIm=image,
+                        confidence=0.90,
+                    )
+                    if wrong:
+                        self.bot.stop()
+                        self.bot.send_message_start()
+                        sleep(5)
+                        self.bot.click_inline_button(index=0)
+
+                    collapse = locateCenterOnScreen(
+                        template=self.templates['collapse'],
+                        screenshotIm=image,
+                        confidence=0.90,
+                    )
+                    if collapse:
+                        self.bot.session.click(*collapse)
+                        sleep(5)
+
                     locate_play = locateCenterOnScreen(
                         template=self.templates['play_minigame1'],
                         screenshotIm=image,
@@ -182,7 +202,7 @@ class Blum2(TimerMixin, LoadMixin):
                 self.bot.session.click(*daily)
                 sleep(5)
             self.minigame()
-            self.bot.stop()
+        self.bot.stop()
 
 
 class HamsterKombat(TimerMixin, LoadMixin):

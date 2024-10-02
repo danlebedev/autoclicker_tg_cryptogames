@@ -1015,7 +1015,7 @@ class MemeFi(TimerMixin, LoadMixin):
         except:
             pass
         else:
-            sleep(10)
+            sleep(15)
             close_quest = locateCenterOnScreen(
                 template=self.templates['close_quest'],
                 screenshotIm=self.bot.session.screenshot(),

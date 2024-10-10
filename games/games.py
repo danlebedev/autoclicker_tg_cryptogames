@@ -1170,6 +1170,13 @@ class Tomarket(TimerMixin, LoadMixin):
             pass
         else:
             sleep(15)
+            login = locateCenterOnScreen(
+                template=self.templates['login'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if login:
+                self.bot.session.click(*login)
+                sleep(5)
             daily = locateCenterOnScreen(
                 template=self.templates['daily'],
                 screenshotIm=self.bot.session.screenshot(),
@@ -1177,7 +1184,14 @@ class Tomarket(TimerMixin, LoadMixin):
             if daily:
                 self.bot.session.click(*daily)
                 sleep(5)
-            self.daily_cipher()
+            login = locateCenterOnScreen(
+                template=self.templates['login'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if login:
+                self.bot.session.click(*login)
+                sleep(5)
+            #self.daily_cipher()
             self.bot.session.click(*self.claim)
             sleep(5)
             self.bot.session.click(*self.claim)

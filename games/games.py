@@ -1058,7 +1058,7 @@ class MemeFi(TimerMixin, LoadMixin):
                     close_quest = locateCenterOnScreen(
                         template=template,
                         screenshotIm=self.bot.session.screenshot(),
-                        confidence=0.8,
+                        confidence=0.98,
                     )
                     if close_quest:
                         self.bot.session.click(*close_quest)

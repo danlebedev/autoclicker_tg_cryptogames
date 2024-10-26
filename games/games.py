@@ -60,7 +60,7 @@ class Blum(TimerMixin, LoadMixin):
         except:
             pass
         else:
-            sleep(10)
+            sleep(20)
             daily = locateCenterOnScreen(
                 template=self.templates['daily'],
                 screenshotIm=self.bot.session.screenshot(),
@@ -1016,6 +1016,7 @@ class MemeFi(TimerMixin, LoadMixin):
     def __init__(self, bot):
         self.bot = bot
         self.templates = self._load_templates()
+        self.closes = self.load_closes()
         self.scripts = self._load_scripts()
         self.time_between_clicks = 0.3
         self.coordinates = {
@@ -1024,6 +1025,13 @@ class MemeFi(TimerMixin, LoadMixin):
             "3": (450, 980),
             "4": (450, 1100),
         }
+
+    def load_closes(self):
+        lst = []
+        for template in self.templates.items():
+            if 'close_quest' in template[0]:
+                lst.append(template[1])
+        return lst
 
     def daily_cipher(self):
         for k in self.scripts["cipher"]:
@@ -1045,32 +1053,17 @@ class MemeFi(TimerMixin, LoadMixin):
             pass
         else:
             sleep(15)
-            close_quest = locateCenterOnScreen(
-                template=self.templates['close_quest'],
-                screenshotIm=self.bot.session.screenshot(),
-                confidence=0.8,
-            )
-            if close_quest:
-                self.bot.session.click(*close_quest)
-                sleep(5)
-
-            close = locateCenterOnScreen(
-                template=self.templates['close'],
-                screenshotIm=self.bot.session.screenshot(),
-                confidence=0.9,
-            )
-            if close:
-                self.bot.session.click(*close)
-                sleep(5)
-
-            close_quest = locateCenterOnScreen(
-                template=self.templates['close_quest'],
-                screenshotIm=self.bot.session.screenshot(),
-                confidence=0.8,
-            )
-            if close_quest:
-                self.bot.session.click(*close_quest)
-                sleep(5)
+            for _ in range(6):
+                for template in self.closes:
+                    close_quest = locateCenterOnScreen(
+                        template=template,
+                        screenshotIm=self.bot.session.screenshot(),
+                        confidence=0.8,
+                    )
+                    if close_quest:
+                        self.bot.session.click(*close_quest)
+                        sleep(5)
+                sleep(1)
             accept_terms = locateCenterOnScreen(
                 template=self.templates['accept_terms'],
                 screenshotIm=self.bot.session.screenshot(),

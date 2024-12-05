@@ -18,7 +18,7 @@ GAMES = [
     Blum,
     HamsterKombat2,
     PocketFi,
-    #Vertus,
+    Vertus,
     PocketRocketGame,
     QappiMiner,
     #Gleam,

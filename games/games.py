@@ -61,12 +61,26 @@ class Blum(TimerMixin, LoadMixin):
             pass
         else:
             sleep(20)
+            home = locateCenterOnScreen(
+                template=self.templates['home'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if home:
+                self.bot.session.click(*home)
+                sleep(5)
             daily = locateCenterOnScreen(
                 template=self.templates['daily'],
                 screenshotIm=self.bot.session.screenshot(),
             )
             if daily:
                 self.bot.session.click(*daily)
+                sleep(5)
+            home = locateCenterOnScreen(
+                template=self.templates['home'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if home:
+                self.bot.session.click(*home)
                 sleep(5)
             for _ in range(2):
                 claim = locateCenterOnScreen(
@@ -513,24 +527,31 @@ class PocketFi(TimerMixin, LoadMixin):
             if quests:
                 self.bot.session.click(*quests)
                 sleep(5)
-                everyday = locateCenterOnScreen(
-                    template=self.templates['everyday'],
+                pocketfi = locateCenterOnScreen(
+                    template=self.templates['pocketfi'],
                     screenshotIm=self.bot.session.screenshot(),
                     confidence=0.95,
                 )
-                if everyday:
-                    self.bot.session.click(*everyday)
-                    sleep(5)
-                    claim_everyday = locateCenterOnScreen(
-                        template=self.templates['claim_everyday'],
+                if pocketfi:
+                    self.bot.session.click(*pocketfi)
+                    everyday = locateCenterOnScreen(
+                        template=self.templates['everyday'],
                         screenshotIm=self.bot.session.screenshot(),
                         confidence=0.95,
                     )
-                    if claim_everyday:
-                        self.bot.session.click(*claim_everyday)
+                    if everyday:
+                        self.bot.session.click(*everyday)
                         sleep(5)
-                    self.bot.session.click(0.5, 0.2)
-                    sleep(5)
+                        claim_everyday = locateCenterOnScreen(
+                            template=self.templates['claim_everyday'],
+                            screenshotIm=self.bot.session.screenshot(),
+                            confidence=0.95,
+                        )
+                        if claim_everyday:
+                            self.bot.session.click(*claim_everyday)
+                            sleep(5)
+                        self.bot.session.click(0.5, 0.2)
+                        sleep(5)
                 mining = locateCenterOnScreen(
                     template=self.templates['mining'],
                     screenshotIm=self.bot.session.screenshot(),
@@ -574,7 +595,7 @@ class Vertus(TimerMixin, LoadMixin):
         except:
             pass
         else:
-            sleep(20)
+            """sleep(20)
             okx = locateCenterOnScreen(
                 template=self.templates['okx'],
                 screenshotIm=self.bot.session.screenshot(),
@@ -607,7 +628,7 @@ class Vertus(TimerMixin, LoadMixin):
             )
             if claim:
                 self.bot.session.click(*claim)
-            sleep(5)
+            sleep(5)"""
             self.bot.stop()
 
 
@@ -1063,6 +1084,13 @@ class MemeFi(TimerMixin, LoadMixin):
                     if close_quest:
                         self.bot.session.click(*close_quest)
                         sleep(5)
+                    close = locateCenterOnScreen(
+                        template=self.templates['close'],
+                        screenshotIm=self.bot.session.screenshot(),
+                    )
+                    if close:
+                        self.bot.session.click(*close)
+                        sleep(5)
                 sleep(1)
             accept_terms = locateCenterOnScreen(
                 template=self.templates['accept_terms'],
@@ -1133,7 +1161,7 @@ class MemeFi(TimerMixin, LoadMixin):
 
 class Tomarket(TimerMixin, LoadMixin):
     name = 'Tomarket App'
-    timer = 3 * 60 * 60 + 120
+    timer = 6 * 60 * 60 + 120
 
     def __init__(self, bot):
         self.bot = bot

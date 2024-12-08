@@ -213,12 +213,26 @@ class Blum2(TimerMixin, LoadMixin):
             pass
         else:
             sleep(20)
+            home = locateCenterOnScreen(
+                template=self.templates['home'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if home:
+                self.bot.session.click(*home)
+                sleep(5)
             daily = locateCenterOnScreen(
                 template=self.templates['daily'],
                 screenshotIm=self.bot.session.screenshot(),
             )
             if daily:
                 self.bot.session.click(*daily)
+                sleep(5)
+            home = locateCenterOnScreen(
+                template=self.templates['home'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if home:
+                self.bot.session.click(*home)
                 sleep(5)
             self.minigame()
         self.bot.stop()

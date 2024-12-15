@@ -26,9 +26,9 @@ GAMES = [
     #EmpiresBattle,
     #AnonSpace,
     #PixelTap,
-    MemeFi,
+    #MemeFi,
     Tomarket,
-    OKX,
+    #OKX,
     #PikeMan,
 ]
 FOLDERS = {

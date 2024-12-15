@@ -114,7 +114,7 @@ class Blum2(TimerMixin, LoadMixin):
         drop_min = (153, 201, 0)
         drop_max = (213, 255, 50)
         spins = 0
-        SPINS_MAX = randint(20, 25)
+        SPINS_MAX = randint(10, 15)
 
         while True:
             last_click = None

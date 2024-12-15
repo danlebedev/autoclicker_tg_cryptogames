@@ -154,10 +154,18 @@ class Blum2(TimerMixin, LoadMixin):
                         confidence=0.90,
                     )
                     if wrong:
+                        wrong = (
+                            window.left + wrong[0],
+                            window.top + wrong[1],
+                        )
+                        mouse.position = wrong
+                        mouse.click(Button.left)
+                        spins += 1
+                    """if wrong:
                         self.bot.stop()
                         self.bot.send_message_start()
                         sleep(5)
-                        self.bot.click_inline_button(index=0)
+                        self.bot.click_inline_button(index=0)"""
 
                     collapse = locateCenterOnScreen(
                         template=self.templates['collapse'],

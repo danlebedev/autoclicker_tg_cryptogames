@@ -154,6 +154,8 @@ class Blum2(TimerMixin, LoadMixin):
                         confidence=0.90,
                     )
                     if wrong:
+                        if SPINS_MAX <= spins:
+                            return
                         wrong = (
                             window.left + wrong[0],
                             window.top + wrong[1],

@@ -75,13 +75,6 @@ class Blum(TimerMixin, LoadMixin):
             if daily:
                 self.bot.session.click(*daily)
                 sleep(5)
-            home = locateCenterOnScreen(
-                template=self.templates['home'],
-                screenshotIm=self.bot.session.screenshot(),
-            )
-            if home:
-                self.bot.session.click(*home)
-                sleep(5)
             for _ in range(2):
                 claim = locateCenterOnScreen(
                     template=self.templates['claim'],
@@ -543,6 +536,14 @@ class PocketFi(TimerMixin, LoadMixin):
             pass
         else:
             sleep(10)
+            close = locateCenterOnScreen(
+                template=self.templates['close'],
+                screenshotIm=self.bot.session.screenshot(),
+            )
+            if close:
+                self.bot.session.click(*close)
+                sleep(5)
+            
             quests = locateCenterOnScreen(
                 template=self.templates['quests'],
                 screenshotIm=self.bot.session.screenshot(),
@@ -836,11 +837,11 @@ class HotWallet(TimerMixin, LoadMixin):
 
     def play(self):
         try:
-            self.bot.send_message_start()
-            sleep(5)
-            self.bot.click_inline_button(index=2)
+            self.bot.run()
+        except:
+            pass
+        else:
             sleep(10)
-
             follow = locateCenterOnScreen(
                 template=self.templates['follow'],
                 screenshotIm=self.bot.session.screenshot(),
@@ -900,8 +901,7 @@ class HotWallet(TimerMixin, LoadMixin):
                 self.bot.session.press('back')
 
             self.bot.stop()
-        except:
-            pass
+
 
 
 class EmpiresBattle(TimerMixin):

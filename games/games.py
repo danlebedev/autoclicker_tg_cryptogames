@@ -884,6 +884,7 @@ class HotWallet(TimerMixin, LoadMixin):
                 if check_news:
                     self.bot.session.click(*check_news)
                     sleep(2)
+                    self.bot.session.press('back')
                     self.bot.expand()
 
                 for _ in range(2):
@@ -898,7 +899,6 @@ class HotWallet(TimerMixin, LoadMixin):
                             self.bot.session.press('back')
                             sleep(5)
                 sleep(15)
-                self.bot.session.press('back')
 
             self.bot.stop()
 
